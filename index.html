@@ -5,90 +5,481 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/1z0-830/">
   <title>Oracle 1Z0-830 — Note</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
   <style>:root {
-    --text: #1f2937;
-    --muted: #6b7280;
-    --border: #e5e7eb;
-    --bg: #ffffff;
-    --accent: #2563eb;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --text-heading: #111827;
+  --border: #e5e7eb;
+  --bg: #ffffff;
+  --bg-subtle: #f3f3f3;
+  --bg-code: #f6f8fa;
+  --accent: #2563eb;
+  --sidebar-width: 280px;
+  --topbar-height: 3.25rem;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-heading: #f9fafb;
+  --border: #374151;
+  --bg: #1a1a1a;
+  --bg-subtle: #252525;
+  --bg-code: #2d2d2d;
+  --accent: #60a5fa;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* Sidebar — stile pannello navigazione Word */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-subtle);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+}
+
+.sidebar-open .sidebar {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  min-height: var(--topbar-height);
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+.nav-chapter {
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-chapter summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.45rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.nav-chapter summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-chapter summary::before {
+  content: "▸ ";
+  display: inline-block;
+  width: 1em;
+  color: var(--text-muted);
+  transition: transform 0.15s ease;
+}
+
+.nav-chapter[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.nav-chapter summary a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-chapter summary a:hover {
+  color: var(--accent);
+}
+
+.nav-subchapters {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0.5rem 0;
+}
+
+.nav-subchapters li a {
+  display: block;
+  padding: 0.3rem 1rem 0.3rem 2rem;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+
+.nav-subchapters li a:hover {
+  color: var(--accent);
+  background: rgba(37, 99, 235, 0.06);
+  border-left-color: var(--accent);
+}
+
+[data-theme="dark"] .nav-subchapters li a:hover {
+  background: rgba(96, 165, 250, 0.1);
+}
+
+.sidebar-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 0.25rem;
+}
+
+.sidebar-close:hover {
+  color: var(--text);
+}
+
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.sidebar-open #sidebar-overlay {
+  display: block;
+}
+
+/* Main area */
+.main-wrapper {
+  min-height: 100vh;
+  transition: margin-left 0.25s ease;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: var(--topbar-height);
+  padding: 0 1.25rem;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.topbar h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.icon-btn svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+#theme-toggle .icon-moon {
+  display: none;
+}
+
+[data-theme="dark"] #theme-toggle .icon-sun {
+  display: none;
+}
+
+[data-theme="dark"] #theme-toggle .icon-moon {
+  display: block;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.chapter-title {
+  margin-top: 0;
+  padding-top: 1rem;
+  border-top: 3px solid var(--accent);
+  color: var(--text-heading);
+}
+
+.chapter-sep {
+  border: 0;
+  border-top: 2px dashed var(--border);
+  margin: 3rem 0;
+}
+
+h3 {
+  margin-top: 2rem;
+  color: var(--text-heading);
+  scroll-margin-top: calc(var(--topbar-height) + 1rem);
+}
+
+.chapter {
+  scroll-margin-top: calc(var(--topbar-height) + 1rem);
+}
+
+pre {
+  background: var(--bg-code);
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+code {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.92em;
+}
+
+strong {
+  color: var(--text-heading);
+}
+
+/* Desktop: sidebar visibile sposta il contenuto */
+@media (min-width: 901px) {
+  #sidebar-overlay {
+    display: none !important;
   }
-  
-  * { box-sizing: border-box; }
-  
-  body {
-    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
-    line-height: 1.65;
-    color: var(--text);
-    background: var(--bg);
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1.25rem 4rem;
+
+  .sidebar-close {
+    display: none;
   }
-  
-  header {
-    position: sticky;
-    top: 0;
-    background: rgba(255,255,255,.95);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--border);
-    margin: -2rem -1.25rem 2rem;
-    padding: 1rem 1.25rem;
+
+  .sidebar-open .main-wrapper {
+    margin-left: var(--sidebar-width);
   }
-  
-  header nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem 1rem;
-    list-style: none;
-    padding: 0;
-    margin: .75rem 0 0;
+
+  .sidebar {
+    transform: translateX(-100%);
   }
-  
-  header a { color: var(--accent); text-decoration: none; }
-  header a:hover { text-decoration: underline; }
-  
-  .chapter-title {
-    margin-top: 0;
-    padding-top: 1rem;
-    border-top: 3px solid var(--accent);
+
+  .sidebar-open .sidebar {
+    transform: translateX(0);
   }
-  
-  .chapter-sep {
-    border: 0;
-    border-top: 2px dashed var(--border);
-    margin: 3rem 0;
+}
+
+@media (max-width: 900px) {
+  .topbar h1 {
+    font-size: 0.9rem;
   }
-  
-  pre {
-    background: #f6f8fa;
-    padding: 1rem;
-    overflow-x: auto;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-  
-  code { font-family: Consolas, Monaco, monospace; font-size: .92em; }
-  
-  h3 { margin-top: 2rem; color: #111827; }
-  strong { color: #111827; }</style>
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Oracle 1Z0-830 Certification Notes</h1>
-    <nav><ul><li><a href="#cap-1">Capitolo 1</a></li>
-<li><a href="#cap-2">Capitolo 2</a></li>
-<li><a href="#cap-3">Capitolo 3</a></li>
-<li><a href="#cap-4">Capitolo 4</a></li>
-<li><a href="#cap-5">Capitolo 5</a></li>
-<li><a href="#cap-6">Capitolo 6</a></li>
-<li><a href="#cap-7">Capitolo 7</a></li>
-<li><a href="#cap-8">Capitolo 8</a></li>
-<li><a href="#cap-9">Capitolo 9</a></li></ul></nav>
-  </header>
-  <main><section id="cap-1" class="chapter">
+  <div class="app">
+    <div id="sidebar-overlay" aria-hidden="true"></div>
+    <aside id="sidebar" class="sidebar" aria-label="Navigazione capitoli">
+      <div class="sidebar-header">
+        <span>Navigazione</span>
+        <button id="sidebar-close" class="sidebar-close icon-btn" type="button" aria-label="Chiudi navigazione">✕</button>
+      </div>
+      <nav class="sidebar-nav">
+<details class="nav-chapter" open>
+  <summary><a href="#cap-1">Capitolo 1</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-1-s1" title="1. Ambiente di Sviluppo e Componenti (JDK)">1. Ambiente di Sviluppo e Componenti (JDK)</a></li>
+<li><a href="#cap-1-s2" title="2. Struttura delle Classi e File Sorgente (Membri e Commenti)">2. Struttura delle Classi e File Sorgente (Membri e Commenti)</a></li>
+<li><a href="#cap-1-s3" title="3. Il Metodo main() (Scrittura e Entry Point)">3. Il Metodo main() (Scrittura e Entry Point)</a></li>
+<li><a href="#cap-1-s4" title="4. Dichiarazione di Package e Import (Regola PIC)">4. Dichiarazione di Package e Import (Regola PIC)</a></li>
+<li><a href="#cap-1-s5" title="5. Inizializzazione e Creazione di Oggetti">5. Inizializzazione e Creazione di Oggetti</a></li>
+<li><a href="#cap-1-s6" title="6. Tipi di Dati Primitivi e Wrapper">6. Tipi di Dati Primitivi e Wrapper</a></li>
+<li><a href="#cap-1-s7" title="7. Text Blocks (&quot;&quot;&quot;)">7. Text Blocks (&quot;&quot;&quot;)</a></li>
+<li><a href="#cap-1-s8" title="8. Identificatori e Variabili (Regole e Parole Riservate)">8. Identificatori e Variabili (Regole e Parole Riservate)</a></li>
+<li><a href="#cap-1-s9" title="9. Inferenza del Tipo (var)">9. Inferenza del Tipo (var)</a></li>
+<li><a href="#cap-1-s10" title="10. Scope delle Variabili">10. Scope delle Variabili</a></li>
+<li><a href="#cap-1-s11" title="11. Garbage Collection (GC) e Distruzione di Oggetti">11. Garbage Collection (GC) e Distruzione di Oggetti</a></li>
+<li><a href="#cap-1-s12" title="12. Casi Limite e Tranelli Sintattici">12. Casi Limite e Tranelli Sintattici</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-2">Capitolo 2</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-2-s1" title="1. Comprensione degli Operatori Java">1. Comprensione degli Operatori Java</a></li>
+<li><a href="#cap-2-s2" title="2. Applicazione degli Operatori Unari">2. Applicazione degli Operatori Unari</a></li>
+<li><a href="#cap-2-s3" title="3. Operatori Aritmetici Binari">3. Operatori Aritmetici Binari</a></li>
+<li><a href="#cap-2-s4" title="4. Regole di Promozione Numerica">4. Regole di Promozione Numerica</a></li>
+<li><a href="#cap-2-s5" title="5. Assegnazione di Valori e Casting">5. Assegnazione di Valori e Casting</a></li>
+<li><a href="#cap-2-s6" title="6. Operatori di Uguaglianza e Relazionali">6. Operatori di Uguaglianza e Relazionali</a></li>
+<li><a href="#cap-2-s7" title="7. Operatori Logici e Condizionali">7. Operatori Logici e Condizionali</a></li>
+<li><a href="#cap-2-s8" title="8. Operatore Ternario">8. Operatore Ternario</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-3">Capitolo 3</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-3-s1" title="1. Dichiarazioni di Decisione: Statements e Blocchi">1. Dichiarazioni di Decisione: Statements e Blocchi</a></li>
+<li><a href="#cap-3-s2" title="2. L'istruzione if e la Clausola else">2. L'istruzione if e la Clausola else</a></li>
+<li><a href="#cap-3-s3" title="3. Pattern Matching con l'operatore instanceof">3. Pattern Matching con l'operatore instanceof</a></li>
+<li><a href="#cap-3-s4" title="4. Pattern Variables e Clausole Condizionali">4. Pattern Variables e Clausole Condizionali</a></li>
+<li><a href="#cap-3-s5" title="5. Struttura di `switch statement` e `switch expression`">5. Struttura di `switch statement` e `switch expression`</a></li>
+<li><a href="#cap-3-s6" title="5.1. Tipi Supportati e Pattern Matching in switch">5.1. Tipi Supportati e Pattern Matching in switch</a></li>
+<li><a href="#cap-3-s7" title="5.2. Guard Clauses e l'uso di when">5.2. Guard Clauses e l'uso di when</a></li>
+<li><a href="#cap-3-s8" title="5.3. Ordinamento dei Rami e Dominanza (Unreachable Code)">5.3. Ordinamento dei Rami e Dominanza (Unreachable Code)</a></li>
+<li><a href="#cap-3-s9" title="6. Cicli while e do/while">6. Cicli while e do/while</a></li>
+<li><a href="#cap-3-s10" title="7. Il Ciclo for di Base">7. Il Ciclo for di Base</a></li>
+<li><a href="#cap-3-s11" title="8. Il Ciclo for-each Potenziato">8. Il Ciclo for-each Potenziato</a></li>
+<li><a href="#cap-3-s12" title="9. Controllo del Flusso con Branching: Etichette e Salti">9. Controllo del Flusso con Branching: Etichette e Salti</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-4">Capitolo 4</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-4-s1" title="1. Creazione e Manipolazione di Stringhe (String)">1. Creazione e Manipolazione di Stringhe (String)</a></li>
+<li><a href="#cap-4-s2" title="2. Utilizzo della classe StringBuilder">2. Utilizzo della classe StringBuilder</a></li>
+<li><a href="#cap-4-s3" title="3. Comprensione dell'Uguaglianza (== vs equals)">3. Comprensione dell'Uguaglianza (== vs equals)</a></li>
+<li><a href="#cap-4-s4" title="4. Comprensione degli Array">4. Comprensione degli Array</a></li>
+<li><a href="#cap-4-s5" title="5. Calcoli con le API Math">5. Calcoli con le API Math</a></li>
+<li><a href="#cap-4-s6" title="6. Lavoro con Date e Ore (Date-Time API)">6. Lavoro con Date e Ore (Date-Time API)</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-5">Capitolo 5</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-5-s1" title="1. Progettazione dei Metodi (Designing Methods)">1. Progettazione dei Metodi (Designing Methods)</a></li>
+<li><a href="#cap-5-s2" title="2. Dichiarazione di Variabili Locali e d'Istanza (Declaring Local and Instance Variables)">2. Dichiarazione di Variabili Locali e d'Istanza (Declaring Local and Instance Variables)</a></li>
+<li><a href="#cap-5-s3" title="3. Lavoro con i Varargs (Working with Varargs)">3. Lavoro con i Varargs (Working with Varargs)</a></li>
+<li><a href="#cap-5-s4" title="4. Applicazione dei Modificatori di Accesso (Applying Access Modifiers)">4. Applicazione dei Modificatori di Accesso (Applying Access Modifiers)</a></li>
+<li><a href="#cap-5-s5" title="5. Accesso ai Dati Statici (Accessing Static Data)">5. Accesso ai Dati Statici (Accessing Static Data)</a></li>
+<li><a href="#cap-5-s6" title="6. Passaggio di Dati tra Metodi (Passing Data among Methods)">6. Passaggio di Dati tra Metodi (Passing Data among Methods)</a></li>
+<li><a href="#cap-5-s7" title="7. Overloading dei Metodi (Overloading Methods)">7. Overloading dei Metodi (Overloading Methods)</a></li>
+<li><a href="#cap-5-s8" title="8. Autoboxing e Unboxing (Autoboxing and Unboxing)">8. Autoboxing e Unboxing (Autoboxing and Unboxing)</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-6">Capitolo 6</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-6-s1" title="1. Comprensione dell'ereditarietà (Inheritance)">1. Comprensione dell'ereditarietà (Inheritance)</a></li>
+<li><a href="#cap-6-s2" title="2. Modificatori delle classi (Class modifiers)">2. Modificatori delle classi (Class modifiers)</a></li>
+<li><a href="#cap-6-s3" title="3. Accesso ai riferimenti this e super">3. Accesso ai riferimenti this e super</a></li>
+<li><a href="#cap-6-s4" title="4. Dichiarazione e overloading dei costruttori">4. Dichiarazione e overloading dei costruttori</a></li>
+<li><a href="#cap-6-s5" title="5. Ordine di inizializzazione degli oggetti">5. Ordine di inizializzazione degli oggetti</a></li>
+<li><a href="#cap-6-s6" title="6. Overriding dei metodi">6. Overriding dei metodi</a></li>
+<li><a href="#cap-6-s7" title="7. Hiding di metodi statici e variabili">7. Hiding di metodi statici e variabili</a></li>
+<li><a href="#cap-6-s8" title="8. Creazione di classi astratte">8. Creazione di classi astratte</a></li>
+<li><a href="#cap-6-s9" title="9. Creazione di oggetti immutabili">9. Creazione di oggetti immutabili</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-7">Capitolo 7</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-7-s1" title="1. Implementazione delle Interfacce (Implementing Interfaces)">1. Implementazione delle Interfacce (Implementing Interfaces)</a></li>
+<li><a href="#cap-7-s2" title="2. Metodi Concreti nelle Interfacce (default, static, private)">2. Metodi Concreti nelle Interfacce (default, static, private)</a></li>
+<li><a href="#cap-7-s3" title="3. Lavoro con le Enumerazioni (Working with Enums)">3. Lavoro con le Enumerazioni (Working with Enums)</a></li>
+<li><a href="#cap-7-s4" title="4. Classi e Interfacce Sigillate (Sealed Classes)">4. Classi e Interfacce Sigillate (Sealed Classes)</a></li>
+<li><a href="#cap-7-s5" title="5. Incapsulamento e Record (Encapsulating Data with Records)">5. Incapsulamento e Record (Encapsulating Data with Records)</a></li>
+<li><a href="#cap-7-s6" title="6. Creazione di Classi Annidate (Nested Classes)">6. Creazione di Classi Annidate (Nested Classes)</a></li>
+<li><a href="#cap-7-s7" title="7. Comprensione del Polimorfismo (Understanding Polymorphism)">7. Comprensione del Polimorfismo (Understanding Polymorphism)</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-8">Capitolo 8</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-8-s1" title="1. Scrittura di Lambda Semplici (Writing Simple Lambdas)">1. Scrittura di Lambda Semplici (Writing Simple Lambdas)</a></li>
+<li><a href="#cap-8-s2" title="2. Codifica delle Interfacce Funzionali (Coding Functional Interfaces)">2. Codifica delle Interfacce Funzionali (Coding Functional Interfaces)</a></li>
+<li><a href="#cap-8-s3" title="3. Utilizzo dei Riferimenti ai Metodi (Using Method References)">3. Utilizzo dei Riferimenti ai Metodi (Using Method References)</a></li>
+<li><a href="#cap-8-s4" title="4. Lavoro con le Interfacce Funzionali Integrate (Built-in Functional Interfaces)">4. Lavoro con le Interfacce Funzionali Integrate (Built-in Functional Interfaces)</a></li>
+<li><a href="#cap-8-s5" title="5. Lavoro con le Variabili nelle Lambda (Working with Variables in Lambdas)">5. Lavoro con le Variabili nelle Lambda (Working with Variables in Lambdas)</a></li>
+  </ul>
+</details>
+<details class="nav-chapter" open>
+  <summary><a href="#cap-9">Capitolo 9</a></summary>
+  <ul class="nav-subchapters">
+<li><a href="#cap-9-s1" title="1. Utilizzo delle API Comuni per le Collezioni (Common Collection APIs)">1. Utilizzo delle API Comuni per le Collezioni (Common Collection APIs)</a></li>
+<li><a href="#cap-9-s2" title="2. Comprensione dei Tipi Generici (Generic Types)">2. Comprensione dei Tipi Generici (Generic Types)</a></li>
+<li><a href="#cap-9-s3" title="3. Utilizzo dell'Interfaccia List">3. Utilizzo dell'Interfaccia List</a></li>
+<li><a href="#cap-9-s4" title="4. Utilizzo dell'Interfaccia Set">4. Utilizzo dell'Interfaccia Set</a></li>
+<li><a href="#cap-9-s5" title="5. Utilizzo delle Interfacce Queue e Deque">5. Utilizzo delle Interfacce Queue e Deque</a></li>
+<li><a href="#cap-9-s6" title="6. Utilizzo dell'Interfaccia Map">6. Utilizzo dell'Interfaccia Map</a></li>
+<li><a href="#cap-9-s7" title="7. Ordinamento dei Dati (Sorting Data)">7. Ordinamento dei Dati (Sorting Data)</a></li>
+<li><a href="#cap-9-s8" title="8. Introduzione alle Collezioni Sequenziate (Sequenced Collections)">8. Introduzione alle Collezioni Sequenziate (Sequenced Collections)</a></li>
+<li><a href="#cap-9-s9" title="9. Lavoro Avanzato con i Generics">9. Lavoro Avanzato con i Generics</a></li>
+  </ul>
+</details>
+      </nav>
+    </aside>
+    <div class="main-wrapper">
+      <header class="topbar">
+        <button id="sidebar-open" class="icon-btn" type="button" aria-label="Apri navigazione">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <h1>Oracle 1Z0-830 Certification Notes</h1>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Cambia tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </header>
+      <main><section id="cap-1" class="chapter">
       <h1 class="chapter-title">Capitolo 1</h1>
-      <h3>1. Ambiente di Sviluppo e Componenti (JDK)</h3>
+      <h3 id="cap-1-s1">1. Ambiente di Sviluppo e Componenti (JDK)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il <strong>Java Development Kit (JDK)</strong> contiene il software minimo necessario per lo sviluppo, inclusi i comandi <strong>javac</strong> (compila i file .java in bytecode .class), <strong>java</strong> (esegue il programma lanciando la <strong>JVM</strong>) e <strong>jar</strong> (pacchettizza i file). È fondamentale utilizzare la versione 21 del <strong>JDK</strong> per l&#39;esame 1Z0-830, poiché le regole sintattiche e i comportamenti del codice possono variare significativamente tra le versioni del linguaggio. Il codice Java è compilato in <strong>bytecode</strong>, che consiste in istruzioni in un formato speciale che la <strong>JVM</strong> sa come eseguire su qualsiasi macchina fisica reale, agendo come una &quot;scatola magica&quot; che fa girare il file .class all&#39;interno dello specifico sistema operativo e hardware.</p>
 <p><strong>Regole di Sintassi e Opzioni</strong>
@@ -98,7 +489,7 @@ Il comando <strong>javadoc</strong> genera la documentazione. Le opzioni di Java
 <li><strong><code>-d &lt;dir&gt;</code>:</strong> Specifica la directory in cui posizionare i file di classe generati.</li>
 </ul>
 <hr>
-<h3>2. Struttura delle Classi e File Sorgente (Membri e Commenti)</h3>
+<h3 id="cap-1-s2">2. Struttura delle Classi e File Sorgente (Membri e Commenti)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Le <strong>classi</strong> sono i mattoni costruttivi di base dei programmi Java che descrivono caratteristiche e comportamenti tramite <strong>campi</strong> (variabili che detengono lo stato) e <strong>metodi</strong> (operazioni sullo stato; in altri linguaggi spesso chiamati <em>funzioni</em> o <em>procedure</em>), definiti insieme come <strong>membri della classe</strong>. Un <strong>oggetto</strong> (o <strong>istanza</strong>) è la rappresentazione a runtime di una classe in memoria, mentre un <strong>riferimento</strong> (<em>reference</em>) è una variabile che punta a un oggetto; in termini di modello, il riferimento si comporta in modo simile a un <strong>puntatore</strong> all&#39;indirizzo sull&#39;<strong>heap</strong> dove risiede l&#39;oggetto. Un file .java può contenere al massimo una sola classe <strong>public</strong>, il cui nome deve coincidere esattamente con quello del file (incluso il case), ma può ospitare più classi non pubbliche. Java chiama una parola con un significato speciale <strong>keyword</strong>. Un <strong>Access Modifier</strong> (modificatore di accesso) è una parola chiave che dichiara il livello di esposizione di un membro verso potenziali chiamanti.</p>
 <p><strong>Commenti e Tranelli</strong>
@@ -114,14 +505,14 @@ I commenti supportati sono tre: a riga singola (<code>//</code>), multiline (<co
 public class Meerkat { }
 </code></pre>
 <hr>
-<h3>3. Il Metodo main() (Scrittura e Entry Point)</h3>
+<h3 id="cap-1-s3">3. Il Metodo main() (Scrittura e Entry Point)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il metodo <strong>main()</strong> rappresenta il punto di ingresso (<strong>entry point</strong>) cercato dalla <strong>JVM</strong> quando inizia a far girare un nuovo programma. La firma standard deve essere <code>public static void main(String[] args)</code>. <strong>void</strong> indica che non viene restituito alcun valore, mentre <strong>static</strong> vincola il metodo alla classe.</p>
 <p><strong>Varianti Legali e Varargs</strong>
 Sono ammesse varianti come lo scambio d&#39;ordine tra <strong>public</strong> e <strong>static</strong>, l&#39;aggiunta del modificatore <strong>final</strong> (anche sul metodo o sui parametri, es. <code>public final static void main(final String[] args)</code>), l&#39;uso di nomi variabili diversi da <strong>args</strong> e l&#39;uso dei <strong>varargs</strong> (<code>String... args</code>) al posto dell&#39;array. Sono accettati tre formati per il parametro: <code>String[] args</code>, <code>String options[]</code>, o <code>String... friends</code>. I <strong>parametri</strong> sono le variabili dichiarate nella firma; la <strong>firma</strong> del metodo è data dal nome del metodo e dai <strong>tipi</strong> dei parametri (in ordine). Un <strong>array</strong> (<code>String[]</code>) ha dimensione fissa; con i <strong>varargs</strong> (<code>String...</code>) si passa una sequenza di argomenti compatibile.</p>
 <p><strong>⚠️ Tranello (Parametri mancanti):</strong> L&#39;accesso a un indice dell&#39;array <strong>args</strong> (es. <code>args[0]</code> se non ci sono argomenti, o un indice oltre l&#39;ultimo fornito) lancia a runtime l&#39;eccezione <code>java.lang.ArrayIndexOutOfBoundsException</code>.</p>
 <hr>
-<h3>4. Dichiarazione di Package e Import (Regola PIC)</h3>
+<h3 id="cap-1-s4">4. Dichiarazione di Package e Import (Regola PIC)</h3>
 <p><strong>Definizioni e Concetti</strong>
 I <strong>package</strong> sono raggruppamenti logici per le classi, simili a cartelle in uno schedario. Un <strong>Import Statement</strong> comunica a Java in quali pacchetti cercare le classi. I <strong>Child Packages</strong> (pacchetti figli) sono pacchetti più dettagliati (es. <code>com.wiley.javabook</code> è figlio di <code>com.wiley</code>). Una <strong>wildcard</strong> (<code>*</code>) importa le classi <strong>direttamente</strong> in quel pacchetto, <strong>non</strong> le classi dei sotto-pacchetti, né campi o metodi (es. <code>import java.util.*;</code> <strong>non</strong> importa nulla da <code>java.util.concurrent.*</code> — servono import espliciti o ulteriori wildcard sul sotto-pacchetto). Il pacchetto <code>java.lang</code> è l&#39;unico importato automaticamente; importarlo esplicitamente o con <code>*</code> è <strong>ridondante</strong> ma <strong>consentito</strong>. Se non si dichiara alcun <code>package</code>, le classi appartengono al <strong>default package</strong> (pacchetto senza nome; uso sconsigliato in applicazioni reali o moduli).</p>
 <p><strong>Regola PIC (Package, Import, Class)</strong>
@@ -136,7 +527,7 @@ Il codice deve seguire l&#39;ordine rigoroso: 1) <strong>P</strong>ackage (opzio
 package structure; // DOES NOT COMPILE: package deve essere il primo
 </code></pre>
 <hr>
-<h3>5. Inizializzazione e Creazione di Oggetti</h3>
+<h3 id="cap-1-s5">5. Inizializzazione e Creazione di Oggetti</h3>
 <p><strong>Definizioni e Concetti</strong>
 Gli oggetti si creano con la parola chiave <strong>new</strong> che chiama un <strong>costruttore</strong>, il quale ha lo stesso nome della classe e nessun tipo di ritorno. Un <strong>blocco di codice</strong> è compreso tra parentesi graffe <code>{}</code>. Gli <strong>Instance Initializer</strong> (inizializzatori d&#39;istanza) sono blocchi che appaiono fuori da un metodo e vengono eseguiti quando viene creata un&#39;istanza.</p>
 <p><strong>Ordine di Inizializzazione Tassativo:</strong></p>
@@ -149,7 +540,7 @@ Gli oggetti si creano con la parola chiave <strong>new</strong> che chiama un <s
 private String name = &quot;Fluffy&quot;;
 </code></pre>
 <hr>
-<h3>6. Tipi di Dati Primitivi e Wrapper</h3>
+<h3 id="cap-1-s6">6. Tipi di Dati Primitivi e Wrapper</h3>
 <p><strong>Definizioni e Concetti</strong>
 Java offre <strong>8 tipi primitivi</strong> che rappresentano singoli valori in memoria (non sono oggetti): <strong>boolean</strong>, <strong>byte</strong> (8-bit), <strong>short</strong> (16-bit), <strong>int</strong> (32-bit), <strong>long</strong> (64-bit), <strong>float</strong> (32-bit), <strong>double</strong> (64-bit), <strong>char</strong> (16-bit Unicode). <strong>String</strong> <strong>non</strong> è un primitivo ma un oggetto. Ad ogni primitivo corrisponde una <strong>classe wrapper</strong> (es. <strong>Integer</strong> per <strong>int</strong>), che è un tipo di riferimento e può essere assegnata a <strong>null</strong>, a differenza dei primitivi. Le classi numeriche wrapper estendono <strong><code>Number</code></strong>, tranne <strong>Boolean</strong> e <strong>Character</strong>; sui tipi numerici wrapper sono disponibili, tra l&#39;altro, metodi statici di utilità come <strong><code>max</code></strong>, <strong><code>min</code></strong>, <strong><code>sum</code></strong>. Un <strong>letterale</strong> è un numero o valore presente direttamente nel codice. I letterali interi ammettono <strong>prefissi</strong> per la base: <strong>ottale</strong> (<code>0</code>…), <strong>esadecimale</strong> (<code>0x</code> / <code>0X</code>), <strong>binario</strong> (<code>0b</code> / <code>0B</code>).</p>
 <p><strong>⚠️ Tranelli (Null e Underscore):</strong></p>
@@ -164,7 +555,7 @@ double d2 = 1_000._0; // DOES NOT COMPILE (vicino al punto)
 double d3 = _100.0;   // DOES NOT COMPILE (all&#39;inizio)
 </code></pre>
 <hr>
-<h3>7. Text Blocks (&quot;&quot;&quot;)</h3>
+<h3 id="cap-1-s7">7. Text Blocks (&quot;&quot;&quot;)</h3>
 <p><strong>Definizioni e Concetti</strong>
 I blocchi di testo sono stringhe multiline che iniziano e finiscono con tre doppi apici (<code>&quot;&quot;&quot;</code>). Il contenuto non deve essere &quot;escaped&quot;. Lo <strong>Spazio bianco essenziale</strong> è parte della stringa importante per il valore finale, mentre lo <strong>Spazio bianco incidentale</strong> serve solo alla leggibilità del codice.</p>
 <p><strong>Sequenze di Escape e Tranelli:</strong></p>
@@ -177,7 +568,7 @@ I blocchi di testo sono stringhe multiline che iniziano e finiscono con tre dopp
 <pre><code class="language-java">String b = &quot;&quot;&quot;doe&quot;&quot;&quot;; // DOES NOT COMPILE: manca l&#39;andata a capo dopo i primi &quot;&quot;&quot;
 </code></pre>
 <hr>
-<h3>8. Identificatori e Variabili (Regole e Parole Riservate)</h3>
+<h3 id="cap-1-s8">8. Identificatori e Variabili (Regole e Parole Riservate)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un <strong>identificatore</strong> è il nome di una variabile, metodo, classe, interfaccia o pacchetto. Deve iniziare con una lettera, un simbolo di valuta (es. <code>$</code>, <code>¥</code>, <code>€</code>) o un underscore (<code>_</code>). Possono includere numeri ma non iniziare con essi. Non si possono usare nomi uguali alle <strong>reserved words</strong> (es. <code>public</code>, <code>class</code>, <code>for</code>). Le <strong>variabili di istanza/classe</strong> ricevono valori di default (<code>0</code>, <code>null</code>, <code>false</code>), mentre le <strong>variabili locali</strong> devono essere inizializzate manualmente prima di essere lette.</p>
 <p><strong>⚠️ Tranelli (Java 21 e Inizializzazione):</strong></p>
@@ -202,7 +593,7 @@ Un <strong>identificatore</strong> è il nome di una variabile, metodo, classe, 
 }
 </code></pre>
 <hr>
-<h3>9. Inferenza del Tipo (var)</h3>
+<h3 id="cap-1-s9">9. Inferenza del Tipo (var)</h3>
 <p><strong>Definizioni e Concetti</strong>
 La parola chiave <strong>var</strong> abilita l&#39;inferenza del tipo per le <strong>variabili locali</strong> (<em>Local Variable Type Inference</em>): la variabile <strong>deve</strong> essere inizializzata sulla <strong>stessa riga</strong> in cui si dichiara, così che il tipo sia deducibile. Il tipo fissato a <strong>tempo di compilazione</strong> <strong>non</strong> cambia. <strong>var</strong> è anche un <em>reserved type name</em>: <strong>non</strong> si può usare come nome di tipo per una classe, interfaccia o enum definiti dal programma.</p>
 <p><strong>⚠️ Tranelli (Uso limitato di var):</strong></p>
@@ -212,7 +603,7 @@ La parola chiave <strong>var</strong> abilita l&#39;inferenza del tipo per le <s
 <li>Non può essere usata in dichiarazioni di variabili multiple (es. <code>var a = 2, b = 3;</code> <strong>non</strong> compila).</li>
 </ul>
 <hr>
-<h3>10. Scope delle Variabili</h3>
+<h3 id="cap-1-s10">10. Scope delle Variabili</h3>
 <p><strong>Definizioni e Regole</strong>
 Lo <strong>scope</strong> (ambito) definisce la porzione di codice in cui una variabile è accessibile.</p>
 <ul>
@@ -223,19 +614,19 @@ Lo <strong>scope</strong> (ambito) definisce la porzione di codice in cui una va
 I blocchi interni possono vedere variabili dei blocchi esterni, ma non viceversa.</li>
 </ul>
 <hr>
-<h3>11. Garbage Collection (GC) e Distruzione di Oggetti</h3>
+<h3 id="cap-1-s11">11. Garbage Collection (GC) e Distruzione di Oggetti</h3>
 <p><strong>Definizioni e Concetti</strong>
 La <strong>Garbage Collection</strong> è il processo di liberazione automatica della memoria sull&#39;heap tramite l&#39;eliminazione di oggetti non più raggiungibili. Un oggetto diventa idoneo (<strong>eligible</strong>) per la <strong>GC</strong> nel momento esatto in cui non è più raggiungibile da alcun riferimento attivo (es. referenza impostata a <strong>null</strong> o tutti i riferimenti fuori scope).</p>
 <p><strong>⚠️ Tranello (System.gc):</strong> Chiamare <code>System.gc()</code> è solo un suggerimento alla <strong>JVM</strong> e non garantisce l&#39;esecuzione immediata della pulizia.</p>
 <hr>
-<h3>12. Casi Limite e Tranelli Sintattici</h3>
+<h3 id="cap-1-s12">12. Casi Limite e Tranelli Sintattici</h3>
 <p>Tutti i casi limite e i tranelli sintattici sopra descritti (come la regola PIC, l&#39;Illegal Forward Reference, gli underscore nei numeri, la sintassi dei Text Blocks e i limiti di <code>var</code>) costituiscono gli elementi critici per evitare errori di compilazione nel Capitolo 1.</p>
 
     </section>
 <hr class="chapter-sep">
 <section id="cap-2" class="chapter">
       <h1 class="chapter-title">Capitolo 2</h1>
-      <h3>1. Comprensione degli Operatori Java</h3>
+      <h3 id="cap-2-s1">1. Comprensione degli Operatori Java</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un <strong>operatore Java</strong> è un simbolo speciale che può essere applicato a un insieme di variabili, valori o letterali — definiti <strong>operandi</strong> — e che restituisce un <strong>risultato</strong>. Il termine <strong>operando</strong> si riferisce al valore o alla variabile a cui l&#39;operatore viene applicato. L&#39;output dell&#39;operazione è definito semplicemente come il <strong>risultato</strong>. <strong>Classificazione:</strong> Gli operatori sono classificati in unari (un operando), binari (due operandi) o ternari (tre operandi). <strong>Precedenza degli Operatori (Operator Precedence):</strong> Determinare quali operatori vengono valutati e in quale ordine è definito precedenza degli operatori (Tabella 2.1).</p>
 <p><strong>⚠️ Tranello: Ordine di Valutazione</strong>
@@ -247,7 +638,7 @@ System.out.print(reward); // Stampa 9.0
 </code></pre>
 <p>In questo esempio, viene prima eseguito il decremento (--cookies porta il valore a 3), poi la moltiplicazione (2 * 3 = 6), e infine l&#39;addizione (3 + 6 = 9). Il valore viene promosso a 9.0 per l&#39;assegnazione a double.</p>
 <hr>
-<h3>2. Applicazione degli Operatori Unari</h3>
+<h3 id="cap-2-s2">2. Applicazione degli Operatori Unari</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un <strong>operatore unario</strong> è quello che richiede esattamente un operando, o variabile, per funzionare. <strong>Tipi:</strong> Includono il complemento logico (!), il complemento bit per bit (~), il più (+), la negazione (-), l&#39;incremento (++), il decremento (--) e il cast ((tipo)). <strong>Incremento/Decremento Prefisso (++w, --x):</strong> Aumenta o diminuisce il valore di 1 e restituisce il nuovo valore. <strong>Incremento/Decremento Postfisso (y++, z--):</strong> Aumenta o diminuisce il valore di 1 e restituisce il valore originale.</p>
 <p><strong>⚠️ Tranello: Applicazione Errata e Valori di Ritorno</strong>
@@ -266,7 +657,7 @@ System.out.println(parkAttendance);   // Stampa 0
 </code></pre>
 <p>L&#39;operatore prefisso aggiorna e restituisce il <strong>nuovo</strong> valore; quello postfisso aggiorna la variabile ma restituisce il valore <strong>originale</strong>. <strong>⚠️ Tranello:</strong> Sbagliare il valore restituito quando la stessa variabile è incrementata e usata nello stesso statement.</p>
 <hr>
-<h3>3. Operatori Aritmetici Binari</h3>
+<h3 id="cap-2-s3">3. Operatori Aritmetici Binari</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Operatore Binario:</strong> Operatori che richiedono due operandi; sono di gran lunga i più comuni.</li>
@@ -283,7 +674,7 @@ System.out.println(parkAttendance);   // Stampa 0
 <pre><code class="language-java">short robin = 3 + [(4 * 2) + 4]; // DOES NOT COMPILE: parentesi quadre non ammesse
 </code></pre>
 <hr>
-<h3>4. Regole di Promozione Numerica</h3>
+<h3 id="cap-2-s4">4. Regole di Promozione Numerica</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Promozione Numerica Primitiva (Numeric Promotion):</strong> Processo mediante il quale Java converte automaticamente i tipi di dati più piccoli in tipi più grandi durante le operazioni.</li>
@@ -303,7 +694,7 @@ short hamster = 3;
 short capybara = mouse * hamster; // DOES NOT COMPILE: il risultato è un int
 </code></pre>
 <hr>
-<h3>5. Assegnazione di Valori e Casting</h3>
+<h3 id="cap-2-s5">5. Assegnazione di Valori e Casting</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Operatore di Assegnazione (=):</strong> Memorizza il risultato di un&#39;espressione nella variabile sul lato sinistro.</li>
@@ -340,7 +731,7 @@ if(healthy = true) // ATTENZIONE: assegna true, non confronta
    System.out.print(&quot;Good!&quot;); // Viene stampato
 </code></pre>
 <hr>
-<h3>6. Operatori di Uguaglianza e Relazionali</h3>
+<h3 id="cap-2-s6">6. Operatori di Uguaglianza e Relazionali</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Operatori di Uguaglianza (==, !=):</strong> Restituiscono un <code>boolean</code>. Per i primitivi confrontano i valori; per gli oggetti verificano se i riferimenti puntano allo stesso oggetto in memoria.</li>
@@ -366,7 +757,7 @@ if (time instanceof String) { }  // DOES NOT COMPILE: Number non può essere Str
 <pre><code class="language-java">System.out.print(null instanceof Object); // Stampa false
 </code></pre>
 <hr>
-<h3>7. Operatori Logici e Condizionali</h3>
+<h3 id="cap-2-s7">7. Operatori Logici e Condizionali</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Operatori Logici (&amp;, |, ^):</strong> Quando applicati a <code>boolean</code>, valutano sempre entrambi i lati dell&#39;espressione.</li>
@@ -382,7 +773,7 @@ boolean bunny = (rabbit &gt;= 6) || (++rabbit &lt;= 7);
 System.out.println(rabbit); // Stampa 6: ++rabbit non è mai stato eseguito!
 </code></pre>
 <hr>
-<h3>8. Operatore Ternario</h3>
+<h3 id="cap-2-s8">8. Operatore Ternario</h3>
 <p>È l&#39;<strong>unico operatore ternario</strong> del linguaggio (spesso chiamato operatore condizionale <code>? :</code>).</p>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
@@ -401,11 +792,11 @@ int animal = (stripes &lt; 9) ? 3 : &quot;Horse&quot;; // DOES NOT COMPILE: &quo
 <hr class="chapter-sep">
 <section id="cap-3" class="chapter">
       <h1 class="chapter-title">Capitolo 3</h1>
-      <h3>1. Dichiarazioni di Decisione: Statements e Blocchi</h3>
+      <h3 id="cap-3-s1">1. Dichiarazioni di Decisione: Statements e Blocchi</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un Java statement è un&#39;unità completa di esecuzione terminata da un punto e virgola (;). Un blocco di codice in Java è un gruppo di zero o più istruzioni tra parentesi graffe bilanciate ({}) e può essere utilizzato ovunque sia consentita un&#39;istruzione singola. I &quot;control flow statements&quot; interrompono il flusso di esecuzione utilizzando il processo decisionale, il looping e il branching, consentendo all&#39;applicazione di eseguire selettivamente particolari segmenti di codice. La singola istruzione o il blocco di istruzioni che viene eseguito se la condizione di una dichiarazione decisionale valuta a true è definito &quot;target&quot;.</p>
 <hr>
-<h3>2. L&#39;istruzione if e la Clausola else</h3>
+<h3 id="cap-3-s2">2. L&#39;istruzione if e la Clausola else</h3>
 <p><strong>Definizioni e Concetti</strong>
 L&#39;istruzione <code>if</code> è composta da un&#39;espressione booleana e da un&#39;istruzione o un blocco di istruzioni; se l&#39;espressione booleana valuta a true, il target viene eseguito. L&#39;istruzione <code>else</code> permette di eseguire un blocco alternativo quando la condizione del <code>if</code> valuta a false. In Java, a differenza di altri linguaggi, i valori 0 e 1 non sono considerati valori booleani e non possono essere usati direttamente nelle condizioni.</p>
 <p><strong>⚠️ Tranello (Valori numerici come booleani):</strong>
@@ -418,13 +809,13 @@ if (hourOfDay) {  // DOES NOT COMPILE
 </code></pre>
 <p><em>Motivo:</em> In Java, 0 e 1 non sono considerati valori boolean.</p>
 <hr>
-<h3>3. Pattern Matching con l&#39;operatore instanceof</h3>
+<h3 id="cap-3-s3">3. Pattern Matching con l&#39;operatore instanceof</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il pattern matching è una tecnica di controllo del flusso di programma che esegue una sezione di codice solo se soddisfa determinati criteri. L&#39;aggiunta di una variabile dopo il tipo (chiamata pattern variable) istruisce il compilatore a trattarlo come pattern matching, evitando potenziali <code>ClassCastException</code> perché l&#39;operazione di cast viene eseguita solo se l&#39;operatore <code>instanceof</code> restituisce true.</p>
 <p><strong>Sintassi (instanceof con pattern variable)</strong>
 Si indica al compilatore che si usa il pattern matching dichiarando una variabile subito dopo il tipo controllato, ad esempio <code>if (number instanceof Integer data)</code>.</p>
 <hr>
-<h3>4. Pattern Variables e Clausole Condizionali</h3>
+<h3 id="cap-3-s4">4. Pattern Variables e Clausole Condizionali</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il pattern matching supporta una clausola condizionale opzionale, dichiarata come espressione booleana, utilizzata per filtrare i dati. Una pattern variable è soggetta alla &quot;flow scoping&quot;: la variabile è in scope fintanto che il compilatore può determinare definitivamente il suo tipo (tipicamente nel ramo in cui il tipo è garantito, ad esempio dopo un <code>if</code> con <code>instanceof</code> positivo, e non necessariamente nel ramo <code>else</code>). È considerata cattiva pratica riassegnare una pattern variable, operazione che può essere impedita con il modificatore <code>final</code>.</p>
 <p><strong>⚠️ Tranello (Scope della pattern variable):</strong>
@@ -444,7 +835,7 @@ Quando si usa l&#39;operatore di negazione <code>!</code>, è necessario prestar
    return;
 </code></pre>
 <hr>
-<h3>5. Struttura di <code>switch statement</code> e <code>switch expression</code></h3>
+<h3 id="cap-3-s5">5. Struttura di <code>switch statement</code> e <code>switch expression</code></h3>
 <p><strong>Definizioni e Concetti</strong>
 Il vecchio <strong>switch statement</strong> instrada l&#39;esecuzione verso i rami <code>case</code> senza dover restituire un valore; il nuovo <strong>switch expression</strong> valuta l&#39;intera costruzione come un&#39;espressione che produce un valore. Entrambi i tipi possono prevedere una clausola <code>default</code> opzionale; nelle <strong>switch expression</strong> il <code>default</code> è spesso obbligatorio affinché l&#39;espressione abbia sempre un valore di ritorno, salvo che tutti i casi possibili siano già coperti in modo esaustivo (come con un <code>enum</code> completo o una <strong>sealed class</strong> con pattern di copertura completa).</p>
 <p><strong>Regole di Sintassi e Comportamento</strong></p>
@@ -491,11 +882,11 @@ var name = switch (fish) {
 <p><strong>⚠️ Tranello (Mischiare le sintassi):</strong>
 Non è permesso mischiare la sintassi con l&#39;operatore freccia (<code>-&gt;</code>) e quella con i due punti (<code>:</code>) nello stesso switch.</p>
 <hr>
-<h3>5.1. Tipi Supportati e Pattern Matching in switch</h3>
+<h3 id="cap-3-s6">5.1. Tipi Supportati e Pattern Matching in switch</h3>
 <p><strong>Definizioni e Concetti</strong>
 I tipi supportati includono <code>int</code>, <code>Integer</code>, <code>byte</code>, <code>Byte</code>, <code>short</code>, <code>Short</code>, <code>char</code>, <code>Character</code>, <code>String</code>, valori <code>enum</code> e <code>var</code> (se risolto in uno dei precedenti). A partire da Java 21, qualsiasi tipo di oggetto può essere utilizzato come variabile di switch se viene utilizzato il pattern matching. Non sono supportati <code>boolean</code>, <code>long</code>, <code>float</code> e <code>double</code>.</p>
 <hr>
-<h3>5.2. Guard Clauses e l&#39;uso di when</h3>
+<h3 id="cap-3-s7">5.2. Guard Clauses e l&#39;uso di when</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il pattern matching con <code>switch</code> include una &quot;guard clause&quot;, ovvero una clausola condizionale opzionale aggiunta a un ramo <code>case</code>. La parola chiave <code>when</code> è obbligatoria tra la variabile di pattern e l&#39;espressione condizionale. Questo permette di gestire scenari complessi come <code>case Integer i when i &gt; 10 -&gt; &quot;Joseph&quot;;</code>.</p>
 <p><strong>Variabili a runtime nei <code>case</code> (Il trucco del Pattern Matching)</strong>
@@ -526,7 +917,7 @@ L&#39;ordine è critico anche con le clausole <code>when</code>. Un caso senza g
 };
 </code></pre>
 <hr>
-<h3>5.3. Ordinamento dei Rami e Dominanza (Unreachable Code)</h3>
+<h3 id="cap-3-s8">5.3. Ordinamento dei Rami e Dominanza (Unreachable Code)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Quando si lavora con il pattern matching, l&#39;ordine dei rami è fondamentale indipendentemente dal tipo di switch. Un ramo non può essere &quot;dominato&quot; da un&#39;istruzione precedente; se il compilatore rileva che è impossibile raggiungere un <code>case</code> (unreachable code), viene generato un errore di compilazione. Ad esempio, <code>case Number n</code> domina rami successivi come <code>case Integer i</code>.</p>
 <p><strong>⚠️ Tranello (Casi dominati, unreachable code):</strong>
@@ -588,11 +979,11 @@ switch (tentativo) {
 }
 </code></pre>
 <hr>
-<h3>6. Cicli while e do/while</h3>
+<h3 id="cap-3-s9">6. Cicli while e do/while</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un ciclo è una struttura di controllo ripetitiva che può eseguire un&#39;istruzione o un blocco di codice più volte in successione. Il ciclo <code>while</code> valuta un&#39;espressione booleana di terminazione prima di ogni iterazione; il ciclo <code>do/while</code>, spesso presentato come <strong>forma alternativa</strong> del ciclo condizionale, garantisce l&#39;esecuzione del blocco almeno una volta prima della valutazione della condizione.</p>
 <hr>
-<h3>7. Il Ciclo for di Base</h3>
+<h3 id="cap-3-s10">7. Il Ciclo for di Base</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il ciclo <code>for</code> è composto da tre sezioni separate da punti e virgola: inizializzazione, espressione booleana (condizione) e aggiornamento. Le sezioni di <strong>inizializzazione</strong> e di <strong>aggiornamento</strong> possono contenere più istruzioni separate da <strong>virgole</strong>. Le variabili dichiarate nel blocco di inizializzazione hanno scope limitato e sono accessibili solo all&#39;interno del ciclo <code>for</code>.</p>
 <p><strong>⚠️ Tranello (Inizializzazione multipla con tipi diversi nel ciclo for):</strong>
@@ -601,7 +992,7 @@ Nella sezione di inizializzazione di un ciclo <code>for</code> tradizionale, è 
 <pre><code class="language-java">for (int i=0, long j=3; i&lt;10; i++) { ... } // DOES NOT COMPILE: tipi diversi
 </code></pre>
 <hr>
-<h3>8. Il Ciclo for-each Potenziato</h3>
+<h3 id="cap-3-s11">8. Il Ciclo for-each Potenziato</h3>
 <p><strong>Definizioni e Concetti</strong>
 Dichiarato con una sezione di inizializzazione e un oggetto su cui iterare, il lato destro deve essere un array integrato di Java o un oggetto il cui tipo implementa <code>java.lang.Iterable</code>. In pratica rientrano le collezioni come <code>List</code> e <code>Set</code>; la classe <code>Map</code> <strong>non</strong> può essere usata direttamente come sorgente del for-each (non implementa <code>Iterable</code>), anche se espone metodi che restituiscono viste di tipo <code>Collection</code> sulle quali invece si può iterare.</p>
 <p><strong>⚠️ Tranello (Tipi non supportati nel for-each):</strong>
@@ -611,7 +1002,7 @@ Il lato destro di un ciclo <code>for-each</code> deve essere un array o implemen
 for (char c : birds) { ... } // DOES NOT COMPILE: String non è un array o Iterable
 </code></pre>
 <hr>
-<h3>9. Controllo del Flusso con Branching: Etichette e Salti</h3>
+<h3 id="cap-3-s12">9. Controllo del Flusso con Branching: Etichette e Salti</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un&#39;<strong>etichetta (label)</strong> è un identificatore che segue le regole degli identificatori Java, seguito da due punti (<code>:</code>), applicabile a cicli o <code>switch</code> per gestire salti più articolati. Java permette l&#39;uso di etichette con i cicli <code>while</code>, <code>do/while</code>, <code>for</code> e con lo <code>switch</code>. Le istruzioni <code>break</code> e <code>continue</code> modificano il flusso all&#39;interno di uno statement, mentre <code>return</code> può essere usato come alternativa a etichette e <code>break</code> per uscire da metodi.</p>
 <p><strong>Comportamento di <code>break</code> e <code>continue</code></strong></p>
@@ -636,7 +1027,7 @@ La parola chiave <code>yield</code> è specifica per restituire valori dalle <em
 <hr class="chapter-sep">
 <section id="cap-4" class="chapter">
       <h1 class="chapter-title">Capitolo 4</h1>
-      <h3>1. Creazione e Manipolazione di Stringhe (String)</h3>
+      <h3 id="cap-4-s1">1. Creazione e Manipolazione di Stringhe (String)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>String</strong> è fondamentalmente una sequenza di caratteri ed è un tipo di riferimento speciale che non richiede necessariamente l&#39;operatore <strong>new</strong> per essere istanziato. La classe String è speciale e non richiede necessariamente di essere istanziata con <code>new</code>. Le stringhe sono immutabili, il che significa che chiamare un metodo su una String restituirà un oggetto diverso invece di cambiare il valore del riferimento originale. In altre parole, chiamare un metodo su una <code>String</code> restituisce un altro oggetto <code>String</code>, anziché mutare il valore del riferimento. Java utilizza il &quot;pool delle stringhe&quot; (o pool di internamento) per raccogliere e riutilizzare i valori letterali e le costanti, ottimizzando l&#39;uso della memoria. Il <em>string pool</em>, noto anche come <em>intern pool</em>, è un&#39;area nella Java Virtual Machine (JVM) che raccoglie tutti i valori letterali e le costanti presenti nel programma. Un <strong>code point</strong> (punto di codice Unicode) è un valore numerico per un carattere nel modello Unicode; può riguardare unità più ampie del singolo valore <em>char</em> a 16 bit. <strong>Contesto — API (interfaccia di programmazione applicativa):</strong> in questo senso, un&#39;<strong>API</strong> è un insieme di classi o definizioni di interfacce che espone un blocco di funzionalità (le API principali del linguaggio e delle librerie standard).</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong>
@@ -664,7 +1055,7 @@ s.concat(&quot;2&quot;);
 System.out.println(s); // Stampa 1 (il risultato di concat è andato perduto)
 </code></pre>
 <hr>
-<h3>2. Utilizzo della classe StringBuilder</h3>
+<h3 id="cap-4-s2">2. Utilizzo della classe StringBuilder</h3>
 <p><strong>Definizioni e Concetti</strong>
 A differenza di String, StringBuilder è mutabile e non è una sequenza di caratteri immutabile. StringBuilder è una sequenza di caratteri mutabile. Quando si concatenano chiamate ai metodi di StringBuilder, l&#39;oggetto cambia il proprio stato interno e restituisce un riferimento a se stesso, a differenza di <code>String</code> dove ogni chiamata crea un nuovo oggetto. La maggior parte dei metodi restituisce un riferimento all&#39;oggetto corrente. Questa classe è fondamentale per migliorare le prestazioni quando si devono costruire stringhe in modo dinamico, ad esempio all&#39;interno di un ciclo for.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -687,7 +1078,7 @@ var sb2 = sb.append(&quot;bbb&quot;);
 System.out.println(sb == sb2); // true (puntano allo stesso oggetto)
 </code></pre>
 <hr>
-<h3>3. Comprensione dell&#39;Uguaglianza (== vs equals)</h3>
+<h3 id="cap-4-s3">3. Comprensione dell&#39;Uguaglianza (== vs equals)</h3>
 <p><strong>Definizioni e Concetti</strong>
 L&#39;operatore <code>==</code> controlla l&#39;uguaglianza dei <strong>riferimenti</strong> (due variabili puntano allo stesso oggetto in memoria). Per <strong>String</strong>, <code>equals()</code> confronta invece il <strong>contenuto</strong>; l&#39;esito di un confronto con <code>==</code> tra letterali equivalenti o tra letterale e istanza dipende dal <em>string pool</em>, che raccoglie i valori letterali e le costanti del programma. Il metodo <code>equals()</code> segue l&#39;implementazione della classe: per <code>String</code> verifica l&#39;uguaglianza carattere per carattere.</p>
 <p><strong>⚠️ Tranello (String pool e intern()):</strong> È un tranello d&#39;esame comune l&#39;uso di intern() per forzare una stringa nel pool, rendendo vero il confronto con == contro un letterale equivalente.</p>
@@ -701,7 +1092,7 @@ System.out.println(s == t.intern());   // vero (t entra nel pool)
 </code></pre>
 <p>I letterali <code>String</code> provengono dal <em>string pool</em>: due letterali con lo stesso contenuto si riferiscono allo stesso oggetto e risultano uguali con <code>==</code>.</p>
 <hr>
-<h3>4. Comprensione degli Array</h3>
+<h3 id="cap-4-s4">4. Comprensione degli Array</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un array è un&#39;area di memoria a dimensione fissa sull&#39;heap che riserva spazio per elementi primitivi o riferimenti a oggetti. È una lista ordinata che può contenere duplicati. Gli indici iniziano sempre da zero e la proprietà <code>length</code> restituisce il numero di posizioni allocate, senza parentesi perché non è un metodo. L&#39;attributo <code>length</code> non descrive il <em>contenuto</em> delle celle, ma solo quante posizioni sono state allocate. Un <strong>array anonimo</strong> è un array creato e inizializzato sul posto (es. <code>method(new int[] { 1, 2, 3 })</code>) senza prima assegnarlo a una variabile con nome; tipo e valori iniziali compaiono nello stesso costrutto <code>new</code>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong>
@@ -744,7 +1135,7 @@ nums[3] = 0; // Lancia ArrayIndexOutOfBoundsException
 <li><strong>Ricerca binaria:</strong> <code>binarySearch</code> richiede un array <strong>ordinato</strong>; in caso contrario il risultato non è definito. Usa <code>sort()</code> sull&#39;array o rispetta l&#39;ordine come precondizione.</li>
 </ul>
 <hr>
-<h3>5. Calcoli con le API Math</h3>
+<h3 id="cap-4-s5">5. Calcoli con le API Math</h3>
 <p><strong>Definizioni e Concetti</strong>
 Java include la classe <code>Math</code> con numerosi metodi statici per eseguire calcoli comuni, come <code>min()</code>, <code>max()</code>, <code>round()</code>, <code>ceil()</code>, <code>floor()</code>, <code>pow()</code> e <code>random()</code>. Tutti i metodi della classe <code>Math</code> sono <em>static</em>; non serve creare un&#39;istanza di <code>Math</code> per utilizzarli. Per l&#39;esame 1Z0-830 è essenziale associare a ogni chiamata il <strong>tipo primitivo di ritorno</strong> atteso in base al tipo di ingresso (es. <code>float</code> vs <code>double</code>): prestare <strong>attenzione speciale ai tipi di ritorno</strong> nelle domande su <code>Math</code> — sono un&#39;ottima occasione per i tranelli!
 Vengono inoltre trattate le classi <code>BigInteger</code> e <code>BigDecimal</code> per gestire numeri che superano le capacità dei primitivi o che richiedono precisione decimale assoluta. Come <code>String</code>, sono <strong>immutabili</strong>: si concatenano le chiamate ai metodi e si riassegna il risultato.</p>
@@ -795,7 +1186,7 @@ System.out.println(Math.floor(-2.3)); // -3.0
 <pre><code class="language-java">var math = new Math(); // NON COMPILA
 </code></pre>
 <hr>
-<h3>6. Lavoro con Date e Ore (Date-Time API)</h3>
+<h3 id="cap-4-s6">6. Lavoro con Date e Ore (Date-Time API)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Le API per data e ora (<code>java.time.*</code>) includono <code>LocalDate</code> (solo data), <code>LocalTime</code> (solo ora), <code>LocalDateTime</code> (data e ora, senza fuso), <code>ZonedDateTime</code> (data, ora e fuso orario) e <code>Instant</code> (istante preciso in UTC/GMT). Sono tutte classi <strong>immutabili</strong>: <code>plus()</code>, <code>minus()</code> e <code>with()</code> restituiscono <strong>nuovi</strong> oggetti. <code>Period</code> rappresenta un intervallo basato su <strong>giorni, mesi o anni</strong>; <code>Duration</code> riguarda unità più fini (<strong>ore, minuti, secondi, nanosecondi</strong>). La vecchia classe <code>java.util.Date</code> <strong>non</strong> è all&#39;esame. Per usare le classi moderne serve <code>import java.time.*;</code>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong>
@@ -947,7 +1338,7 @@ System.out.println(dateTime); // 2025-11-02T02:30-05:00
 <hr class="chapter-sep">
 <section id="cap-5" class="chapter">
       <h1 class="chapter-title">Capitolo 5</h1>
-      <h3>1. Progettazione dei Metodi (Designing Methods)</h3>
+      <h3 id="cap-5-s1">1. Progettazione dei Metodi (Designing Methods)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>dichiarazione di metodo</strong> (method declaration) elenca tutte le informazioni necessarie per chiamare il metodo: in pratica, modificatore di accesso, eventuali <strong>specificatori opzionali</strong> (optional specifiers, come <code>static</code> o <code>final</code> prima del tipo di ritorno), <strong>tipo di ritorno</strong> (return type), nome, <strong>lista dei parametri</strong> (parameter list) tra parentesi, lista delle eccezioni controllate (<strong>checked exceptions</strong>) e <strong>corpo del metodo</strong> (method body) tra parentesi graffe. Il tipo di ritorno <code>void</code> indica che non si restituisce alcun valore. Ogni parametro (parameter) è un valore o riferimento che il chiamante fornisce al metodo. La dichiarazione deve includere un corpo, a meno che il metodo non sia dichiarato <code>abstract</code> (o definito in contesti che lo consentono, come in una interfaccia in casi particolari).</p>
 <ul>
@@ -991,7 +1382,7 @@ Una <strong>dichiarazione di metodo</strong> (method declaration) elenca tutte l
 public void _() {}    // DOES NOT COMPILE: un solo underscore come nome metodo
 </code></pre>
 <hr>
-<h3>2. Dichiarazione di Variabili Locali e d&#39;Istanza (Declaring Local and Instance Variables)</h3>
+<h3 id="cap-5-s2">2. Dichiarazione di Variabili Locali e d&#39;Istanza (Declaring Local and Instance Variables)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Variabile locale:</strong> definita in un metodo o blocco. Non ha valore di default e va inizializzata prima della lettura. L’unico modificatore ammesso è <code>final</code> (inibisce la riassegnazione). Le <strong>classi locali</strong> e le <strong>lambda</strong> possono catturare solo variabili locali <strong>effectively final</strong> (o esplicitamente <code>final</code>), cioè non riassegnate dopo il primo assegnamento.</li>
@@ -1017,7 +1408,7 @@ public void _() {}    // DOES NOT COMPILE: un solo underscore come nome metodo
 <pre><code class="language-java">int num, String value; // DOES NOT COMPILE: la scorciatoia su più variabili vale solo con stesso tipo
 </code></pre>
 <hr>
-<h3>3. Lavoro con i Varargs (Working with Varargs)</h3>
+<h3 id="cap-5-s3">3. Lavoro con i Varargs (Working with Varargs)</h3>
 <p><strong>Definizioni e Concetti</strong>
 I <strong>varargs</strong> (<code>T...</code> nome) permettono di passare un numero variabile di argomenti, che a runtime vengono trattati come un array. È lecito passare un <strong>array esplicito</strong> oppure un elenco di argomenti separati da virgola, purché rispettino il tipo atteso. Regole: al più <strong>un</strong> varargs per firma, e, se c’è, <strong>deve</strong> essere l’ultimo parametro.</p>
 <p><strong>⚠️ Tranelli (Varargs):</strong></p>
@@ -1036,7 +1427,7 @@ public void walk4(int... start, int... steps) {} // DOES NOT COMPILE: al massimo
 walkDog(null); // NullPointerException quando si usa steps come array
 </code></pre>
 <hr>
-<h3>4. Applicazione dei Modificatori di Accesso (Applying Access Modifiers)</h3>
+<h3 id="cap-5-s4">4. Applicazione dei Modificatori di Accesso (Applying Access Modifiers)</h3>
 <p><strong>Definizioni e Concetti</strong>
 I modificatori di accesso stabiliscono <strong>chi</strong> può usare un membro. L’ordine nella dichiarazione (modificatore di accesso prima del tipo di ritorno) è quello illustrato nel paragrafo 1. Java offre quattro livelli: <code>private</code>, accesso di package (nessuna parola chiave), <code>protected</code> e <code>public</code>. Il modificatore <code>protected</code> è il più articolato: oltre alla stessa classe e al package, consente accessi per ereditarietà e in certi casi tramite riferimenti al tipo di sottoclasse, secondo le regole del linguaggio.</p>
 <p><strong>Regole di Accessibilità</strong></p>
@@ -1054,7 +1445,7 @@ Frog f = new Tadpole();
 f.ribbit(); // DOES NOT COMPILE: con il tipo dichiarato Frog, in questo scenario, non c’è accesso protected in un altro package
 </code></pre>
 <hr>
-<h3>5. Accesso ai Dati Statici (Accessing Static Data)</h3>
+<h3 id="cap-5-s5">5. Accesso ai Dati Statici (Accessing Static Data)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il modificatore <strong>static</strong> lega un membro alla <strong>classe</strong>: esiste in un’unica copia logica condivisa tra tutte le istanze. I <strong>metodi e i campi d’istanza</strong> possono richiamare membri <code>static</code> della stessa classe; <strong>viceversa</strong>, in un metodo o blocco <code>static</code> <strong>non</strong> si possono usare campi o metodi d’istanza senza un riferimento a un <strong>oggetto</strong> esplicito. Una <strong>costante</strong> unisce in genere <code>static</code> e <code>final</code> (immutabilità del valore dopo l’inizializzazione) e, per convenzione, spesso un nome in <strong>MAIUSCOLO</strong> con <strong>underscore</strong> tra le parole.</p>
 <ul>
@@ -1082,7 +1473,7 @@ System.out.println(s.hiss); // hiss è static: compila; nessun NPE solo perché 
 static import java.util.Arrays.*;  // DOES NOT COMPILE: l&#39;ordine corretto è import static, non l&#39;inverso
 </code></pre>
 <hr>
-<h3>6. Passaggio di Dati tra Metodi (Passing Data among Methods)</h3>
+<h3 id="cap-5-s6">6. Passaggio di Dati tra Metodi (Passing Data among Methods)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Java applica il <strong>passaggio per valore</strong>: alla chiamata, nel parametro formale viene copiato <strong>il valore</strong> dell’espressione passata. Se l’argomento è un <strong>riferimento a oggetto</strong>, la copiata è del <strong>riferimento</strong>; chiamato e chiamante possono così condividere lo stesso oggetto, ma se il metodo <strong>riassegna</strong> il parametro a un <strong>nuovo</strong> oggetto, la variabile del chiamante <strong>non</strong> cambia. I <strong>valori di ritorno</strong> possono essere <strong>ignorati</strong> dal chiamante: non è un errore di compilazione, ma, se il metodo restituisce un risultato significativo e nessuno lo usa, l’elaborazione che produce quel valore può risultare <strong>inutile</strong> rispetto all’intento (salvo che non si volesse solo un effetto collaterale).</p>
 <ul>
@@ -1090,7 +1481,7 @@ Java applica il <strong>passaggio per valore</strong>: alla chiamata, nel parame
 <li><strong>Riferimenti a oggetti:</strong> modifiche allo <strong>stato</strong> dell’oggetto condiviso (campi, contenuto di collezioni, ecc.) restano visibili al chiamante; la <strong>sostituzione</strong> del riferimento locale al metodo, no.</li>
 </ul>
 <hr>
-<h3>7. Overloading dei Metodi (Overloading Methods)</h3>
+<h3 id="cap-5-s7">7. Overloading dei Metodi (Overloading Methods)</h3>
 <p><strong>Definizioni e Concetti</strong>
 L’<strong>overloading</strong> richiede lo <strong>stesso</strong> nome e <strong>parametri diversi</strong> (numero, tipo, ordine). <strong>Non</strong> basta variare <strong>solo</strong> il tipo di ritorno o i modificatori d’accesso: servono <strong>firme</strong> (nome + elenco parametri) distinte, altrimenti compaiono <strong>metodi duplicati</strong>.</p>
 <p><strong>Ordine di risoluzione (scelta del metodo sovraccaricato):</strong> in presenza di più candidati, Java prova, in <strong>quest’ordine</strong>:</p>
@@ -1111,7 +1502,7 @@ public int fly(int numMiles) { return 1; } // DOES NOT COMPILE: stessa firma (no
 </code></pre>
 <p><strong>Esempio (Risoluzione: promozione numerica e autoboxing):</strong> con chiamata <code>glide(1, 2)</code> e overload <code>void glide(long i, long j)</code> e <code>void glide(Integer i, Integer j)</code> si vince spesso l’overload con i <code>long</code> (promozione) rispetto a <code>Integer</code> (boxing), in linea con l’ordine di risoluzione sopra (da verificare sul codice reale, ma la logica d’esame resta: promozione prima del boxing ove applicabile).</p>
 <hr>
-<h3>8. Autoboxing e Unboxing (Autoboxing and Unboxing)</h3>
+<h3 id="cap-5-s8">8. Autoboxing e Unboxing (Autoboxing and Unboxing)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Autoboxing:</strong> da tipo primitivo a tipo wrapper corrispondente (es. <code>int</code> a <code>Integer</code>) in contesti che lo prevedono, spesso <strong>senza</strong> <code>cast</code> esplicito.</li>
@@ -1135,7 +1526,7 @@ char badElephant = elephant; // runtime: NullPointerException (unboxing su null)
 <hr class="chapter-sep">
 <section id="cap-6" class="chapter">
       <h1 class="chapter-title">Capitolo 6</h1>
-      <h3>1. Comprensione dell&#39;ereditarietà (Inheritance)</h3>
+      <h3 id="cap-6-s1">1. Comprensione dell&#39;ereditarietà (Inheritance)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Inheritance (Ereditarietà):</strong> L&#39;ereditarietà è il processo mediante il quale una sottoclasse include automaticamente determinati membri della classe, inclusi primitivi, oggetti o metodi, definiti nella classe genitrice.</li>
@@ -1157,7 +1548,7 @@ char badElephant = elephant; // runtime: NullPointerException (unboxing su null)
 <li><strong>Accessibilità dei membri:</strong> Una classe Java che ne estende un&#39;altra eredita tutti i suoi metodi e variabili pubblici e protetti. Se la classe si trova nello stesso pacchetto, eredita anche tutti i membri con accesso di package. I membri <code>private</code> non sono mai accessibili direttamente tramite ereditarietà.</li>
 </ul>
 <hr>
-<h3>2. Modificatori delle classi (Class modifiers)</h3>
+<h3 id="cap-6-s2">2. Modificatori delle classi (Class modifiers)</h3>
 <p><strong>Definizioni e Regole</strong>
 Una dichiarazione di classe può includere vari modificatori:</p>
 <ul>
@@ -1179,7 +1570,7 @@ protected class ClownFish{} // NON COMPILA
 private class BlueTang {} // NON COMPILA
 </code></pre>
 <hr>
-<h3>3. Accesso ai riferimenti this e super</h3>
+<h3 id="cap-6-s3">3. Accesso ai riferimenti this e super</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>this Reference:</strong> Riferimento utilizzato per accedere a un membro corrente o ereditato di una classe.</li>
@@ -1219,7 +1610,7 @@ private class BlueTang {} // NON COMPILA
 </li>
 </ul>
 <hr>
-<h3>4. Dichiarazione e overloading dei costruttori</h3>
+<h3 id="cap-6-s4">4. Dichiarazione e overloading dei costruttori</h3>
 <p><strong>Definizioni e Regole</strong></p>
 <ul>
 <li><strong>Constructor (Costruttore):</strong> Metodo speciale che corrisponde al nome della classe e non ha tipo di ritorno. Viene chiamato quando viene creata una nuova istanza della classe.</li>
@@ -1254,7 +1645,7 @@ public class Seal extends Mammal {} // NON COMPILA
 </li>
 </ul>
 <hr>
-<h3>5. Ordine di inizializzazione degli oggetti</h3>
+<h3 id="cap-6-s5">5. Ordine di inizializzazione degli oggetti</h3>
 <p><strong>Definizioni e Regole</strong></p>
 <ul>
 <li><strong>Order of Initialization (Ordine di inizializzazione):</strong> come e quando ai membri vengono assegnati i valori, lungo l&#39;albero delle classi.</li>
@@ -1279,7 +1670,7 @@ public class Seal extends Mammal {} // NON COMPILA
 }
 </code></pre>
 <hr>
-<h3>6. Overriding dei metodi</h3>
+<h3 id="cap-6-s6">6. Overriding dei metodi</h3>
 <p><strong>Regole Tassative</strong>
 Un metodo è <strong>overridden</strong> (sovrascritto) se una sottoclasse definisce un metodo con la stessa <strong>firma</strong> (nome e parametri) rispetto alla versione ereditata, rispettando almeno queste vincolanti (oltre a regole su eccezioni e covarianza viste sotto):</p>
 <ol>
@@ -1332,7 +1723,7 @@ public class SunBear extends Bear {
 <li><strong>I metodi <code>final</code> in superclasse</strong> non possono essere né <strong>sostituiti</strong> né <strong>nascosti</strong>; i metodi <code>static</code> in genere danno <em>method hiding</em> e regole distinte (§7).</li>
 </ul>
 <hr>
-<h3>7. Hiding di metodi statici e variabili</h3>
+<h3 id="cap-6-s7">7. Hiding di metodi statici e variabili</h3>
 <p><strong>Ridichiarazione vs overriding</strong></p>
 <ul>
 <li><strong>Method Redeclaring (Ridichiarazione):</strong> si ha quando in sottoclasse compare un metodo con lo stesso nome (e talvolta la stessa forma) di un metodo che <strong>non</strong> entra nel meccanismo di override — in particolare con un metodo <code>private</code> in superclasse: le sottoclassi possono definire un metodo nuovo, <strong>senza</strong> relazione di sostituzione col metodo privato.</li>
@@ -1361,7 +1752,7 @@ System.out.println(joey.age); // Stampa 2, non 6
 <li><strong>Metodi <code>static</code> vs istanza:</strong> vedi l&#39;esempio <em>Bear</em> nella sezione 6: <strong>non</strong> mescolare <em>static</em> e istanza.</li>
 </ul>
 <hr>
-<h3>8. Creazione di classi astratte</h3>
+<h3 id="cap-6-s8">8. Creazione di classi astratte</h3>
 <p><strong>Definizioni e Regole</strong></p>
 <ul>
 <li><strong>Abstract Class:</strong> dichiarata con <code>abstract</code>, <strong>non</strong> si può istanziare con <code>new</code> come classe concreta; l&#39;inizializzazione d&#39;istanza lungo la gerarchia prosegue comunque tramite le <strong>sottoclassi concrete</strong> e le rispettive catene di costruttori.</li>
@@ -1386,7 +1777,7 @@ System.out.println(joey.age); // Stampa 2, non 6
 <li><strong>Modificatori incompatibili:</strong> un metodo <strong>non</strong> può essere insieme <code>abstract</code> e <code>private</code>, né <code>abstract</code> e <code>final</code> (né <em>private</em> né <em>final</em> consentono la sostituzione richiesta a valle nelle sottoclassi).</li>
 </ul>
 <hr>
-<h3>9. Creazione di oggetti immutabili</h3>
+<h3 id="cap-6-s9">9. Creazione di oggetti immutabili</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Immutable Object (Oggetto immutabile):</strong> istanza il cui <strong>stato</strong> non può mutare in modo lecito <strong>dopo</strong> la creazione, se il pattern è rispettato.</li>
@@ -1420,7 +1811,7 @@ zebra.getFavoriteFoods().clear(); // se il getter dà il riferimento reale, lo s
 <hr class="chapter-sep">
 <section id="cap-7" class="chapter">
       <h1 class="chapter-title">Capitolo 7</h1>
-      <h3>1. Implementazione delle Interfacce (Implementing Interfaces)</h3>
+      <h3 id="cap-7-s1">1. Implementazione delle Interfacce (Implementing Interfaces)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Interface (Interfaccia):</strong> Un&#39;interfaccia è un tipo di dato astratto che dichiara un elenco di metodi astratti che qualsiasi classe che implementa l&#39;interfaccia deve fornire.</li>
@@ -1456,7 +1847,7 @@ public class Tiger implements Herbivore, Omnivore { // NON COMPILA: conflitto su
 }
 </code></pre>
 <hr>
-<h3>2. Metodi Concreti nelle Interfacce (default, static, private)</h3>
+<h3 id="cap-7-s2">2. Metodi Concreti nelle Interfacce (default, static, private)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Default interface method:</strong> Metodo d&#39;istanza in un&#39;interfaccia dichiarato con <code>default</code> e con corpo. Può essere sovrascritto dalle classi implementatrici ed è stato introdotto anche per <strong>retrocompatibilità</strong> (aggiungere metodi a un&#39;interfaccia esistente senza rompere le implementazioni già compilate).</li>
@@ -1469,7 +1860,7 @@ public class Tiger implements Herbivore, Omnivore { // NON COMPILA: conflitto su
 <li><strong>Metodi <code>static</code> dell&#39;interfaccia:</strong> Non sono ereditati; la chiamata usa il nome dell&#39;interfaccia. Un metodo <code>static</code> nell&#39;interfaccia <strong>non</strong> può invocare un metodo <code>default</code> o <code>private</code> <strong>d&#39;istanza</strong>.</li>
 </ul>
 <hr>
-<h3>3. Lavoro con le Enumerazioni (Working with Enums)</h3>
+<h3 id="cap-7-s3">3. Lavoro con le Enumerazioni (Working with Enums)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Enumeration (<code>enum</code>):</strong> Tipo che rappresenta un insieme fisso di costanti (es. giorni della settimana, stagioni).</li>
@@ -1492,7 +1883,7 @@ public class Tiger implements Herbivore, Omnivore { // NON COMPILA: conflitto su
 }
 </code></pre>
 <hr>
-<h3>4. Classi e Interfacce Sigillate (Sealed Classes)</h3>
+<h3 id="cap-7-s4">4. Classi e Interfacce Sigillate (Sealed Classes)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Sealed class:</strong> Limita la gerarchia indicando con <code>sealed</code> e <code>permits</code> quali classi possono estenderla direttamente.</li>
@@ -1532,7 +1923,7 @@ public class Scooter extends Moto {} // OK, Moto è non-sealed
 // Correzione: permits Snake.Cobra
 </code></pre>
 <hr>
-<h3>5. Incapsulamento e Record (Encapsulating Data with Records)</h3>
+<h3 id="cap-7-s5">5. Incapsulamento e Record (Encapsulating Data with Records)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Incapsulamento:</strong> Limitare l&#39;accesso ai dettagli interni di un oggetto (es. campi <code>private</code> esposti tramite metodi controllati).</li>
@@ -1596,7 +1987,7 @@ public void checkPoint(Object obj) {
 }
 </code></pre>
 <hr>
-<h3>6. Creazione di Classi Annidate (Nested Classes)</h3>
+<h3 id="cap-7-s6">6. Creazione di Classi Annidate (Nested Classes)</h3>
 <p><strong>Tipi e Regole</strong></p>
 <ol>
 <li><strong>Inner class (classe interna):</strong> Non <code>static</code>, a livello di membro; richiede un&#39;istanza della classe esterna. Può usare <strong>tutti e quattro</strong> i livelli di accesso (<code>public</code>, <code>protected</code>, package-private, <code>private</code>).</li>
@@ -1611,7 +2002,7 @@ public void checkPoint(Object obj) {
 <li><strong>Variabili locali e effectively final:</strong> Se una variabile locale usata nella classe locale viene <strong>riassegnata</strong> dopo la dichiarazione della classe, non è più effectively final e il codice <strong>non compila</strong>.</li>
 </ul>
 <hr>
-<h3>7. Comprensione del Polimorfismo (Understanding Polymorphism)</h3>
+<h3 id="cap-7-s7">7. Comprensione del Polimorfismo (Understanding Polymorphism)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Polimorfismo:</strong> Capacità di un oggetto di essere usato tramite un riferimento del proprio tipo, di una <strong>superclasse</strong> o di un&#39;<strong>interfaccia</strong> implementata; in memoria resta un unico oggetto con una forma concreta.</li>
@@ -1637,7 +2028,7 @@ Bird bird = (Bird) fish; // NON COMPILA: tipi non correlati
 <hr class="chapter-sep">
 <section id="cap-8" class="chapter">
       <h1 class="chapter-title">Capitolo 8</h1>
-      <h3>1. Scrittura di Lambda Semplici (Writing Simple Lambdas)</h3>
+      <h3 id="cap-8-s1">1. Scrittura di Lambda Semplici (Writing Simple Lambdas)</h3>
 <p><strong>Definizioni e Concetti</strong>
 La <strong>programmazione funzionale</strong> (<em>functional programming</em>) è un modo di scrivere codice in modo più dichiarativo; si specifica cosa si vuole fare invece di gestire lo stato degli oggetti, concentrandosi più sulle espressioni che sui cicli. Una <strong>espressione lambda</strong> (<em>lambda expression</em>) è un blocco di codice che viene passato in giro; può essere pensata come un metodo senza nome esistente all&#39;interno di una classe anonima, dotata di parametri e di un corpo proprio come i metodi completi, ma <strong>senza un nome come un metodo reale</strong>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -1664,7 +2055,7 @@ La <strong>programmazione funzionale</strong> (<em>functional programming</em>) 
 <pre><code class="language-java">var invalid = (Animal a) -&gt; a.canHop(); // NON COMPILA: contesto insufficiente per l&#39;interfaccia funzionale
 </code></pre>
 <hr>
-<h3>2. Codifica delle Interfacce Funzionali (Coding Functional Interfaces)</h3>
+<h3 id="cap-8-s2">2. Codifica delle Interfacce Funzionali (Coding Functional Interfaces)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>interfaccia funzionale</strong> (<em>functional interface</em>) è un&#39;interfaccia che contiene esattamente un singolo metodo astratto, condizione nota ufficialmente come regola <strong>SAM (Single Abstract Method)</strong>.</p>
 <p><strong>Regole di Esclusione e Compatibilità</strong></p>
@@ -1677,7 +2068,7 @@ Una <strong>interfaccia funzionale</strong> (<em>functional interface</em>) è u
 <pre><code class="language-java">public interface Hibernate { public boolean equals(Hibernate o); void rest(); } // NON COMPILA: ha 2 metodi astratti perché equals(Hibernate) non è equals(Object o)
 </code></pre>
 <hr>
-<h3>3. Utilizzo dei Riferimenti ai Metodi (Using Method References)</h3>
+<h3 id="cap-8-s3">3. Utilizzo dei Riferimenti ai Metodi (Using Method References)</h3>
 <p><strong>Definizioni e Concetti</strong>
 I <strong>riferimenti ai metodi</strong> (<em>method references</em>) sono un altro modo per rendere il codice più leggibile, limitandosi a menzionare il nome del metodo invece di scrivere l&#39;intera espressione lambda. Un <strong>riferimento al costruttore</strong> (<em>constructor reference</em>) è un tipo speciale di method reference che usa <code>new</code> al posto del nome del metodo e <strong>istanzia un oggetto</strong>; Java utilizza il <strong>contesto</strong> per determinare quale costruttore specifico chiamare in base ai parametri attesi dall&#39;interfaccia funzionale.</p>
 <p><strong>Formati Supportati</strong></p>
@@ -1693,7 +2084,7 @@ I <strong>riferimenti ai metodi</strong> (<em>method references</em>) sono un al
 <li><strong>Ambiguità (ambiguous type error):</strong> Il compilatore riporta un <strong>errore di tipo ambiguo</strong> quando non riesce a trovare un metodo che corrisponda alla descrizione inferta dal contesto, o ne trova multipli.</li>
 </ul>
 <hr>
-<h3>4. Lavoro con le Interfacce Funzionali Integrate (Built-in Functional Interfaces)</h3>
+<h3 id="cap-8-s4">4. Lavoro con le Interfacce Funzionali Integrate (Built-in Functional Interfaces)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Java fornisce un ampio numero di interfacce funzionali di uso generale nel pacchetto <code>java.util.function</code>, evitando allo sviluppatore di doverne scrivere di proprie ogni volta. Esistono inoltre numerose interfacce <strong>specifiche per i primitivi</strong> <code>int</code>, <code>long</code> e <code>double</code> (come <code>IntSupplier</code> o <code>ToDoubleFunction</code>) per migliorare le prestazioni evitando l&#39;overhead delle classi wrapper.</p>
 <p><strong>Interfacce Principali</strong></p>
@@ -1714,7 +2105,7 @@ Java fornisce un ampio numero di interfacce funzionali di uso generale nel pacch
 <li><strong>Eccezioni checked:</strong> Le interfacce funzionali integrate (come <code>Supplier</code>) non permettono eccezioni checked. Se una lambda lancia un&#39;eccezione checked, deve essere gestita con un try-catch interno o mappata in una runtime.</li>
 </ul>
 <hr>
-<h3>5. Lavoro con le Variabili nelle Lambda (Working with Variables in Lambdas)</h3>
+<h3 id="cap-8-s5">5. Lavoro con le Variabili nelle Lambda (Working with Variables in Lambdas)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Le variabili possono comparire nelle lambda in <strong>tre punti</strong>: la <strong>lista dei parametri</strong>, le <strong>variabili locali</strong> dichiarate nel corpo della lambda e le <strong>variabili referenziate</strong> dal codice circostante. Una variabile <strong>effectively final</strong> è una variabile locale <strong>non modificata dopo l&#39;assegnazione iniziale</strong>; può essere usata nel corpo della lambda anche senza la parola chiave <code>final</code>.</p>
 <p><strong>Regole per i Parametri e le Variabili</strong></p>
@@ -1740,7 +2131,7 @@ Le variabili possono comparire nelle lambda in <strong>tre punti</strong>: la <s
 <hr class="chapter-sep">
 <section id="cap-9" class="chapter">
       <h1 class="chapter-title">Capitolo 9</h1>
-      <h3>1. Utilizzo delle API Comuni per le Collezioni (Common Collection APIs)</h3>
+      <h3 id="cap-9-s1">1. Utilizzo delle API Comuni per le Collezioni (Common Collection APIs)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>collezione</strong> (<em>collection</em>) è un gruppo di oggetti contenuti in un singolo oggetto. Il <strong>Java Collections Framework</strong> è un insieme di classi in <code>java.util</code> per memorizzare collezioni. Include quattro interfacce principali: <strong>List</strong> (ordinata, ammette duplicati), <strong>Set</strong> (senza duplicati), <strong>Queue</strong> (ordine specifico di elaborazione) e <strong>Map</strong> (mappa chiavi a valori).</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -1750,7 +2141,7 @@ Una <strong>collezione</strong> (<em>collection</em>) è un gruppo di oggetti co
 </ul>
 <p><strong>⚠️ Tranello (Autoboxing e Null):</strong> Java protegge da molti problemi con le Collections, ma è comunque possibile scrivere codice che lancia una <strong>NullPointerException</strong>. Se si aggiunge un <code>null</code> a una collezione di wrapper e si tenta di assegnarlo a un primitivo, Java fallisce durante l&#39;unboxing: tenta di ottenere il valore <code>int</code> di <code>null</code> e, poiché chiamare qualsiasi metodo su <code>null</code> produce una NullPointerException, è esattamente ciò che si ottiene.</p>
 <hr>
-<h3>2. Comprensione dei Tipi Generici (Generic Types)</h3>
+<h3 id="cap-9-s2">2. Comprensione dei Tipi Generici (Generic Types)</h3>
 <p><strong>Definizioni e Concetti</strong>
 I <strong>generics</strong> (<em>parameterized types</em>) permettono di specificare il tipo di oggetti contenuti in una collezione, come <code>List&lt;Integer&gt;</code>. Un <strong>bounded parameter type</strong> è un tipo generico che specifica un vincolo (<em>bound</em>) sul parametro di tipo. Il <strong>diamond operator</strong> (<code>&lt;&gt;</code>) è una notazione abbreviata che permette di omettere il tipo generico sul lato destro di un&#39;assegnazione quando il tipo può essere inferito dal lato sinistro.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -1763,7 +2154,7 @@ I <strong>generics</strong> (<em>parameterized types</em>) permettono di specifi
 <pre><code class="language-java">List&lt;&gt; list = new ArrayList&lt;Integer&gt;(); // DOES NOT COMPILE
 </code></pre>
 <hr>
-<h3>3. Utilizzo dell&#39;Interfaccia List</h3>
+<h3 id="cap-9-s3">3. Utilizzo dell&#39;Interfaccia List</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>List</strong> (<em>lista</em>) è una collezione ordinata di elementi che ammette duplicati; gli elementi sono accessibili tramite un indice <code>int</code>. <strong>ArrayList</strong> è come un array ridimensionabile: quando si aggiungono elementi, cresce automaticamente ed è consigliata per <strong>letture frequenti</strong>, poiché consente l&#39;accesso a qualsiasi elemento in tempo costante. <strong>LinkedList</strong> permette di aggiungere/rimuovere facilmente all&#39;inizio o alla fine e implementa sia <strong>List</strong> che <strong>Deque</strong>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo (Tabella 9.1)</strong></p>
@@ -1779,7 +2170,7 @@ Una <strong>List</strong> (<em>lista</em>) è una collezione ordinata di element
 <li><strong>Ambiguità di remove():</strong> Il metodo <code>remove()</code> che accetta un <strong>elemento</strong> restituisce <code>false</code> se l&#39;elemento non è trovato. Il metodo <code>remove()</code> che accetta un <strong><code>int</code></strong> (indice) lancia un&#39;eccezione se l&#39;indice non è valido.</li>
 </ul>
 <hr>
-<h3>4. Utilizzo dell&#39;Interfaccia Set</h3>
+<h3 id="cap-9-s4">4. Utilizzo dell&#39;Interfaccia Set</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un <strong>Set</strong> (<em>insieme</em>) è una collezione che non ammette duplicati. <strong>HashSet</strong> memorizza gli elementi in una hash table (chiavi hash, valori di tipo Object) e usa <code>hashCode()</code> per trovare elementi non ordinati. <strong>LinkedHashSet</strong> mantiene l&#39;<strong>ordine di inserimento</strong>. <strong>TreeSet</strong> è ordinato, mantiene gli elementi nel loro <strong>ordine naturale</strong> (<em>natural order</em>), non ammette valori <code>null</code> e richiede che gli elementi implementino <strong>Comparable</strong> oppure che venga fornito un <strong>Comparator</strong>.</p>
 <p><strong>⚠️ Tranelli (TreeSet e strutture ordinate):</strong></p>
@@ -1788,11 +2179,11 @@ Un <strong>Set</strong> (<em>insieme</em>) è una collezione che non ammette dup
 <li><strong>Comparable non implementato:</strong> A differenza dell&#39;ordinamento esplicito, TreeSet non verifica a compile time che la classe implementi <strong>Comparable</strong>. L&#39;errore avviene solo a runtime durante il tentativo di inserimento; Java lancia un&#39;eccezione del tipo <em>class Rabbit cannot be cast to class java.lang.Comparable</em>.</li>
 </ul>
 <hr>
-<h3>5. Utilizzo delle Interfacce Queue e Deque</h3>
+<h3 id="cap-9-s5">5. Utilizzo delle Interfacce Queue e Deque</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>Queue</strong> (<em>coda</em>) ordina gli elementi in un ordine specifico per l&#39;elaborazione. Una <strong>Deque</strong> (<em>double-ended queue</em>, coda a doppia estremità) è una sottointerfaccia di Queue che permette l&#39;accesso a entrambe le estremità. <strong>ArrayDeque</strong> è una coda pura ed efficiente; <strong>LinkedList</strong> è più flessibile perché implementa anche <strong>List</strong>. Questi tipi supportano il pattern <strong>FIFO</strong> (<em>First-In, First-Out</em>) o <strong>LIFO</strong> (<em>Last-In, First-Out</em>); quest&#39;ultimo corrisponde allo <strong>stack</strong>, gestito tramite i metodi <code>push()</code>, <code>pop()</code> e <code>peek()</code>.</p>
 <hr>
-<h3>6. Utilizzo dell&#39;Interfaccia Map</h3>
+<h3 id="cap-9-s6">6. Utilizzo dell&#39;Interfaccia Map</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>Map</strong> (<em>mappa</em>) associa chiavi univoche a valori; gli elementi sono coppie chiave/valore e <strong>Map non estende Collection</strong>. <strong>HashMap</strong> usa <code>hashCode()</code> per trovare le chiavi e associa chiavi univoche ai valori. <strong>LinkedHashMap</strong> mantiene l&#39;ordine di inserimento. <strong>TreeMap</strong> ordina le chiavi secondo il loro ordine naturale e non ammette chiavi <code>null</code>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -1817,7 +2208,7 @@ Una <strong>Map</strong> (<em>mappa</em>) associa chiavi univoche a valori; gli 
 // Se la chiave 3 è mappata a null, il risultato è: chiave 3 → valore 3
 </code></pre>
 <hr>
-<h3>7. Ordinamento dei Dati (Sorting Data)</h3>
+<h3 id="cap-9-s7">7. Ordinamento dei Dati (Sorting Data)</h3>
 <p><strong>Definizioni e Concetti</strong>
 <strong>Comparable</strong> è l&#39;interfaccia che dichiara il metodo <code>compareTo(T o)</code> per definire l&#39;<strong>ordine naturale</strong> (<em>natural order</em>) di una classe: restituisce un numero negativo se l&#39;oggetto è minore dell&#39;argomento, <code>0</code> se sono uguali, un numero positivo altrimenti. <strong>Comparator</strong> definisce <code>compare(T o1, T o2)</code> per ordinamenti personalizzati ed è spesso implementato tramite <strong>lambda</strong>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -1825,12 +2216,12 @@ Una <strong>Map</strong> (<em>mappa</em>) associa chiavi univoche a valori; gli 
 <li><strong>Coerenza con equals (<em>consistency with equals</em>):</strong> Un ordinamento naturale è coerente con <code>equals</code> se <code>x.equals(y)</code> è vero ogni volta che <code>x.compareTo(y) == 0</code>.</li>
 </ul>
 <hr>
-<h3>8. Introduzione alle Collezioni Sequenziate (Sequenced Collections)</h3>
+<h3 id="cap-9-s8">8. Introduzione alle Collezioni Sequenziate (Sequenced Collections)</h3>
 <p><strong>Definizioni e Concetti (Java 21)</strong>
 Introdotte in Java 21, le <strong>Sequenced Collections</strong> definiscono collezioni con un <strong>encounter order</strong> (ordine di incontro) ben definito: tutti gli elementi possono essere letti in modo ripetibile. <strong>SequencedCollection</strong> include implementazioni come <code>ArrayList</code> e <code>LinkedList</code>. <strong>SequencedSet</strong> include <code>LinkedHashSet</code> e <code>TreeSet</code>. <strong>SequencedMap</strong> include <code>LinkedHashMap</code> e <code>TreeMap</code>. Metodi specifici come <code>addFirst()</code>, <code>getFirst()</code>, <code>removeLast()</code> e <code>reversed()</code> permettono operazioni dirette sulle estremità della sequenza.</p>
 <p><strong>⚠️ Tranello (addFirst/addLast su strutture ordinate):</strong> Il solo fatto che una classe implementi <strong>SequencedCollection</strong> non implica che supporti tutti i metodi. Ad esempio, su un <strong>TreeSet</strong> non è possibile forzare un elemento in prima o ultima posizione: chiamate come <code>addFirst()</code> o <code>addLast()</code> falliscono a runtime perché inserire un elemento in una posizione arbitraria in una struttura ordinata potrebbe violare il <code>Comparator</code>.</p>
 <hr>
-<h3>9. Lavoro Avanzato con i Generics</h3>
+<h3 id="cap-9-s9">9. Lavoro Avanzato con i Generics</h3>
 <p><strong>Definizioni e Concetti</strong>
 È possibile creare <strong>classi generiche</strong> dichiarando un parametro di tipo tra parentesi angolari, come <code>Crate&lt;T&gt;</code>. Un <strong>wildcard generic type</strong> è un tipo generico sconosciuto rappresentato con <code>?</code>. I <strong>bounded wildcards</strong> (<em>wildcards vincolati</em>) limitano i tipi accettabili:</p>
 <ul>
@@ -1856,5 +2247,66 @@ public void chew(List&lt;Double&gt; input) {} // DOES NOT COMPILE
 <p><strong>⚠️ Tranello (L&#39;&quot;Evil Trick&quot; del parametro di tipo che maschera una classe):</strong> L&#39;esame usa nomi di parametri di tipo identici a nomi di classi esistenti per confondere. Per coincidenza, <code>B</code> può essere sia il nome di una classe sia il nome di un parametro di tipo nel metodo. All&#39;interno dello scope del metodo, <code>B</code> rappresenta un tipo generico (classe A, B o C) e <strong>non</strong> più la classe <code>B</code>; di conseguenza non è possibile istanziare la classe <code>B</code> con <code>new B()</code> all&#39;interno di quel metodo.</p>
 
     </section></main>
+    </div>
+  </div>
+  <script>(function () {
+  const STORAGE_THEME = "1z0-830-theme";
+  const STORAGE_SIDEBAR = "1z0-830-sidebar";
+
+  const root = document.documentElement;
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("sidebar-overlay");
+  const themeToggle = document.getElementById("theme-toggle");
+  const hljsTheme = document.getElementById("hljs-theme");
+
+  const HLJS_LIGHT =
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+  const HLJS_DARK =
+    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css";
+
+  function setTheme(theme) {
+    root.dataset.theme = theme;
+    if (hljsTheme) {
+      hljsTheme.href = theme === "dark" ? HLJS_DARK : HLJS_LIGHT;
+    }
+    localStorage.setItem(STORAGE_THEME, theme);
+  }
+
+  function toggleTheme() {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    setTheme(next);
+  }
+
+  function setSidebarOpen(open) {
+    root.classList.toggle("sidebar-open", open);
+    localStorage.setItem(STORAGE_SIDEBAR, open ? "open" : "closed");
+  }
+
+  function toggleSidebar() {
+    setSidebarOpen(!root.classList.contains("sidebar-open"));
+  }
+
+  themeToggle?.addEventListener("click", toggleTheme);
+
+  document.getElementById("sidebar-open")?.addEventListener("click", () => setSidebarOpen(true));
+  document.getElementById("sidebar-close")?.addEventListener("click", () => setSidebarOpen(false));
+  overlay?.addEventListener("click", () => setSidebarOpen(false));
+
+  document.querySelectorAll(".sidebar-nav a").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (window.matchMedia("(max-width: 900px)").matches) {
+        setSidebarOpen(false);
+      }
+    });
+  });
+
+  const savedTheme = localStorage.getItem(STORAGE_THEME);
+  setTheme(savedTheme === "dark" ? "dark" : "light");
+
+  const savedSidebar = localStorage.getItem(STORAGE_SIDEBAR);
+  const defaultOpen = window.matchMedia("(min-width: 901px)").matches;
+  setSidebarOpen(savedSidebar ? savedSidebar === "open" : defaultOpen);
+})();
+</script>
 </body>
 </html>
