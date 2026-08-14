@@ -1241,6 +1241,106 @@ strong {
 </li>
   </ul>
 </div>
+<div class="nav-chapter is-expanded" data-chapter="14">
+  <div class="nav-chapter-heading">
+    <button type="button" class="nav-chapter-toggle" aria-expanded="true" aria-label="Comprimi capitolo 14"></button>
+    <a href="#cap-14" class="nav-chapter-link">Capitolo 14</a>
+  </div>
+  <ul class="nav-subchapters">
+<li class="nav-item nav-depth-3">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h1" title="14.1 Riferimento a File e Directory (Referencing Files and Directories)">14.1 Riferimento a File e Directory (Referencing Files and Directories)</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-3">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h2" title="14.2 Introduzione agli Stream di I/O (Introducing I/O Streams)">14.2 Introduzione agli Stream di I/O (Introducing I/O Streams)</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-3">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h3" title="14.3 Lettura e Scrittura di File (Reading and Writing Files)">14.3 Lettura e Scrittura di File (Reading and Writing Files)</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-3">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h4" title="14.4 Serializzazione dei Dati (Serializing Data)">14.4 Serializzazione dei Dati (Serializing Data)</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-3">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h5" title="14.5 Interazione con l'Utente (Interacting with Users)">14.5 Interazione con l'Utente (Interacting with Users)</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-3">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h6" title="14.6 Lavoro con API Avanzate (Working with Advanced APIs)">14.6 Lavoro con API Avanzate (Working with Advanced APIs)</a>
+  </div>
+</li>
+<li class="nav-section nav-depth-3 is-expanded" data-nav-section>
+  <div class="nav-item-row nav-section-heading">
+    <button type="button" class="nav-section-toggle" aria-expanded="true" aria-label="Comprimi sezione"></button>
+    <a href="#cap-14-h7" class="nav-section-link" title="14.7 Revisione delle API Chiave (Key APIs Review)">14.7 Revisione delle API Chiave (Key APIs Review)</a>
+  </div>
+  <ul class="nav-section-children">
+<li class="nav-item nav-depth-4">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h8" title="1. `java.nio.file.Path`">1. `java.nio.file.Path`</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-4">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h9" title="2. `java.nio.file.Files`">2. `java.nio.file.Files`</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-4">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h10" title="3. `java.io.File` (API Legacy)">3. `java.io.File` (API Legacy)</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-4">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h11" title="4. Stream di Base (`InputStream`, `OutputStream`, `Reader`, `Writer`)">4. Stream di Base (`InputStream`, `OutputStream`, `Reader`, `Writer`)</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-4">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h12" title="5. Stream ad Alto Livello">5. Stream ad Alto Livello</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-4">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h13" title="6. `java.util.Console`">6. `java.util.Console`</a>
+  </div>
+</li>
+<li class="nav-item nav-depth-4">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h14" title="7. `java.io.Serializable`">7. `java.io.Serializable`</a>
+  </div>
+</li>
+  </ul>
+</li>
+<li class="nav-item nav-depth-3">
+  <div class="nav-item-row">
+    <span class="nav-item-gutter" aria-hidden="true"></span>
+    <a href="#cap-14-h15" title="14.8 Casi Limite e Tranelli Sintattici">14.8 Casi Limite e Tranelli Sintattici</a>
+  </div>
+</li>
+  </ul>
+</div>
       </nav>
     </aside>
     <div class="main-wrapper">
@@ -3888,6 +3988,379 @@ nums.parallelStream().forEach(System.out::print);        // Stampa non determini
 <li><strong>Collezioni Concorrenti vs Sincronizzate:</strong> <code>ConcurrentHashMap</code> non accetta chiavi o valori <code>null</code>; le collezioni sincronizzate (<code>Collections.synchronizedList()</code>) richiedono un blocco <code>synchronized</code> esplicito per essere iterate in sicurezza senza scatenare <code>ConcurrentModificationException</code>.</li>
 <li><strong>Deadlock e CyclicBarrier:</strong> Dimensionare un pool di thread con un numero di thread inferiore al limite della <code>CyclicBarrier</code> conduce a un blocco permanente (<em>hang</em>) dell&#39;intera applicazione.</li>
 <li><strong>Stream Paralleli:</strong> <code>Stream.iterate()</code> richiede argomenti separati da virgole; <code>findAny()</code> è non deterministico in parallelo ma molto più efficiente di <code>findFirst()</code>; l&#39;accumulazione concorrente di risultati richiede combiner associativi e collector thread-safe, non manipolazioni su collezioni standard non sincronizzate.</li>
+</ul>
+
+    </section>
+<hr class="chapter-sep">
+<section id="cap-14" class="chapter">
+      <h1 class="chapter-title">Capitolo 14</h1>
+      <h3 id="cap-14-h1">14.1 Riferimento a File e Directory (Referencing Files and Directories)</h3>
+<p><strong>Definizioni e Concetti</strong>
+In Java la gestione di file e directory si basa su due modelli: l&#39;API legacy <code>java.io.File</code> (introdotta in Java 1.0) e l&#39;API moderna <strong>NIO.2</strong> (<code>java.nio.file.Path</code>, introdotta in Java 7 e potenziata in Java 21). Un oggetto <strong>Path</strong> rappresenta una locazione gerarchica all&#39;interno del file system (file o cartella), sia essa esistente o puramente concettuale.</p>
+<ul>
+<li><strong>Percorso Assoluto (<em>Absolute Path</em>):</strong> Specifica la posizione completa partendo dall&#39;elemento radice (<em>root</em>) del file system (es. <code>/home/user/data.txt</code> su Unix o <code>C:\user\data.txt</code> su Windows). <code>path.isAbsolute()</code> restituisce <code>true</code>.</li>
+<li><strong>Percorso Relativo (<em>Relative Path</em>):</strong> Specifica la posizione a partire dalla directory di lavoro corrente senza indicare la radice (es. <code>user/data.txt</code>).</li>
+<li><strong>Creazione di oggetti Path:</strong> In Java 21 il modo standard di creare un percorso è tramite i metodi factory <code>Path.of(String first, String... more)</code> o <code>Path.of(URI uri)</code>. La classe di utilità <code>Paths.get(...)</code> è un alias equivalente, così come <code>FileSystems.getDefault().getPath(...)</code>.</li>
+<li><strong>Interoperabilità File e Path:</strong> La classe <code>java.io.File</code> dispone del metodo di istanza <code>file.toPath()</code> per passare a NIO.2, mentre <code>Path</code> dispone di <code>path.toFile()</code> per retrocompatibilità.</li>
+</ul>
+<p><strong>Metodi Principali dell&#39;Interfaccia <code>Path</code></strong></p>
+<ul>
+<li><strong><code>toString()</code>:</strong> Restituisce la rappresentazione in formato stringa del percorso completo.</li>
+<li><strong><code>getFileName()</code>:</strong> Restituisce l&#39;ultimo elemento del percorso come nuovo oggetto <code>Path</code> (il nome del file o della cartella terminale).</li>
+<li><strong><code>getParent()</code>:</strong> Restituisce il percorso della cartella genitore oppure <code>null</code> se si tratta della radice o di un percorso relativo senza genitore esplicito.</li>
+<li><strong><code>getRoot()</code>:</strong> Restituisce l&#39;elemento radice del percorso o <code>null</code> se il percorso è relativo.</li>
+<li><strong><code>getNameCount()</code>:</strong> Restituisce il numero totale di elementi presenti nel percorso (<strong>esclusa la radice</strong>).</li>
+<li><strong><code>getName(int index)</code>:</strong> Restituisce l&#39;elemento alla posizione specificata (0-based) come nuovo oggetto <code>Path</code>.</li>
+<li><strong><code>subpath(int beginIndex, int endIndex)</code>:</strong> Estrae una porzione del percorso dall&#39;indice <code>beginIndex</code> (incluso) a <code>endIndex</code> (escluso). <strong>Non include mai la radice</strong> e lancia <code>IllegalArgumentException</code> se gli indici sono fuori limite.</li>
+<li><strong><code>isAbsolute()</code>:</strong> Verifica se il percorso è assoluto.</li>
+<li><strong><code>toAbsolutePath()</code>:</strong> Converte un percorso relativo in assoluto agganciandolo alla directory di lavoro corrente della JVM.</li>
+<li><strong><code>resolve(Path other)</code> / <code>resolve(String other)</code>:</strong> Unisce due percorsi. Se <code>other</code> è un percorso assoluto, il metodo restituisce direttamente <code>other</code> ignorando il percorso di base.</li>
+<li><strong><code>resolveSibling(Path other)</code>:</strong> Sostituisce l&#39;ultimo elemento del percorso chiamante con il percorso specificato (risolve rispetto al genitore).</li>
+<li><strong><code>relativize(Path other)</code>:</strong> Calcola il percorso relativo necessario per raggiungere <code>other</code> partendo dal percorso corrente. <strong>Regola d&#39;oro:</strong> entrambi i percorsi devono essere entrambi assoluti o entrambi relativi (su Windows devono appartenere alla stessa unità disco), altrimenti lancia <code>IllegalArgumentException</code>.</li>
+<li><strong><code>normalize()</code>:</strong> Rimuove le ridondanze sintattiche come <code>.</code> (directory corrente) e <code>..</code> (directory superiore) basandosi unicamente sulla manipolazione della stringa, <strong>senza verificare l&#39;esistenza del file sul disco</strong>.</li>
+<li><strong><code>toRealPath(LinkOption... options)</code>:</strong> Risolve i collegamenti simbolici (<em>symbolic links</em>), normalizza il percorso e ne verifica l&#39;effettiva esistenza sul file system reale, lanciando <code>NoSuchFileException</code> se il target non esiste.</li>
+</ul>
+<p><strong>⚠️ Tranelli (Path e Riferimenti):</strong></p>
+<ul>
+<li><strong>Mescolare assoluti e relativi in <code>relativize()</code>:</strong> Invocare <code>relativize()</code> tra un percorso assoluto e uno relativo (o viceversa) provoca immediatamente una <code>IllegalArgumentException</code> a runtime.</li>
+<li><strong>Passaggio di un path assoluto a <code>resolve()</code>:</strong> Invocare <code>path1.resolve(path2)</code> quando <code>path2</code> è assoluto restituisce <code>path2</code> senza alcuna concatenazione.</li>
+<li><strong>Inclusione della root in <code>subpath()</code>:</strong> <code>subpath()</code> conta solo gli elementi di nome; tentare di accedere alla radice o superare <code>getNameCount()</code> lancia <code>IllegalArgumentException</code>.</li>
+<li><strong>Normalizzazione vs Esistenza:</strong> <code>normalize()</code> ripulisce solo la stringa (es. trasforma <code>a/b/../c</code> in <code>a/c</code>), ma non garantisce che la risorsa esista realmente sul disco; solo <code>toRealPath()</code> esegue la verifica reale.</li>
+</ul>
+<p><strong>Esempi di Codice:</strong></p>
+<pre><code class="language-java">Path path = Path.of(&quot;/zoo/armadillo/shells.txt&quot;);
+System.out.println(path.getNameCount()); // 3 (zoo, armadillo, shells.txt - root esclusa)
+System.out.println(path.getName(0));      // zoo
+System.out.println(path.subpath(1, 3));   // armadillo/shells.txt
+
+Path p1 = Path.of(&quot;fish.txt&quot;);
+Path p2 = Path.of(&quot;birds.txt&quot;);
+System.out.println(p1.relativize(p2));   // ../birds.txt
+
+Path absolute = Path.of(&quot;/home/user&quot;);
+Path relative = Path.of(&quot;docs/file.txt&quot;);
+// absolute.relativize(relative); // Lancia IllegalArgumentException a runtime!
+
+System.out.println(relative.resolve(&quot;/etc/config&quot;)); // Stampa /etc/config (parametro assoluto)
+</code></pre>
+<hr>
+<h3 id="cap-14-h2">14.2 Introduzione agli Stream di I/O (Introducing I/O Streams)</h3>
+<p><strong>Definizioni e Concetti</strong>
+Uno <strong>Stream di I/O</strong> è un condotto sequenziale per il trasferimento di dati da una sorgente a una destinazione. Gli stream non memorizzano dati, ma consentono la lettura o la scrittura ordinata di flussi continui.</p>
+<ul>
+<li><strong>Byte Streams (Flussi di Byte):</strong> Elaborano dati binari a 8 bit (immagini, file compilati, archivi compressi). Le classi base astratte sono <code>InputStream</code> (lettura) e <code>OutputStream</code> (scrittura).</li>
+<li><strong>Character Streams (Flussi di Caratteri):</strong> Elaborano dati testuali a 16 bit Unicode gestendo automaticamente la codifica dei caratteri (<em>character encoding/charset</em>). Le classi base astratte sono <code>Reader</code> (lettura) e <code>Writer</code> (scrittura).</li>
+<li><strong>Stream di Basso Livello (<em>Low-Level Streams</em>):</strong> Si collegano direttamente alla risorsa fisica (es. <code>FileInputStream</code>, <code>FileOutputStream</code>, <code>FileReader</code>, <code>FileWriter</code>).</li>
+<li><strong>Stream di Alto Livello (<em>High-Level / Filter Streams</em>):</strong> Avvolgono (<em>wrap</em>) un altro stream per aggiungere funzionalità come bufferizzazione, formattazione o serializzazione (es. <code>BufferedReader</code>, <code>BufferedWriter</code>, <code>ObjectInputStream</code>, <code>ObjectOutputStream</code>, <code>PrintStream</code>, <code>PrintWriter</code>).</li>
+<li><strong>Stream Ponte (<em>Bridge Streams</em>):</strong> Consentono di convertire un flusso di byte in un flusso di caratteri specificando il charset: <code>InputStreamReader</code> e <code>OutputStreamWriter</code>.</li>
+</ul>
+<p><strong>Metodi Principali delle Classi Base</strong></p>
+<ul>
+<li><strong><code>read()</code>:</strong> Legge un singolo byte o carattere restituendo un valore intero compreso tra <code>0</code> e <code>255</code> (per byte) o <code>0</code> e <code>65535</code> (per caratteri), oppure <strong><code>-1</code> quando si raggiunge la fine dello stream (EOF)</strong>.</li>
+<li><strong><code>read(byte[] b)</code> / <code>read(char[] cbuf)</code>:</strong> Legge un blocco di byte/caratteri riempiendo l&#39;array e restituisce il numero di elementi effettivamente letti (o <code>-1</code> a fine stream).</li>
+<li><strong><code>write(int b)</code> / <code>write(byte[] b)</code> / <code>write(String s)</code>:</strong> Scrive byte o stringhe verso la destinazione.</li>
+<li><strong><code>flush()</code>:</strong> Forza lo svuotamento del buffer interno scrivendo immediatamente tutti i byte/caratteri accumulati sulla destinazione fisica.</li>
+<li><strong><code>close()</code>:</strong> Chiude lo stream rilasciando le risorse native allocate. Nelle catene di decoratori, chiudere lo stream più esterno chiude a cascata tutti gli stream interni sottostanti.</li>
+<li><strong>Supporto <code>mark()</code> e <code>reset()</code>:</strong> Permette di memorizzare una posizione nello stream con <code>mark(int readAheadLimit)</code> e di ritornarvi successivamente tramite <code>reset()</code>. Prima di invocare <code>reset()</code> è obbligatorio verificare <code>markSupported()</code>.</li>
+</ul>
+<p><strong>Regole Operative e Bufferizzazione</strong>
+La bufferizzazione ottimizza drasticamente le prestazioni di I/O memorizzando blocchi di dati in memoria RAM invece di eseguire accessi fisici al disco per ogni singolo byte o carattere.</p>
+<ul>
+<li><code>BufferedReader</code> mette a disposizione il metodo fondamentale <strong><code>readLine()</code></strong> che restituisce una stringa (senza i caratteri di a capo) oppure <code>null</code> al raggiungimento della fine dello stream.</li>
+<li><code>BufferedWriter</code> mette a disposizione il metodo <strong><code>newLine()</code></strong> per inserire il separatore di riga dipendente dal sistema operativo.</li>
+</ul>
+<p><strong>⚠️ Tranelli (Stream e Decoratori):</strong></p>
+<ul>
+<li><strong>Incompatibilità diretta tra Byte e Character Streams:</strong> Non è possibile passare un <code>InputStream</code> direttamente a un costruttore di <code>Reader</code> senza passare per la classe ponte <code>InputStreamReader</code> (es. <code>new BufferedReader(new FileInputStream(&quot;a.txt&quot;))</code> <strong>non compila</strong>).</li>
+<li><strong>Omessa gestione di <code>IOException</code>:</strong> Quasi tutti i costruttori e metodi di I/O dichiarano la checked exception <code>IOException</code>, che deve essere obbligatoriamente gestita o rilanciata nella firma.</li>
+<li><strong>Mancata verifica di <code>markSupported()</code>:</strong> Chiamare <code>reset()</code> su stream che non supportano il riposizionamento (come <code>FileInputStream</code> puro) lancia <code>IOException</code> a runtime.</li>
+</ul>
+<p><strong>Esempi di Codice:</strong></p>
+<pre><code class="language-java">// Pattern corretto con Try-with-resources e stream a catena
+Path source = Path.of(&quot;source.txt&quot;);
+Path target = Path.of(&quot;target.txt&quot;);
+
+try (var reader = new BufferedReader(new FileReader(source.toFile()));
+     var writer = new BufferedWriter(new FileWriter(target.toFile()))) {
+    String line;
+    while ((line = reader.readLine()) != null) {
+        writer.write(line);
+        writer.newLine(); // A capo standard
+    }
+} // Chiusura automatica di entrambi i flussi e delle risorse sottostanti
+</code></pre>
+<hr>
+<h3 id="cap-14-h3">14.3 Lettura e Scrittura di File (Reading and Writing Files)</h3>
+<p><strong>Metodi e Operazioni della Classe <code>java.nio.file.Files</code></strong>
+La classe di utilità <code>Files</code> fornisce metodi statici altamente ottimizzati per operare su file e cartelle tramite oggetti <code>Path</code>:</p>
+<ul>
+<li><strong>Metodi Factory di I/O:</strong> <code>Files.newInputStream(path)</code>, <code>Files.newOutputStream(path)</code>, <code>Files.newBufferedReader(path)</code>, <code>Files.newBufferedWriter(path)</code>.</li>
+<li><strong>Lettura e Scrittura Rapida:</strong><ul>
+<li><strong><code>Files.readAllBytes(path)</code>:</strong> Legge l&#39;intero file in memoria come <code>byte[]</code>.</li>
+<li><strong><code>Files.readString(path)</code> / <code>Files.writeString(path, charSeq)</code>:</strong> Legge o scrive l&#39;intero contenuto testuale in una sola chiamata.</li>
+<li><strong><code>Files.readAllLines(path)</code>:</strong> Legge tutte le righe caricandole interamente in una <code>List&lt;String&gt;</code> (può causare <code>OutOfMemoryError</code> su file di grandi dimensioni).</li>
+<li><strong><code>Files.lines(path)</code>:</strong> Restituisce uno <strong><code>Stream&lt;String&gt;</code> pigro (<em>lazy</em>)</strong> che legge le righe su richiesta (richiede obbligatoriamente la chiusura con <code>try-with-resources</code>).</li>
+</ul>
+</li>
+<li><strong>Confronto di File:</strong><ul>
+<li><strong><code>Files.isSameFile(Path p1, Path p2)</code>:</strong> Restituisce <code>true</code> se i percorsi puntano alla stessa risorsa fisica. Se i due <code>Path</code> sono sintatticamente uguali (<code>equals()</code>), restituisce <code>true</code> senza accedere al disco; altrimenti controlla il file system reale risolvendo eventuali link simbolici.</li>
+<li><strong><code>Files.mismatch(Path p1, Path p2)</code>:</strong> Confronta il contenuto di due file byte per byte. Restituisce <code>-1L</code> se i file sono identici, oppure l&#39;<strong>indice 0-based del primo byte differente</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Operazioni di Manipolazione del File System</strong></p>
+<ul>
+<li><strong>Creazione:</strong><ul>
+<li><code>Files.createDirectory(path)</code>: Crea una singola cartella; lancia eccezione se la cartella esiste già o se le cartelle genitori non esistono.</li>
+<li><code>Files.createDirectories(path)</code>: Crea la cartella e tutte le directory intermedie mancanti lungo il percorso; <strong>non lancia eccezione</strong> se la cartella finale esiste già.</li>
+<li><code>Files.createFile(path)</code>: Crea un nuovo file vuoto; lancia eccezione se il file esiste già.</li>
+</ul>
+</li>
+<li><strong>Copia e Spostamento:</strong><ul>
+<li><code>Files.copy(source, target, StandardCopyOption... options)</code>: Copia un file o directory. Per le cartelle, esegue una <strong>copia superficiale (<em>shallow copy</em>)</strong>, creando la nuova cartella vuota senza copiare ricorsivamente i file in essa contenuti.</li>
+<li><code>Files.move(source, target, StandardCopyOption... options)</code>: Sposta o rinomina un file o una directory.</li>
+<li><strong>Opzioni di Copia/Spostamento (<code>StandardCopyOption</code>):</strong> <code>REPLACE_EXISTING</code> (sovrascrive se esiste), <code>COPY_ATTRIBUTES</code> (preserva i metadati del file), <code>ATOMIC_MOVE</code> (spostamento atomico garantito a livello di file system).</li>
+</ul>
+</li>
+<li><strong>Cancellazione:</strong><ul>
+<li><code>Files.delete(path)</code>: Cancella il file o la directory (lancia <code>NoSuchFileException</code> se non esiste, o <code>DirectoryNotEmptyException</code> se la cartella non è vuota).</li>
+<li><code>Files.deleteIfExists(path)</code>: Cancella il target se presente restituendo <code>true</code>, oppure restituisce <code>false</code> senza lanciare eccezioni se il target non esiste.</li>
+</ul>
+</li>
+</ul>
+<p><strong>⚠️ Tranelli (Files e mismatch):</strong></p>
+<ul>
+<li><strong><code>mismatch()</code> con file inesistenti:</strong> Lancia <code>NoSuchFileException</code> a meno che entrambi i parametri non puntino allo stesso identico percorso non esistente.</li>
+<li><strong>Indici 0-based di <code>mismatch()</code>:</strong> Se la discrepanza si trova al secondo carattere/byte del file, il metodo restituisce <code>1L</code>.</li>
+<li><strong>Copia di directory:</strong> <code>Files.copy(dir1, dir2)</code> non copia i file interni; per una copia profonda (<em>deep copy</em>) è necessario attraversare l&#39;albero con <code>Files.walk()</code>.</li>
+</ul>
+<p><strong>Esempi di Codice:</strong></p>
+<pre><code class="language-java">Path p1 = Path.of(&quot;howdy.txt&quot;); // Contiene &quot;Howdy&quot;
+Path p2 = Path.of(&quot;hello.txt&quot;); // Contiene &quot;Hello&quot;
+System.out.println(Files.mismatch(p1, p2)); // 1 (la &#39;o&#39; e la &#39;e&#39; differiscono all&#39;indice 1)
+
+// Lettura efficiente con Stream e Try-with-resources
+try (Stream&lt;String&gt; stream = Files.lines(Path.of(&quot;large-log.txt&quot;))) {
+    stream.filter(l -&gt; l.contains(&quot;ERROR&quot;))
+          .forEach(System.out::println);
+} // Stream chiuso correttamente, rilasciando l&#39;handle di sistema
+</code></pre>
+<hr>
+<h3 id="cap-14-h4">14.4 Serializzazione dei Dati (Serializing Data)</h3>
+<p><strong>Definizioni e Requisiti</strong>
+La <strong>Serializzazione</strong> è il processo di conversione di un grafo di oggetti Java in una sequenza di byte. La <strong>Deserializzazione</strong> è il processo inverso che ricostruisce gli oggetti in memoria a partire dal flusso di byte.</p>
+<ul>
+<li><strong>Interfaccia <code>Serializable</code>:</strong> Interfaccia marcatore (<em>marker interface</em>, non contiene metodi) appartenente al package <code>java.io</code>. Una classe deve implementare esplicitamente <code>Serializable</code> (o estendere una classe che la implementa) affinché le sue istanze possano essere serializzate.</li>
+<li><strong>Stream di Oggetti:</strong> Si utilizzano le classi di alto livello <code>ObjectOutputStream</code> (metodo <code>writeObject(Object)</code>) e <code>ObjectInputStream</code> (metodo <code>readObject()</code>).</li>
+<li><strong><code>serialVersionUID</code>:</strong> Identificatore di versione numerico a 64 bit (<code>private static final long serialVersionUID = 1L;</code>) utilizzato dalla JVM per garantire che la classe caricata per la deserializzazione corrisponda esattamente alla versione utilizzata durante la serializzazione.</li>
+</ul>
+<p><strong>Regole di Trattamento dei Membri della Classe</strong></p>
+<ul>
+<li><strong>Campi <code>transient</code>:</strong> I campi contrassegnati con la parola chiave <code>transient</code> <strong>non vengono serializzati</strong>. Durante la deserializzazione, Java non legge alcun dato per essi e li inizializza al rispettivo <strong>valore predefinito del tipo di dato</strong> (<code>null</code> per i riferimenti a oggetti e wrapper, <code>0</code> per interi, <code>false</code> per boolean).</li>
+<li><strong>Campi <code>static</code>:</strong> Le variabili statiche appartengono alla classe e non all&#39;istanza; <strong>non vengono serializzate</strong>. Al momento della deserializzazione, il campo statico manterrà il valore corrente già presente nella JVM in esecuzione.</li>
+<li><strong>Campi Oggetto Annidati:</strong> Tutte le classi referenziate come campi d&#39;istanza devono essere a loro volta <code>Serializable</code>; in caso contrario, l&#39;invocazione di <code>writeObject()</code> lancerà a runtime una <code>NotSerializableException</code>.</li>
+<li><strong>Ereditarietà e Costruttori:</strong> Durante la deserializzazione di una classe serializzabile, il costruttore della classe stessa <strong>non viene eseguito</strong>. Tuttavia, se una superclasse non implementa <code>Serializable</code>, Java eseguirà il <strong>costruttore senza argomenti (<em>no-arg constructor</em>) della prima superclasse non serializzabile</strong>. Se tale costruttore non esiste o non è accessibile, viene lanciata <code>InvalidClassException</code>.</li>
+<li><strong>Serializzazione dei Record (Java 21):</strong> A differenza delle classi ordinarie, i <code>record</code> serializzabili vengono sempre deserializzati passando obbligatoriamente attraverso il loro <strong>costruttore canonico</strong>, garantendo l&#39;immutabilità e la validazione dei componenti.</li>
+</ul>
+<p><strong>⚠️ Tranelli (Serializzazione):</strong></p>
+<ul>
+<li><strong>Mancata implementazione di <code>Serializable</code>:</strong> Il codice compila regolarmente, ma lancia <code>NotSerializableException</code> a runtime non appena si tenta di invocare <code>writeObject()</code>.</li>
+<li><strong>Tipo di ritorno e Checked Exception di <code>readObject()</code>:</strong> <code>readObject()</code> restituisce un tipo generico <code>Object</code> e richiede un casting esplicito verso il tipo di destinazione. Inoltre, dichiara sia <code>IOException</code> che <code>ClassNotFoundException</code>, entrambe obbligatorie da gestire.</li>
+<li><strong>Valori <code>transient</code> dopo la deserializzazione:</strong> Gli inizializzatori di campo d&#39;istanza e i costruttori non vengono eseguiti durante la deserializzazione ordinaria; un campo <code>transient int count = 25;</code> avrà valore <code>0</code> dopo la deserializzazione, non <code>25</code>.</li>
+</ul>
+<p><strong>Esempi di Codice:</strong></p>
+<pre><code class="language-java">public class Bird implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String name = &quot;Tweety&quot;;
+    private transient int age = 10;
+    private transient String color = &quot;Yellow&quot;;
+    
+    // Costruttore standard
+    public Bird(String name, int age, String color) {
+        this.name = name;
+        this.age = age;
+        this.color = color;
+    }
+    // Getter e Setter...
+}
+
+// Scrittura e Lettura
+ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+try (var out = new ObjectOutputStream(buffer)) {
+    out.writeObject(new Bird(&quot;Robin&quot;, 3, &quot;Red&quot;));
+}
+
+try (var in = new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()))) {
+    Bird b = (Bird) in.readObject(); // Richiede casting e gestione ClassNotFoundException
+    System.out.println(b.getName());  // Robin (preservato)
+    System.out.println(b.getAge());   // 0 (transient: assume default di int)
+    System.out.println(b.getColor()); // null (transient: assume default di Object)
+}
+</code></pre>
+<hr>
+<h3 id="cap-14-h5">14.5 Interazione con l&#39;Utente (Interacting with Users)</h3>
+<p><strong>Definizioni e Metodi</strong>
+Java fornisce la classe <code>java.util.Console</code> per gestire in modo avanzato l&#39;interazione bidirezionale da terminale con l&#39;utente. L&#39;istanza singleton della console viene recuperata tramite l&#39;invocazione di <strong><code>System.console()</code></strong>.</p>
+<ul>
+<li><strong>Flussi Standard del Sistema:</strong><ul>
+<li><code>System.in</code>: Stream di input a byte (<code>InputStream</code>).</li>
+<li><code>System.out</code>: Stream di output a caratteri bufferizzato per stampe standard (<code>PrintStream</code>).</li>
+<li><code>System.err</code>: Stream di output a caratteri per messaggi di errore (<code>PrintStream</code>).</li>
+</ul>
+</li>
+<li><strong>Metodi Principali della Classe <code>Console</code>:</strong><ul>
+<li><strong><code>readLine()</code> / <code>readLine(String fmt, Object... args)</code>:</strong> Stampa un eventuale prompt formattato e acquisisce una riga di testo terminata da invio, restituendo una <code>String</code>.</li>
+<li><strong><code>readPassword()</code> / <code>readPassword(String fmt, Object... args)</code>:</strong> Acquisisce una stringa di input da terminale <strong>disabilitando l&#39;eco a schermo dei caratteri digitati</strong> per impedire la visualizzazione visiva dei dati sensibili (<em>shoulder surfing</em>). Restituisce un array di caratteri <strong><code>char[]</code></strong>.</li>
+<li><strong><code>format(String fmt, Object... args)</code> / <code>printf(...)</code>:</strong> Scrive output formattato direttamente sulla console.</li>
+<li><strong><code>writer()</code>:</strong> Restituisce un oggetto <code>PrintWriter</code> collegato alla console.</li>
+<li><strong><code>reader()</code>:</strong> Restituisce un oggetto <code>Reader</code> collegato alla console.</li>
+<li><strong><code>flush()</code>:</strong> Svuota forzatamente il buffer di output della console.</li>
+</ul>
+</li>
+</ul>
+<p><strong>⚠️ Tranelli (Console e Sicurezza):</strong></p>
+<ul>
+<li><strong>Valore <code>null</code> di <code>System.console()</code>:</strong> Se l&#39;applicazione viene eseguita all&#39;interno di un ambiente non interattivo (ad esempio la maggior parte degli IDE come Eclipse o IntelliJ, oppure come servizio o processo in background), <code>System.console()</code> restituisce <code>null</code>. Chiamare metodi direttamente su <code>System.console()</code> senza un controllo di nullità provoca una <code>NullPointerException</code> immediata a runtime.</li>
+<li><strong>Tipo di ritorno di <code>readPassword()</code>:</strong> Restituisce categoricamente <code>char[]</code> e <strong>non <code>String</code></strong>. Questo consente al programmatore di sovrascrivere l&#39;array in memoria (es. <code>Arrays.fill(pwd, &#39;x&#39;)</code>) non appena terminata la validazione, evitando che il dato sensibile rimanga immutabile nella string pool della memoria heap fino all&#39;intervento del Garbage Collector.</li>
+</ul>
+<p><strong>Esempi di Codice:</strong></p>
+<pre><code class="language-java">Console console = System.console();
+if (console != null) {
+    String username = console.readLine(&quot;Inserisci username: &quot;);
+    char[] password = console.readPassword(&quot;Inserisci password: &quot;);
+    
+    console.format(&quot;Benvenuto, %s!%n&quot;, username);
+    
+    // Best practice di sicurezza: azzeramento immediato dell&#39;array
+    java.util.Arrays.fill(password, &#39;0&#39;);
+} else {
+    System.err.println(&quot;Console interattiva non disponibile nell&#39;ambiente corrente.&quot;);
+}
+</code></pre>
+<hr>
+<h3 id="cap-14-h6">14.6 Lavoro con API Avanzate (Working with Advanced APIs)</h3>
+<p><strong>Attributi e Viste dei File (Attributes and Views)</strong>
+NIO.2 consente di ispezionare e modificare i metadati dei file in modo efficiente e multipiattaforma:</p>
+<ul>
+<li><strong><code>BasicFileAttributes</code>:</strong> Interfaccia di sola lettura che recupera in una singola chiamata al file system un insieme completo di attributi essenziali.<ul>
+<li>Metodi: <code>size()</code>, <code>creationTime()</code>, <code>lastModifiedTime()</code>, <code>lastAccessTime()</code>, <code>isDirectory()</code>, <code>isRegularFile()</code>, <code>isSymbolicLink()</code>, <code>isOther()</code>, <code>fileKey()</code>.</li>
+<li>Recupero: <code>Files.readAttributes(path, BasicFileAttributes.class)</code>.</li>
+</ul>
+</li>
+<li><strong><code>BasicFileAttributeView</code>:</strong> Interfaccia che permette non solo di leggere, ma anche di <strong>modificare</strong> gli attributi del file.<ul>
+<li>Metodo principale: <code>setTimes(FileTime lastModifiedTime, FileTime lastAccessTime, FileTime createTime)</code>. Se un parametro è <code>null</code>, l&#39;attributo corrispondente rimane inalterato.</li>
+<li>Recupero: <code>Files.getFileAttributeView(path, BasicFileAttributeView.class)</code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Navigazione e Ricerca nel File System con gli Stream</strong>
+I metodi statici di <code>Files</code> consentono di esplorare gerarchie di cartelle sfruttando la potenza della Stream API di Java:</p>
+<ul>
+<li><strong><code>Files.list(Path dir)</code>:</strong> Restituisce uno <code>Stream&lt;Path&gt;</code> contenente gli elementi (file e sottocartelle) situati <strong>esclusivamente al primo livello</strong> della cartella specificata (non è ricorsivo, profondità 1).</li>
+<li><strong><code>Files.walk(Path start, int maxDepth, FileVisitOption... options)</code>:</strong> Attraversa ricorsivamente l&#39;albero delle directory in profondità (<em>depth-first search</em>). Se non specificato, <code>maxDepth</code> è <code>Integer.MAX_VALUE</code>.</li>
+<li><strong><code>Files.find(Path start, int maxDepth, BiPredicate&lt;Path, BasicFileAttributes&gt; matcher, FileVisitOption... options)</code>:</strong> Attraversa l&#39;albero e filtra direttamente gli elementi combinando percorso e attributi in un&#39;unica operazione ottimizzata.</li>
+</ul>
+<p><strong>⚠️ Tranelli (Navigazione, Risorse e Cicli):</strong></p>
+<ul>
+<li><strong>Chiusura obbligatoria degli Stream di <code>Files</code>:</strong> I metodi <code>Files.list()</code>, <code>Files.walk()</code>, <code>Files.find()</code> e <code>Files.lines()</code> aprono connessioni con il file system sottostante. Devono essere <strong>sempre racchiusi in un blocco <code>try-with-resources</code></strong>, altrimenti i descrittori di file rimarranno aperti causando resource leak nel sistema operativo.</li>
+<li><strong>Collegamenti simbolici e <code>FileSystemLoopException</code>:</strong> Di default, <code>Files.walk()</code> e <code>Files.find()</code> <strong>non seguono i link simbolici</strong> (<code>FileVisitOption.FOLLOW_LINKS</code>). Se l&#39;opzione <code>FOLLOW_LINKS</code> viene abilitata esplicitamente e il file system contiene un ciclo circolare (una cartella che punta a un genitore superiore), il metodo entrerà in un ciclo infinito e lancerà una <code>FileSystemLoopException</code>.</li>
+</ul>
+<p><strong>Esempi di Codice:</strong></p>
+<pre><code class="language-java">Path startPath = Path.of(&quot;/data&quot;);
+
+// 1. Lettura attributi
+BasicFileAttributes attrs = Files.readAttributes(startPath, BasicFileAttributes.class);
+System.out.println(&quot;Dimensione: &quot; + attrs.size());
+System.out.println(&quot;Data creazione: &quot; + attrs.creationTime());
+
+// 2. Ricerca avanzata con Files.find e Try-with-resources
+try (Stream&lt;Path&gt; stream = Files.find(startPath, 5, 
+        (p, a) -&gt; p.toString().endsWith(&quot;.java&quot;) &amp;&amp; a.size() &gt; 1024)) {
+    stream.forEach(System.out::println);
+}
+</code></pre>
+<hr>
+<h3 id="cap-14-h7">14.7 Revisione delle API Chiave (Key APIs Review)</h3>
+<p>Di seguito l&#39;elenco riepilogativo delle classi e interfacce fondamentali del Capitolo 14 con i rispettivi metodi da padroneggiare per l&#39;esame 1Z0-830:</p>
+<h4 id="cap-14-h8">1. <code>java.nio.file.Path</code></h4>
+<ul>
+<li><code>Path.of(String, String...)</code> / <code>Path.of(URI)</code>: Creazione di istanze Path.</li>
+<li><code>getFileName()</code>, <code>getParent()</code>, <code>getRoot()</code>: Ispezione componenti del percorso.</li>
+<li><code>getNameCount()</code>, <code>getName(int)</code>: Conteggio e recupero elementi (esclusa la radice).</li>
+<li><code>subpath(int begin, int end)</code>: Estrazione porzione (0-based, esclusa la radice).</li>
+<li><code>isAbsolute()</code>, <code>toAbsolutePath()</code>: Verifica e conversione in percorso assoluto.</li>
+<li><code>resolve(Path)</code>, <code>resolveSibling(Path)</code>: Concatenazione di percorsi.</li>
+<li><code>relativize(Path)</code>: Calcolo del percorso relativo tra due punti.</li>
+<li><code>normalize()</code>: Rimozione sintattica di <code>.</code> e <code>..</code>.</li>
+<li><code>toRealPath(LinkOption...)</code>: Risoluzione reale su disco con verifica di esistenza.</li>
+<li><code>toFile()</code>: Conversione verso <code>java.io.File</code>.</li>
+</ul>
+<h4 id="cap-14-h9">2. <code>java.nio.file.Files</code></h4>
+<ul>
+<li><code>exists(Path, LinkOption...)</code>, <code>isDirectory(Path)</code>, <code>isRegularFile(Path)</code>, <code>isSymbolicLink(Path)</code>.</li>
+<li><code>isSameFile(Path, Path)</code>: Confronto identità fisica del file.</li>
+<li><code>mismatch(Path, Path)</code>: Confronto del contenuto byte per byte (ritorna <code>-1</code> o indice primo byte diverso).</li>
+<li><code>createDirectory(Path)</code>, <code>createDirectories(Path)</code>, <code>createFile(Path)</code>.</li>
+<li><code>copy(Path, Path, CopyOption...)</code>, <code>move(Path, Path, CopyOption...)</code>.</li>
+<li><code>delete(Path)</code>, <code>deleteIfExists(Path)</code>.</li>
+<li><code>readAllBytes(Path)</code>, <code>readString(Path)</code>, <code>writeString(Path, CharSequence)</code>.</li>
+<li><code>readAllLines(Path)</code> (in memoria) vs <code>lines(Path)</code> (Stream pigro).</li>
+<li><code>newInputStream(Path)</code>, <code>newOutputStream(Path)</code>, <code>newBufferedReader(Path)</code>, <code>newBufferedWriter(Path)</code>.</li>
+<li><code>list(Path)</code>, <code>walk(Path, int, FileVisitOption...)</code>, <code>find(Path, int, BiPredicate, FileVisitOption...)</code>.</li>
+<li><code>readAttributes(Path, Class&lt;A&gt;)</code>, <code>getFileAttributeView(Path, Class&lt;V&gt;)</code>.</li>
+</ul>
+<h4 id="cap-14-h10">3. <code>java.io.File</code> (API Legacy)</h4>
+<ul>
+<li><code>exists()</code>, <code>getName()</code>, <code>getAbsolutePath()</code>, <code>getParent()</code>, <code>isDirectory()</code>, <code>isFile()</code>, <code>length()</code>.</li>
+<li><code>delete()</code>, <code>mkdir()</code>, <code>mkdirs()</code>, <code>renameTo(File)</code>.</li>
+<li><code>listFiles()</code>: Ritorna <code>File[]</code> con i file della cartella.</li>
+<li><code>toPath()</code>: Conversione verso <code>java.nio.file.Path</code>.</li>
+</ul>
+<h4 id="cap-14-h11">4. Stream di Base (<code>InputStream</code>, <code>OutputStream</code>, <code>Reader</code>, <code>Writer</code>)</h4>
+<ul>
+<li><code>read()</code>, <code>read(byte[])</code>, <code>read(char[])</code>: Lettura (ritorna <code>-1</code> a fine stream).</li>
+<li><code>write(int)</code>, <code>write(byte[])</code>, <code>write(String)</code>: Scrittura dati.</li>
+<li><code>flush()</code>: Forzatura scrittura buffer.</li>
+<li><code>close()</code>: Chiusura della risorsa e rilascio handle.</li>
+<li><code>markSupported()</code>, <code>mark(int)</code>, <code>reset()</code>, <code>skip(long)</code>: Controllo del cursore di lettura.</li>
+</ul>
+<h4 id="cap-14-h12">5. Stream ad Alto Livello</h4>
+<ul>
+<li><code>BufferedReader</code> (metodo <code>readLine()</code>), <code>BufferedWriter</code> (metodo <code>newLine()</code>).</li>
+<li><code>PrintStream</code> / <code>PrintWriter</code> (metodi <code>print()</code>, <code>println()</code>, <code>format()</code>, <code>printf()</code>).</li>
+<li><code>InputStreamReader</code> / <code>OutputStreamWriter</code>: Classi ponte per la conversione byte/caratteri con charset.</li>
+<li><code>ObjectInputStream</code> (metodo <code>readObject()</code>), <code>ObjectOutputStream</code> (metodo <code>writeObject()</code>).</li>
+</ul>
+<h4 id="cap-14-h13">6. <code>java.util.Console</code></h4>
+<ul>
+<li><code>System.console()</code>: Recupero istanza singleton (può essere <code>null</code>).</li>
+<li><code>readLine(String, Object...)</code>: Lettura testo da terminale.</li>
+<li><code>readPassword(String, Object...)</code>: Lettura sicura mascherata (ritorna <code>char[]</code>).</li>
+<li><code>format(...)</code>, <code>printf(...)</code>, <code>writer()</code>, <code>reader()</code>, <code>flush()</code>.</li>
+</ul>
+<h4 id="cap-14-h14">7. <code>java.io.Serializable</code></h4>
+<ul>
+<li>Interfaccia marcatore per l&#39;abilitazione alla serializzazione.</li>
+<li>Parola chiave <code>transient</code>: Esclusione campi dallo stato serializzato (reinizializzati a default).</li>
+<li><code>static</code>: Non serializzati (condivisi a livello di classe).</li>
+<li>Costruttore no-args obbligatorio nella prima superclasse non serializzabile.</li>
+</ul>
+<hr>
+<h3 id="cap-14-h15">14.8 Casi Limite e Tranelli Sintattici</h3>
+<p>Tutti i casi limite e i tranelli sintattici e operativi sopra descritti costituiscono gli elementi critici per il superamento dell&#39;esame 1Z0-830 nel Capitolo 14:</p>
+<ul>
+<li><strong>Differenza File e Path:</strong> I metodi di <code>Files</code> (NIO.2) non sono metodi d&#39;istanza della classe legacy <code>java.io.File</code>; occorre sempre convertire con <code>toPath()</code> o <code>toFile()</code>.</li>
+<li><strong>Comportamento di <code>relativize()</code>:</strong> Entrambi i percorsi devono essere dello stesso tipo (entrambi assoluti o entrambi relativi) e appartenere alla stessa radice/unità disco, altrimenti lancia <code>IllegalArgumentException</code>.</li>
+<li><strong>Comportamento di <code>resolve()</code>:</strong> Se l&#39;argomento passato a <code>resolve()</code> è assoluto, la base viene ignorata e viene restituito direttamente il parametro.</li>
+<li><strong>Conteggio e Indici di <code>subpath()</code>:</strong> Non include la root; <code>subpath(0, 1)</code> del percorso <code>/a/b/c</code> restituisce <code>a</code>. Indici errati lanciano <code>IllegalArgumentException</code>.</li>
+<li><strong>Esito di <code>Files.mismatch()</code>:</strong> Restituisce l&#39;indice numerico zero-based del primo byte differente, oppure <code>-1L</code> se i file sono completamente identici; se i file non esistono, lancia eccezione.</li>
+<li><strong>Copia Superficiale delle Directory:</strong> <code>Files.copy()</code> crea solo la cartella target vuota senza copiare i file figli.</li>
+<li><strong>Gestione Risorse negli Stream NIO.2:</strong> I metodi di <code>Files</code> che restituiscono <code>Stream</code> (<code>lines()</code>, <code>list()</code>, <code>walk()</code>, <code>find()</code>) devono essere racchiusi in <code>try-with-resources</code> per evitare leak di descrittori di file.</li>
+<li><strong>Campi <code>transient</code> e Serializzazione:</strong> Durante la deserializzazione, i campi <code>transient</code> assumono il valore predefinito del tipo (<code>null</code>, <code>0</code>, <code>false</code>) e non quello dichiarato nell&#39;inizializzatore inline o nel costruttore.</li>
+<li><strong>Checked Exceptions su <code>readObject()</code>:</strong> Richiede la gestione sia di <code>IOException</code> che di <code>ClassNotFoundException</code> e il cast esplicito da <code>Object</code>.</li>
+<li><strong>Superclassi non serializzabili:</strong> Se la superclasse non implementa <code>Serializable</code>, deve possedere un costruttore accessibile senza argomenti (<code>no-arg constructor</code>), altrimenti la deserializzazione fallisce con <code>InvalidClassException</code>.</li>
+<li><strong>Controllo di Nullità su <code>System.console()</code>:</strong> Negli ambienti non interattivi (es. IDE), <code>System.console()</code> restituisce <code>null</code>; <code>readPassword()</code> restituisce sempre <code>char[]</code> e non <code>String</code>.</li>
+<li><strong>Cicli nei Link Simbolici:</strong> L&#39;abilitazione di <code>FileVisitOption.FOLLOW_LINKS</code> su percorsi con link circolari può causare <code>FileSystemLoopException</code> durante l&#39;uso di <code>Files.walk()</code>.</li>
 </ul>
 
     </section></main>
