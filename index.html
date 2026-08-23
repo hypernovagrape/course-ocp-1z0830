@@ -1688,10 +1688,33 @@ package structure; // DOES NOT COMPILE: package deve essere il primo
 <h3 id="cap-1-h5">1.5 Inizializzazione e Creazione di Oggetti</h3>
 <p><strong>Definizioni e Concetti</strong>
 Gli oggetti si creano con la parola chiave <strong>new</strong> che chiama un <strong>costruttore</strong>, il quale ha lo stesso nome della classe e nessun tipo di ritorno. Un <strong>blocco di codice</strong> è compreso tra parentesi graffe <code>{}</code>. Gli <strong>Instance Initializer</strong> (inizializzatori d&#39;istanza) sono blocchi che appaiono fuori da un metodo e vengono eseguiti quando viene creata un&#39;istanza.</p>
-<p><strong>Ordine di Inizializzazione Tassativo:</strong></p>
+<p><strong>Ordine di Inizializzazione Tassativo</strong></p>
 <ol>
-<li>I campi e i blocchi inizializzatori d&#39;istanza vengono eseguiti nell&#39;ordine in cui appaiono nel file sorgente.</li>
-<li>Il costruttore viene eseguito per ultimo, dopo che i campi e i blocchi sono stati inizializzati.</li>
+<li><p><strong>Fase Statica (avviene una sola volta):</strong></p>
+<ul>
+<li><strong>Campi statici</strong> e <strong>blocchi statici (<code>static {}</code>)</strong>: Vengono eseguiti nell&#39;esatto ordine in cui sono scritti nel file, dall&#39;alto verso il basso.</li>
+<li><em>Nota:</em> I metodi statici sono disponibili, ma il loro codice <em>non</em> viene eseguito a meno che un campo o un blocco statico non li chiami esplicitamente.</li>
+</ul>
+</li>
+<li><p><strong>Fase di Istanza (avviene per ogni nuovo oggetto):</strong><br>Questa fase scatta ogni volta che usi la parola chiave <code>new</code>.</p>
+<ul>
+<li><strong>Campi di istanza (non statici)</strong> e <strong>blocchi di istanza (<code>{}</code>)</strong>: Vengono inizializzati ed eseguiti nell&#39;esatto ordine in cui compaiono nel codice.</li>
+</ul>
+</li>
+<li><p><strong>Costruttori</strong>:</p>
+<ul>
+<li><strong>Corpo del costruttore</strong>: Viene eseguito solo dopo che tutti i campi e i blocchi di istanza hanno terminato il loro lavoro.</li>
+</ul>
+</li>
+</ol>
+<p>Se la classe estende un&#39;altra classe, l&#39;ordine segue una regola &quot;prima il genitore, poi il figlio&quot;, incastrandosi in questo modo:</p>
+<ol>
+<li>Statici del Padre</li>
+<li>Statici del Figlio</li>
+<li>Istanza e blocchi del Padre</li>
+<li>Costruttore del Padre</li>
+<li>Istanza e blocchi del Figlio</li>
+<li>Costruttore del Figlio</li>
 </ol>
 <p><strong>⚠️ Tranello (Illegal Forward Reference):</strong> Non si può fare riferimento a una variabile prima che sia stata definita all&#39;interno dei blocchi di codice inizializzatori.</p>
 <pre><code class="language-java">{ System.out.println(name); } // DOES NOT COMPILE: riferimento in avanti illegale
