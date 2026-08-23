@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2ab2ea">
   <base href="/1z0-830/">
   <title>Oracle 1Z0-830 — Note</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
   <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
   <style>:root {
   --text: #1f2937;
@@ -1341,6 +1344,11 @@ strong {
 </li>
   </ul>
 </div>
+<div class="nav-chapter is-expanded" data-chapter="a">
+  <div class="nav-chapter-heading">
+    <a href="#cap-a" class="nav-chapter-link" title="Appendice A">Appendice A</a>
+  </div>
+</div>
       </nav>
     </aside>
     <div class="main-wrapper">
@@ -1351,7 +1359,7 @@ strong {
           </svg>
         </button>
         <h1>Oracle 1Z0-830 Certification Notes</h1>
-        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Cambia tema">
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Cambia tema" title="Cambia tema">
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="4"/>
             <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
@@ -4363,6 +4371,342 @@ try (Stream&lt;Path&gt; stream = Files.find(startPath, 5,
 <li><strong>Cicli nei Link Simbolici:</strong> L&#39;abilitazione di <code>FileVisitOption.FOLLOW_LINKS</code> su percorsi con link circolari può causare <code>FileSystemLoopException</code> durante l&#39;uso di <code>Files.walk()</code>.</li>
 </ul>
 
+    </section>
+<hr class="chapter-sep">
+<section id="cap-a" class="chapter">
+      <h1 class="chapter-title">Appendice A</h1>
+      <h2 id="cap-A-h1">🧮 Classe <code>java.lang.Math</code></h2>
+<p>Tutti i metodi sono <code>static</code>.</p>
+<h3 id="cap-A-h2">Arrotondamento e Valore Assoluto</h3>
+<ul>
+<li><strong><code>abs(int a) | abs(long a) | abs(float a) | abs(double a)</code></strong>  -&gt;  <code>int | long | float | double</code> <em>(restituisce lo stesso tipo dell&#39;input)</em></li>
+<li><strong><code>ceil(double a)</code></strong>  -&gt;  <code>double</code> <em>(arrotonda per eccesso)</em></li>
+<li><strong><code>floor(double a)</code></strong>  -&gt;  <code>double</code> <em>(arrotonda per difetto)</em></li>
+<li><strong><code>round(float a)</code></strong>  -&gt;  <code>int</code> <em>(arrotonda al matematico più vicino)</em></li>
+<li><strong><code>round(double a)</code></strong>  -&gt;  <code>long</code> <em>(arrotonda al matematico più vicino)</em></li>
+</ul>
+<h3 id="cap-A-h3">Minimo, Massimo e Casuali</h3>
+<ul>
+<li><strong><code>max(int, int) | max(long, long) | max(float, float) | max(double, double)</code></strong>  -&gt;  <code>int | long | float | double</code></li>
+<li><strong><code>min(int, int) | min(long, long) | min(float, float) | min(double, double)</code></strong>  -&gt;  <code>int | long | float | double</code></li>
+<li><strong><code>random()</code></strong>  -&gt;  <code>double</code> <em>(compreso tra 0.0 e 1.0 escluso)</em></li>
+</ul>
+<h3 id="cap-A-h4">Esponenziali, Radici e Potenze</h3>
+<ul>
+<li><strong><code>pow(double a, double b)</code></strong>  -&gt;  <code>double</code></li>
+<li><strong><code>sqrt(double a)</code></strong>  -&gt;  <code>double</code> <em>(radice quadrata)</em></li>
+<li><strong><code>cbrt(double a)</code></strong>  -&gt;  <code>double</code> <em>(radice cubica)</em></li>
+<li><strong><code>exp(double a)</code></strong>  -&gt;  <code>double</code></li>
+<li><strong><code>log(double a)</code></strong>  -&gt;  <code>double</code> <em>(logaritmo naturale)</em></li>
+<li><strong><code>log10(double a)</code></strong>  -&gt;  <code>double</code> <em>(logaritmo in base 10)</em></li>
+</ul>
+<h3 id="cap-A-h5">Aritmetica Esatta (Prevengono l&#39;overflow lanciando <code>ArithmeticException</code>)</h3>
+<ul>
+<li><strong><code>addExact(int x, int y) | addExact(long, long)</code></strong>  -&gt;  <code>int | long</code></li>
+<li><strong><code>subtractExact(int x, int y) | subtractExact(long, long)</code></strong>  -&gt;  <code>int | long</code></li>
+<li><strong><code>multiplyExact(int x, int y) | multiplyExact(long, long)</code></strong>  -&gt;  <code>int | long</code></li>
+<li><strong><code>incrementExact(int a) | incrementExact(long a)</code></strong>  -&gt;  <code>int | long</code></li>
+<li><strong><code>decrementExact(int a) | decrementExact(long a)</code></strong>  -&gt;  <code>int | long</code></li>
+<li><strong><code>negateExact(int a) | negateExact(long a)</code></strong>  -&gt;  <code>int | long</code></li>
+<li><strong><code>toIntExact(long value)</code></strong>  -&gt;  <code>int</code> <em>(Lancia eccezione se il long non entra in 32 bit)</em></li>
+</ul>
+<hr>
+<h2 id="cap-A-h6">📝 Classe <code>java.lang.String</code></h2>
+<p><em>Le stringhe sono immutabili. Tutte le modifiche restituiscono un NUOVO oggetto <code>String</code>.</em></p>
+<h3 id="cap-A-h7">Ispezione e Ricerca</h3>
+<ul>
+<li><strong><code>length()</code></strong>  -&gt;  <code>int</code></li>
+<li><strong><code>isEmpty()</code></strong>  -&gt;  <code>boolean</code> <em>(true se length == 0)</em></li>
+<li><strong><code>isBlank()</code></strong>  -&gt;  <code>boolean</code> <em>(true se vuota o solo spazi, Java 11+)</em></li>
+<li><strong><code>charAt(int index)</code></strong>  -&gt;  <code>char</code></li>
+<li><strong><code>indexOf(int ch) | indexOf(int ch, int fromIndex)</code></strong>  -&gt;  <code>int</code> <em>(restituisce -1 se non trovato)</em></li>
+<li><strong><code>indexOf(String str) | indexOf(String str, int fromIndex)</code></strong>  -&gt;  <code>int</code></li>
+<li><strong><code>lastIndexOf(int ch) | lastIndexOf(String str)</code></strong>  -&gt;  <code>int</code></li>
+<li><strong><code>contains(CharSequence s)</code></strong>  -&gt;  <code>boolean</code></li>
+<li><strong><code>startsWith(String prefix) | startsWith(String prefix, int toffset)</code></strong>  -&gt;  <code>boolean</code></li>
+<li><strong><code>endsWith(String suffix)</code></strong>  -&gt;  <code>boolean</code></li>
+</ul>
+<h3 id="cap-A-h8">Confronto</h3>
+<ul>
+<li><strong><code>equals(Object anObject)</code></strong>  -&gt;  <code>boolean</code></li>
+<li><strong><code>equalsIgnoreCase(String anotherString)</code></strong>  -&gt;  <code>boolean</code></li>
+<li><strong><code>compareTo(String anotherString)</code></strong>  -&gt;  <code>int</code> <em>(0 se uguali, &lt; 0 se precede, &gt; 0 se segue)</em></li>
+<li><strong><code>compareToIgnoreCase(String str)</code></strong>  -&gt;  <code>int</code></li>
+</ul>
+<h3 id="cap-A-h9">Modifica, Taglio e Formattazione</h3>
+<ul>
+<li><strong><code>substring(int beginIndex)</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>substring(int beginIndex, int endIndex)</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>trim()</code></strong>  -&gt;  <code>String</code> <em>(rimuove spazi ASCII)</em></li>
+<li><strong><code>strip() | stripLeading() | stripTrailing()</code></strong>  -&gt;  <code>String</code> <em>(rimuove spazi Unicode-aware, Java 11+)</em></li>
+<li><strong><code>toLowerCase() | toUpperCase()</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>replace(char oldChar, char newChar)</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>replace(CharSequence target, CharSequence replacement)</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>replaceAll(String regex, String replacement)</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>split(String regex) | split(String regex, int limit)</code></strong>  -&gt;  <code>String[]</code> <em>(Array di stringhe)</em></li>
+<li><strong><code>concat(String str)</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>repeat(int count)</code></strong>  -&gt;  <code>String</code> <em>(Java 11+)</em></li>
+<li><strong><code>formatted(Object... args)</code></strong>  -&gt;  <code>String</code> <em>(Java 15+)</em></li>
+</ul>
+<h3 id="cap-A-h10">Metodi Statici Utili</h3>
+<ul>
+<li><strong><code>String.valueOf(Object | char[] | boolean | int | double ...)</code></strong>  -&gt;  <code>String</code></li>
+<li><strong><code>String.join(CharSequence delimiter, CharSequence... elements)</code></strong>  -&gt;  <code>String</code></li>
+</ul>
+<hr>
+<h2 id="cap-A-h11">🛠️ Classe <code>java.lang.StringBuilder</code></h2>
+<p><em>È mutabile. I metodi di modifica restituiscono <code>this</code> (cioè il riferimento allo stesso <code>StringBuilder</code>) permettendo il method chaining (es. <code>sb.append(&quot;A&quot;).append(&quot;B&quot;)</code>).</em></p>
+<h3 id="cap-A-h12">Modifica</h3>
+<ul>
+<li><strong><code>append(String str) | append(Object) | append(int) ...</code></strong>  -&gt;  <code>StringBuilder</code></li>
+<li><strong><code>insert(int offset, String str) | insert(int, char) ...</code></strong>  -&gt;  <code>StringBuilder</code></li>
+<li><strong><code>delete(int start, int end)</code></strong>  -&gt;  <code>StringBuilder</code></li>
+<li><strong><code>deleteCharAt(int index)</code></strong>  -&gt;  <code>StringBuilder</code></li>
+<li><strong><code>replace(int start, int end, String str)</code></strong>  -&gt;  <code>StringBuilder</code></li>
+<li><strong><code>reverse()</code></strong>  -&gt;  <code>StringBuilder</code></li>
+</ul>
+<h3 id="cap-A-h13">Ispezione e Conversione</h3>
+<ul>
+<li><strong><code>length()</code></strong>  -&gt;  <code>int</code> <em>(Numero di caratteri attuali)</em></li>
+<li><strong><code>capacity()</code></strong>  -&gt;  <code>int</code> <em>(Dimensione dell&#39;array interno)</em></li>
+<li><strong><code>charAt(int index)</code></strong>  -&gt;  <code>char</code></li>
+<li><strong><code>substring(int start) | substring(int start, int end)</code></strong>  -&gt;  <strong><code>String</code></strong> <em>(⚠️ Attenzione all&#39;esame: non restituisce uno StringBuilder!)</em></li>
+<li><strong><code>toString()</code></strong>  -&gt;  <strong><code>String</code></strong></li>
+</ul>
+<hr>
+<h2 id="cap-A-h14">⏱️ Date e Time API (<code>java.time.*</code>)</h2>
+<p><em>Tutte le classi sono immutabili. Le operazioni di manipolazione restituiscono sempre una <strong>nuova istanza</strong> della classe.</em></p>
+<h3 id="cap-A-h15">1. Metodi Statici Comuni di Creazione</h3>
+<ul>
+<li><strong><code>now() | now(ZoneId)</code></strong>  -&gt;  <code>LocalDate | LocalTime | LocalDateTime | ZonedDateTime</code></li>
+<li><strong><code>parse(CharSequence text)</code></strong>  -&gt;  <code>LocalDate | LocalTime | LocalDateTime | ZonedDateTime</code></li>
+</ul>
+<h3 id="cap-A-h16">2. <code>LocalDate</code> (Solo Data)</h3>
+<ul>
+<li><strong><code>LocalDate.of(int year, int month, int day)</code></strong>  -&gt;  <code>LocalDate</code></li>
+<li><strong><code>getYear() | getMonthValue() | getDayOfMonth()</code></strong>  -&gt;  <code>int</code></li>
+<li><strong><code>getMonth()</code></strong>  -&gt;  <code>Month</code> <em>(Enum)</em></li>
+<li><strong><code>getDayOfWeek()</code></strong>  -&gt;  <code>DayOfWeek</code> <em>(Enum)</em></li>
+<li><strong><code>plusDays(long) | plusWeeks(long) | plusMonths(long) | plusYears(long)</code></strong>  -&gt;  <code>LocalDate</code></li>
+<li><strong><code>minusDays(long) | minusWeeks(long) | minusMonths(long) | minusYears(long)</code></strong>  -&gt;  <code>LocalDate</code></li>
+<li><strong><code>withYear(int) | withMonth(int) | withDayOfMonth(int)</code></strong>  -&gt;  <code>LocalDate</code> <em>(Sostituisce il valore)</em></li>
+<li><strong><code>atTime(LocalTime time) | atTime(int hour, int minute ...)</code></strong>  -&gt;  <strong><code>LocalDateTime</code></strong> <em>(Unisce la data a un&#39;ora)</em></li>
+</ul>
+<h3 id="cap-A-h17">3. <code>LocalTime</code> (Solo Ora)</h3>
+<ul>
+<li><strong><code>LocalTime.of(int hour, int minute) | of(int h, int m, int s)</code></strong>  -&gt;  <code>LocalTime</code></li>
+<li><strong><code>getHour() | getMinute() | getSecond() | getNano()</code></strong>  -&gt;  <code>int</code></li>
+<li><strong><code>plusHours(long) | plusMinutes(long) | plusSeconds(long)</code></strong>  -&gt;  <code>LocalTime</code></li>
+<li><strong><code>minusHours(long) | minusMinutes(long) | minusSeconds(long)</code></strong>  -&gt;  <code>LocalTime</code></li>
+<li><strong><code>withHour(int) | withMinute(int) | withSecond(int)</code></strong>  -&gt;  <code>LocalTime</code></li>
+<li><strong><code>atDate(LocalDate date)</code></strong>  -&gt;  <strong><code>LocalDateTime</code></strong> <em>(Unisce l&#39;ora a una data)</em></li>
+</ul>
+<h3 id="cap-A-h18">4. <code>LocalDateTime</code> (Data + Ora)</h3>
+<ul>
+<li><strong><code>LocalDateTime.of(LocalDate date, LocalTime time)</code></strong>  -&gt;  <code>LocalDateTime</code></li>
+<li><em>Eredita tutti i <code>get...</code>, <code>plus...</code>, <code>minus...</code>, <code>with...</code> che restituiscono rispettivamente <code>int</code> o <code>LocalDateTime</code>.</em></li>
+<li><strong><code>toLocalDate()</code></strong>  -&gt;  <strong><code>LocalDate</code></strong> <em>(Estrae solo la data)</em></li>
+<li><strong><code>toLocalTime()</code></strong>  -&gt;  <strong><code>LocalTime</code></strong> <em>(Estrae solo l&#39;ora)</em></li>
+<li><strong><code>atZone(ZoneId zone)</code></strong>  -&gt;  <strong><code>ZonedDateTime</code></strong> <em>(Aggiunge il fuso orario)</em></li>
+</ul>
+<h3 id="cap-A-h19">5. <code>ZonedDateTime</code> (Data + Ora + Fuso Orario)</h3>
+<ul>
+<li><strong><code>ZonedDateTime.of(LocalDateTime, ZoneId)</code></strong>  -&gt;  <code>ZonedDateTime</code></li>
+<li><strong><code>getZone()</code></strong>  -&gt;  <code>ZoneId</code></li>
+<li><strong><code>getOffset()</code></strong>  -&gt;  <code>ZoneOffset</code></li>
+<li><strong><code>toLocalDateTime()</code></strong>  -&gt;  <code>LocalDateTime</code></li>
+<li><strong><code>withZoneSameInstant(ZoneId)</code></strong>  -&gt;  <code>ZonedDateTime</code> <em>(Cambia fuso mantenendo lo stesso momento assoluto)</em></li>
+<li><strong><code>withZoneSameLocal(ZoneId)</code></strong>  -&gt;  <code>ZonedDateTime</code> <em>(Cambia fuso mantenendo l&#39;orario scritto, cambia il momento assoluto)</em></li>
+</ul>
+<h3 id="cap-A-h20">Confronto Temporale (Comuni a tutte le classi <code>java.time</code>)</h3>
+<ul>
+<li><strong><code>isBefore(...)</code></strong>  -&gt;  <code>boolean</code></li>
+<li><strong><code>isAfter(...)</code></strong>  -&gt;  <code>boolean</code></li>
+<li><strong><code>isEqual(...)</code></strong>  -&gt;  <code>boolean</code> <em>(Disponibile per LocalDate/LocalDateTime)</em></li>
+</ul>
+
+<hr class="chapter-sep">
+
+<hr class="chapter-sep">
+<ol>
+<li><p><strong><code>static int parseInt(String s)</code></strong>
+Converte una stringa in un primitivo <code>int</code> (in base 10).</p>
+</li>
+<li><p><strong><code>static int parseInt(String s, int radix)</code></strong>
+Converte una stringa in un primitivo <code>int</code> utilizzando la base numerica specificata dal parametro <code>radix</code>.</p>
+</li>
+<li><p><strong><code>static int parseInt(CharSequence s, int beginIndex, int endIndex, int radix)</code></strong>
+Estrae e converte in un primitivo <code>int</code> solo una porzione specifica di una sequenza di caratteri (es. <code>String</code> o <code>StringBuilder</code>), ottimizzando l&#39;uso della memoria.</p>
+</li>
+<li><p><strong><code>static Integer valueOf(int i)</code></strong>
+Restituisce un oggetto <code>Integer</code> a partire da un primitivo <code>int</code>. È il metodo usato dietro le quinte dall&#39;autoboxing e sfrutta la <em>Integer Cache</em> da -128 a 127.</p>
+</li>
+<li><p><strong><code>static Integer valueOf(String s)</code></strong>
+Converte una stringa in un oggetto <code>Integer</code> (in base 10).</p>
+</li>
+<li><p><strong><code>static Integer valueOf(String s, int radix)</code></strong>
+Converte una stringa in un oggetto <code>Integer</code> utilizzando la base numerica specificata.</p>
+</li>
+<li><p><strong><code>static int parseUnsignedInt(String s)</code></strong>
+Converte una stringa in un primitivo <code>int</code> gestendolo come numero <em>senza segno</em> (permettendo di memorizzare valori positivi fino a circa 4.29 miliardi).</p>
+</li>
+<li><p><strong><code>static int parseUnsignedInt(String s, int radix)</code></strong>
+Converte una stringa in un primitivo <code>int</code> senza segno, utilizzando la base specificata.</p>
+</li>
+<li><p><strong><code>static int parseUnsignedInt(CharSequence s, int beginIndex, int endIndex, int radix)</code></strong>
+Come il <code>parseInt</code> su <code>CharSequence</code>, ma applicato ai numeri senza segno.</p>
+</li>
+<li><p><strong><code>static Integer decode(String nm)</code></strong>
+Decodifica una stringa in un oggetto <code>Integer</code>, deducendo automaticamente la base numerica in base a prefissi specifici (es. <code>0x</code> per esadecimale, <code>0</code> per ottale).</p>
+</li>
+</ol>
+<h3 id="cap-A-h1">Metodi speciali di <code>Boolean</code> e <code>Character</code></h3>
+<p>Questi metodi sono fondamentali perché si comportano diversamente dai wrapper numerici.</p>
+<ol start="11">
+<li><p><strong><code>static boolean parseBoolean(String s)</code></strong>
+Converte una stringa nel primitivo <code>boolean</code>. È estremamente &quot;tollerante&quot;: restituisce <code>true</code> solo se la stringa è <code>&quot;true&quot;</code> (ignorando maiuscole e minuscole); per <strong>qualsiasi</strong> altra stringa (o se è <code>null</code>) restituisce <code>false</code> senza mai lanciare eccezioni.</p>
+</li>
+<li><p><strong><code>static Boolean valueOf(String s)</code></strong>
+Come il precedente, ma restituisce l&#39;oggetto <code>Boolean.TRUE</code> o <code>Boolean.FALSE</code> dalla memoria, usando la stessa logica di tolleranza.</p>
+</li>
+<li><p><strong><code>static Character valueOf(char c)</code></strong>
+Crea o recupera dalla cache (da 0 a 127) un oggetto <code>Character</code> partendo da un primitivo <code>char</code>. <strong>Nota da esame:</strong> Non esistono metodi <code>parseCharacter</code> o <code>valueOf(String)</code> per questa classe.</p>
+</li>
+</ol>
+<hr>
+<h3 id="cap-A-h2">Metodi di Unboxing Manuale (ereditati da <code>Number</code>)</h3>
+<p>Tutti i wrapper numerici (<code>Byte</code>, <code>Short</code>, <code>Integer</code>, <code>Long</code>, <code>Float</code>, <code>Double</code>) possiedono questi metodi di istanza per estrarre il valore in uno specifico tipo primitivo, effettuando eventuali conversioni o troncamenti automatici.</p>
+<ol start="14">
+<li><p><strong><code>byte byteValue()</code></strong>
+Estrae il valore dell&#39;oggetto come primitivo <code>byte</code> (possibile perdita di precisione).</p>
+</li>
+<li><p><strong><code>short shortValue()</code></strong>
+Estrae il valore dell&#39;oggetto come primitivo <code>short</code>.</p>
+</li>
+<li><p><strong><code>int intValue()</code></strong>
+Estrae il valore dell&#39;oggetto come primitivo <code>int</code> (es. se usato su un <code>Double</code>, tronca brutalmente i decimali).</p>
+</li>
+<li><p><strong><code>long longValue()</code></strong>
+Estrae il valore dell&#39;oggetto come primitivo <code>long</code>.</p>
+</li>
+<li><p><strong><code>float floatValue()</code></strong>
+Estrae il valore dell&#39;oggetto come primitivo <code>float</code>.</p>
+</li>
+<li><p><strong><code>double doubleValue()</code></strong>
+Estrae il valore dell&#39;oggetto come primitivo <code>double</code>.</p>
+</li>
+</ol>
+<hr>
+<h3 id="cap-A-h3">Metodi speciali per la virgola mobile (<code>Double</code> e <code>Float</code>)</h3>
+<p>Questi metodi statici testano lo stato di numeri che seguono lo standard IEEE 754.</p>
+<ol start="20">
+<li><p><strong><code>static boolean isNaN(double v)</code></strong> <em>(esiste anche per <code>float</code>)</em>
+Restituisce <code>true</code> se il valore valutato non è un numero matematicamente valido (Not-a-Number), tipicamente generato da operazioni come <code>0.0 / 0.0</code>.</p>
+</li>
+<li><p><strong><code>static boolean isInfinite(double v)</code></strong> <em>(esiste anche per <code>float</code>)</em>
+Restituisce <code>true</code> se il valore rappresenta l&#39;infinito positivo o negativo (es. generato da <code>1.0 / 0.0</code>).</p>
+</li>
+</ol>
+<hr>
+<h3 id="cap-A-h4">Metodi di utilità (Introdotti in Java 8)</h3>
+<p>Questi metodi statici sono presenti nelle classi wrapper <code>Integer</code>, <code>Long</code>, <code>Float</code> e <code>Double</code> (le firme qui sotto usano <code>int</code> per l&#39;esempio, ma esistono gli equivalenti). Sono molto testati in combinazione con le Stream API.</p>
+<ol start="22">
+<li><p><strong><code>static int max(int a, int b)</code></strong>
+Confronta due valori e restituisce il maggiore.</p>
+</li>
+<li><p><strong><code>static int min(int a, int b)</code></strong>
+Confronta due valori e restituisce il minore.</p>
+</li>
+<li><p><strong><code>static int sum(int a, int b)</code></strong>
+Restituisce la somma aritmetica dei due valori.</p>
+</li>
+</ol>
+<hr>
+<h3 id="cap-A-h5">Array &quot;Old Style&quot; (es. <code>int[]</code>, <code>String[]</code>) e <code>java.util.Arrays</code></h3>
+<p>Gli array primitivi o di oggetti (es. <code>int[]</code>) in Java sono oggetti, ma non hanno metodi propri oltre a quelli ereditati da <code>Object</code> (come <code>clone()</code>) e l&#39;attributo speciale <code>length</code> (che <strong>non</strong> è un metodo). Tuttavia, per l&#39;esame è essenziale conoscere i metodi di utilità della classe <code>java.util.Arrays</code>.</p>
+<ol start="25">
+<li><p><strong><code>static void sort(int[] a)</code></strong> <em>(e relativi overload)</em>
+Ordina l&#39;array passato per riferimento. Esistono overload per quasi tutti i primitivi e per oggetti (<code>Object[]</code> o con <code>Comparator</code>).</p>
+</li>
+<li><p><strong><code>static int binarySearch(int[] a, int key)</code></strong> <em>(e relativi overload)</em>
+Cerca un elemento nell&#39;array. <strong>Attenzione:</strong> l&#39;array <em>deve</em> essere già ordinato. Se l&#39;elemento non c&#39;è, restituisce <code>-(punto_di_inserimento) - 1</code>.</p>
+</li>
+<li><p><strong><code>static int compare(int[] a, int[] b)</code></strong>
+Confronta due array in ordine lessicografico. Restituisce <code>0</code> se sono uguali, un numero negativo se <code>a &lt; b</code>, o positivo se <code>a &gt; b</code>.</p>
+</li>
+<li><p><strong><code>static int mismatch(int[] a, int[] b)</code></strong>
+Trova e restituisce l&#39;indice del primo elemento discordante tra i due array. Se sono identici, restituisce <code>-1</code>.</p>
+</li>
+<li><p><strong><code>static boolean equals(int[] a, int[] b)</code></strong> / <strong><code>deepEquals(Object[] a, Object[] b)</code></strong>
+<code>equals</code> confronta il contenuto di array monodimensionali. <code>deepEquals</code> va usato per array multidimensionali (es. <code>int[][]</code>).</p>
+</li>
+<li><p><strong><code>static int[] copyOf(int[] original, int newLength)</code></strong>
+Crea un nuovo array copiando il contenuto dell&#39;originale. Se <code>newLength</code> è maggiore, riempie il resto con i valori di default (es. <code>0</code> o <code>null</code>).</p>
+</li>
+</ol>
+<hr>
+<h3 id="cap-A-h6">Metodi fondamentali di <code>String</code></h3>
+<p>Le stringhe sono immutabili. Qualsiasi metodo che &quot;modifica&quot; una stringa restituisce in realtà una <strong>nuova</strong> stringa.</p>
+<ol start="31">
+<li><p><strong><code>int length()</code></strong>
+Restituisce la lunghezza della stringa (attenzione: per gli array è una proprietà <code>.length</code> senza parentesi, per le stringhe è un metodo <code>length()</code>).</p>
+</li>
+<li><p><strong><code>String substring(int beginIndex, int endIndex)</code></strong>
+Estrae una sottostringa. <code>beginIndex</code> è <em>incluso</em>, <code>endIndex</code> è <em>escluso</em>. (L&#39;overload con solo <code>beginIndex</code> arriva fino alla fine della stringa).</p>
+</li>
+<li><p><strong><code>boolean isBlank()</code></strong> vs <strong><code>boolean isEmpty()</code></strong>
+<code>isEmpty()</code> verifica solo se <code>length() == 0</code>. <code>isBlank()</code> verifica se la stringa è vuota o contiene <em>solo</em> spazi bianchi (spazi, tab, a capo).</p>
+</li>
+<li><p><strong><code>String strip()</code></strong> / <strong><code>stripLeading()</code></strong> / <strong><code>stripTrailing()</code></strong>
+Rimuove gli spazi bianchi all&#39;inizio e/o alla fine (supporta pienamente l&#39;Unicode, a differenza del vecchio e meno potente <code>trim()</code>).</p>
+</li>
+<li><p><strong><code>String indent(int n)</code></strong>
+Aggiunge (o rimuove, se negativo) spazi di indentazione all&#39;inizio di ogni riga e aggiunge un carattere di newline (<code>\n</code>) finale se non già presente.</p>
+</li>
+<li><p><strong><code>String formatted(Object... args)</code></strong>
+Alternativa di istanza al metodo statico <code>String.format()</code>. Formatta la stringa usando i segnaposto (es. <code>&quot;%s %d&quot;.formatted(&quot;Test&quot;, 1)</code>).</p>
+</li>
+<li><p><strong><code>String repeat(int count)</code></strong>
+Ripete la stringa il numero specificato di volte.</p>
+</li>
+</ol>
+<hr>
+<h3 id="cap-A-h7">Metodi fondamentali di <code>List</code> e Collections (focus Java 21)</h3>
+<p>Per l&#39;esame è cruciale conoscere non solo i metodi base, ma anche le recenti aggiunte come le <em>Sequenced Collections</em> (introdotte proprio in Java 21).</p>
+<ol start="38">
+<li><p><strong><code>static List&lt;E&gt; of(E... elements)</code></strong> / <strong><code>copyOf(Collection&lt;? extends E&gt; coll)</code></strong>
+Creano liste <strong>immutabili</strong>. Non accettano valori <code>null</code> (se presenti, lanciano <code>NullPointerException</code>).</p>
+</li>
+<li><p><strong><code>boolean remove(Object o)</code></strong> vs <strong><code>E remove(int index)</code></strong>
+Nelle liste di <code>Integer</code> c&#39;è spesso un trabocchetto da esame: <code>list.remove(1)</code> usa l&#39;overload primitivo e rimuove l&#39;elemento all&#39;indice 1, mentre <code>list.remove(Integer.valueOf(1))</code> rimuove l&#39;oggetto col valore 1.</p>
+</li>
+<li><p><strong><code>void replaceAll(UnaryOperator&lt;E&gt; operator)</code></strong>
+Sostituisce ogni elemento della lista applicando l&#39;operatore specificato.</p>
+</li>
+<li><p><strong><code>boolean removeIf(Predicate&lt;? super E&gt; filter)</code></strong>
+Rimuove (dalla collezione) tutti gli elementi che soddisfano la condizione data dal predicato. È un metodo di <code>Collection</code>.</p>
+</li>
+<li><p><strong><code>void sort(Comparator&lt;? super E&gt; c)</code></strong>
+Ordina la lista <em>in-place</em>. Se si passa <code>null</code> al posto del comparatore, viene usato l&#39;ordinamento naturale (gli elementi devono implementare <code>Comparable</code>).</p>
+</li>
+</ol>
+<h4 id="cap-A-h8">Novità Java 21: <em>Sequenced Collections</em></h4>
+<p>In Java 21 le interfacce <code>List</code>, <code>Deque</code> e <code>SortedSet</code> implementano la nuova interfaccia <code>SequencedCollection</code>, uniformando i metodi per accedere al primo e all&#39;ultimo elemento.</p>
+<ol start="43">
+<li><p><strong><code>E getFirst()</code></strong> / <strong><code>E getLast()</code></strong>
+Restituiscono il primo o l&#39;ultimo elemento. Lanciano <code>NoSuchElementException</code> se la collezione è vuota.</p>
+</li>
+<li><p><strong><code>void addFirst(E e)</code></strong> / <strong><code>void addLast(E e)</code></strong>
+Aggiungono l&#39;elemento in testa o in coda. Nelle collezioni non modificabili lanciano <code>UnsupportedOperationException</code>.</p>
+</li>
+<li><p><strong><code>E removeFirst()</code></strong> / <strong><code>E removeLast()</code></strong>
+Rimuovono e restituiscono il primo o l&#39;ultimo elemento.</p>
+</li>
+<li><p><strong><code>SequencedCollection&lt;E&gt; reversed()</code></strong>
+Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificare o accedere agli elementi di questa vista si rifletterà sulla collezione originale (e viceversa).</p>
+</li>
+</ol>
+
     </section></main>
     </div>
   </div>
@@ -4433,7 +4777,10 @@ try (Stream&lt;Path&gt; stream = Files.find(startPath, 5,
       autoscrollToggle.title = enabled ? "Autoscroll menu (on)" : "Autoscroll menu (off)";
     }
     localStorage.setItem(STORAGE_AUTOSCROLL, enabled ? "true" : "false");
-    if (enabled) scrollNavToActive();
+    if (enabled) {
+      scrollNavToActive();
+      updateScrollSpy();
+    }
   }
 
   function toggleAutoscroll() {
@@ -4552,10 +4899,14 @@ try (Stream&lt;Path&gt; stream = Files.find(startPath, 5,
       link.closest(".nav-chapter")?.classList.add("nav-chapter-active");
       link.closest("[data-nav-section]")?.classList.add("nav-section-active");
 
-      scrollNavToActive();
+      if (autoscrollEnabled) {
+        scrollNavToActive();
+      }
     }
 
-    expandNavAncestors(link);
+    if (autoscrollEnabled) {
+      expandNavAncestors(link);
+    }
   }
 
   function getScrollAnchorLine() {
@@ -4567,6 +4918,8 @@ try (Stream&lt;Path&gt; stream = Files.find(startPath, 5,
   }
 
   function updateScrollSpy() {
+    if (!autoscrollEnabled) return;
+
     const targets = document.querySelectorAll(
       "section.chapter, main h2[id^='cap-'], main h3[id^='cap-'], main h4[id^='cap-']"
     );
