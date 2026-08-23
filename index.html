@@ -363,10 +363,47 @@ body {
   display: block;
 }
 
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.topbar-divider {
+  width: 1px;
+  height: 1.4rem;
+  background: var(--border);
+  margin: 0 0.15rem;
+}
+
+.notes-storage-btn {
+  position: relative;
+}
+
 main {
-  max-width: 900px;
+  position: relative;
+  max-width: none;
+  margin: 0;
+  padding: 2rem 0 4rem;
+}
+
+main .chapter {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.chapter-content {
+  position: relative;
+  width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 0 1.25rem;
+}
+
+main .chapter.sticky-mode-active {
+  cursor: pointer;
 }
 
 .chapter-title {
@@ -374,6 +411,220 @@ main {
   padding-top: 1rem;
   border-top: 3px solid var(--accent);
   color: var(--text-heading);
+}
+
+.sticky-notes-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.chapter {
+  position: relative;
+  overflow: visible;
+}
+
+.sticky-note {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 25;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  background: rgba(255, 230, 102, 0.95);
+  color: #3a2d00;
+  border-radius: 6px 6px 0 6px;
+  transform: rotate(0deg);
+  transition: box-shadow 0.15s ease;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.sticky-note.is-collapsed {
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 230, 102, 0.45);
+  border: 1px dashed rgba(0, 0, 0, 0.22);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sticky-note.is-expanded {
+  background: rgba(255, 236, 133, 0.97);
+}
+
+.sticky-note:hover {
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+.sticky-note-compact {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  user-select: none;
+}
+
+.sticky-note-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 236, 133, 0.98);
+  overflow: visible;
+}
+
+.sticky-note-content,
+.sticky-note-editor,
+.sticky-note {
+  overflow: visible;
+}
+
+.sticky-note-delete:hover::after,
+.sticky-note-confirm:hover::after,
+.sticky-note-cancel:hover::after {
+  z-index: 9999;
+}
+
+.sticky-note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.45rem 0.2rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.sticky-note-text {
+  flex: 1;
+  padding: 0.5rem;
+  overflow: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.sticky-mode-active .sticky-note.is-expanded .sticky-note-text {
+  cursor: text;
+}
+
+.sticky-note-delete,
+.sticky-note-action {
+  border: none;
+  background: rgba(0, 0, 0, 0.08);
+  color: #1f2937;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.sticky-note-action,
+.sticky-note-delete {
+  position: relative;
+}
+
+.sticky-note-delete {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+}
+
+.sticky-note-editor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0.35rem;
+  background: rgba(255, 236, 133, 0.98);
+  overflow: visible;
+}
+
+.sticky-note-input {
+  flex: 1;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  resize: none;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-heading);
+  font: inherit;
+  padding: 0.5rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  overflow-x: hidden;
+}
+
+.sticky-note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+  cursor: default;
+}
+
+.sticky-note-editor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sticky-note-confirm,
+.sticky-note-cancel {
+  width: 1.7rem;
+  height: 1.7rem;
+  cursor: pointer;
+}
+
+.sticky-note-actions {
+  cursor: default;
+}
+
+.sticky-note-confirm:hover,
+.sticky-note-cancel:hover,
+.sticky-note-delete:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.sticky-note-confirm:hover::after,
+.sticky-note-cancel:hover::after,
+.sticky-note-delete:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 8px));
+  left: 50%;
+  top: 0;
+  white-space: nowrap;
+  background: rgba(17, 24, 39, 0.92);
+  color: white;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  padding: 0.25rem 0.4rem;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .sticky-note {
+  background: rgba(255, 208, 76, 0.92);
+  color: #231900;
+}
+
+[data-theme="dark"] .sticky-note-content,
+[data-theme="dark"] .sticky-note-editor {
+  background: rgba(255, 208, 76, 0.95);
 }
 
 .chapter-sep {
@@ -1359,6 +1610,20 @@ strong {
           </svg>
         </button>
         <h1>Oracle 1Z0-830 Certification Notes</h1>
+        <div class="topbar-tools" aria-label="Strumenti pagina">
+          <button id="notes-storage-toggle" class="icon-btn notes-storage-btn" type="button" aria-label="Seleziona cartella note" title="Cartella note su disco">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H9l1.5 2H18.5A2.5 2.5 0 0 1 21 9.5v7A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5v-9z"/>
+            </svg>
+          </button>
+          <button id="sticky-notes-toggle" class="icon-btn" type="button" aria-label="Attiva sticky notes mode" title="Sticky notes mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M7 4.5h8.5A2.5 2.5 0 0 1 18 7v7.5A2.5 2.5 0 0 1 15.5 17H12l-5 3v-3H7A2.5 2.5 0 0 1 4.5 14.5V7A2.5 2.5 0 0 1 7 4.5z"/>
+              <path d="M8 9h8M8 12h6"/>
+            </svg>
+          </button>
+        </div>
+        <span class="topbar-divider" aria-hidden="true"></span>
         <button id="theme-toggle" class="icon-btn" type="button" aria-label="Cambia tema" title="Cambia tema">
           <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="4"/>
@@ -1370,8 +1635,9 @@ strong {
         </button>
       </header>
       <main><section id="cap-1" class="chapter">
-      <h1 class="chapter-title">Ch 1: Building Blocks</h1>
-      <h3 id="cap-1-h1">1.1 Ambiente di Sviluppo e Componenti (JDK)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 1: Building Blocks</h1>
+    <h3 id="cap-1-h1">1.1 Ambiente di Sviluppo e Componenti (JDK)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Il <strong>Java Development Kit (JDK)</strong> contiene il software minimo necessario per lo sviluppo, inclusi i comandi <strong>javac</strong> (compila i file .java in bytecode .class), <strong>java</strong> (esegue il programma lanciando la <strong>JVM</strong>) e <strong>jar</strong> (pacchettizza i file). È fondamentale utilizzare la versione 21 del <strong>JDK</strong> per l&#39;esame 1Z0-830, poiché le regole sintattiche e i comportamenti del codice possono variare significativamente tra le versioni del linguaggio. Il codice Java è compilato in <strong>bytecode</strong>, che consiste in istruzioni in un formato speciale che la <strong>JVM</strong> sa come eseguire su qualsiasi macchina fisica reale, agendo come una &quot;scatola magica&quot; che fa girare il file .class all&#39;interno dello specifico sistema operativo e hardware.</p>
 <p><strong>Regole di Sintassi e Opzioni</strong>
@@ -1514,11 +1780,14 @@ La <strong>Garbage Collection</strong> è il processo di liberazione automatica 
 <h3 id="cap-1-h12">1.12 Casi Limite e Tranelli Sintattici</h3>
 <p>Tutti i casi limite e i tranelli sintattici sopra descritti (come la regola PIC, l&#39;Illegal Forward Reference, gli underscore nei numeri, la sintassi dei Text Blocks e i limiti di <code>var</code>) costituiscono gli elementi critici per evitare errori di compilazione nel Capitolo 1.</p>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-2" class="chapter">
-      <h1 class="chapter-title">Ch 2: Operators</h1>
-      <h3 id="cap-2-h1">2.1 Comprensione degli Operatori Java</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 2: Operators</h1>
+    <h3 id="cap-2-h1">2.1 Comprensione degli Operatori Java</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un <strong>operatore Java</strong> è un simbolo speciale che può essere applicato a un insieme di variabili, valori o letterali — definiti <strong>operandi</strong> — e che restituisce un <strong>risultato</strong>. Il termine <strong>operando</strong> si riferisce al valore o alla variabile a cui l&#39;operatore viene applicato. L&#39;output dell&#39;operazione è definito semplicemente come il <strong>risultato</strong>. <strong>Classificazione:</strong> Gli operatori sono classificati in unari (un operando), binari (due operandi) o ternari (tre operandi). <strong>Precedenza degli Operatori (Operator Precedence):</strong> Determinare quali operatori vengono valutati e in quale ordine è definito precedenza degli operatori (Tabella 2.1).</p>
 <p><strong>⚠️ Tranello: Ordine di Valutazione</strong>
@@ -1680,11 +1949,14 @@ Assegnare un&#39;espressione ternaria a una variabile il cui tipo non copre entr
 int animal = (stripes &lt; 9) ? 3 : &quot;Horse&quot;; // DOES NOT COMPILE: &quot;Horse&quot; non è int
 </code></pre>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-3" class="chapter">
-      <h1 class="chapter-title">Ch 3: Making Decisions</h1>
-      <h3 id="cap-3-h1">3.1 Dichiarazioni di Decisione: Statements e Blocchi</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 3: Making Decisions</h1>
+    <h3 id="cap-3-h1">3.1 Dichiarazioni di Decisione: Statements e Blocchi</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un Java statement è un&#39;unità completa di esecuzione terminata da un punto e virgola (;). Un blocco di codice in Java è un gruppo di zero o più istruzioni tra parentesi graffe bilanciate ({}) e può essere utilizzato ovunque sia consentita un&#39;istruzione singola. I &quot;control flow statements&quot; interrompono il flusso di esecuzione utilizzando il processo decisionale, il looping e il branching, consentendo all&#39;applicazione di eseguire selettivamente particolari segmenti di codice. La singola istruzione o il blocco di istruzioni che viene eseguito se la condizione di una dichiarazione decisionale valuta a true è definito &quot;target&quot;.</p>
 <hr>
@@ -1915,11 +2187,14 @@ Mentre <code>break</code> è ammesso sia nei cicli che negli switch, <code>conti
 <p><strong>⚠️ Tranello (yield fuori dalle switch expressions):</strong>
 La parola chiave <code>yield</code> è specifica per restituire valori dalle <em>switch expressions</em> e non può essere usata negli <em>switch statements</em> tradizionali o fuori da essi.</p>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-4" class="chapter">
-      <h1 class="chapter-title">Ch 4: Core APIs</h1>
-      <h3 id="cap-4-h1">4.1 Creazione e Manipolazione di Stringhe (String)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 4: Core APIs</h1>
+    <h3 id="cap-4-h1">4.1 Creazione e Manipolazione di Stringhe (String)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>String</strong> è fondamentalmente una sequenza di caratteri ed è un tipo di riferimento speciale che non richiede necessariamente l&#39;operatore <strong>new</strong> per essere istanziato. La classe String è speciale e non richiede necessariamente di essere istanziata con <code>new</code>. Le stringhe sono immutabili, il che significa che chiamare un metodo su una String restituirà un oggetto diverso invece di cambiare il valore del riferimento originale. In altre parole, chiamare un metodo su una <code>String</code> restituisce un altro oggetto <code>String</code>, anziché mutare il valore del riferimento. Java utilizza il &quot;pool delle stringhe&quot; (o pool di internamento) per raccogliere e riutilizzare i valori letterali e le costanti, ottimizzando l&#39;uso della memoria. Il <em>string pool</em>, noto anche come <em>intern pool</em>, è un&#39;area nella Java Virtual Machine (JVM) che raccoglie tutti i valori letterali e le costanti presenti nel programma. Un <strong>code point</strong> (punto di codice Unicode) è un valore numerico per un carattere nel modello Unicode; può riguardare unità più ampie del singolo valore <em>char</em> a 16 bit. <strong>Contesto — API (interfaccia di programmazione applicativa):</strong> in questo senso, un&#39;<strong>API</strong> è un insieme di classi o definizioni di interfacce che espone un blocco di funzionalità (le API principali del linguaggio e delle librerie standard).</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong>
@@ -2226,11 +2501,14 @@ dateTime = dateTime.plusHours(1);
 System.out.println(dateTime); // 2025-11-02T02:30-05:00
 </code></pre>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-5" class="chapter">
-      <h1 class="chapter-title">Ch 5: Methods</h1>
-      <h3 id="cap-5-h1">5.1 Progettazione dei Metodi (Designing Methods)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 5: Methods</h1>
+    <h3 id="cap-5-h1">5.1 Progettazione dei Metodi (Designing Methods)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>dichiarazione di metodo</strong> (method declaration) elenca tutte le informazioni necessarie per chiamare il metodo: in pratica, modificatore di accesso, eventuali <strong>specificatori opzionali</strong> (optional specifiers, come <code>static</code> o <code>final</code> prima del tipo di ritorno), <strong>tipo di ritorno</strong> (return type), nome, <strong>lista dei parametri</strong> (parameter list) tra parentesi, lista delle eccezioni controllate (<strong>checked exceptions</strong>) e <strong>corpo del metodo</strong> (method body) tra parentesi graffe. Il tipo di ritorno <code>void</code> indica che non si restituisce alcun valore. Ogni parametro (parameter) è un valore o riferimento che il chiamante fornisce al metodo. La dichiarazione deve includere un corpo, a meno che il metodo non sia dichiarato <code>abstract</code> (o definito in contesti che lo consentono, come in una interfaccia in casi particolari).</p>
 <ul>
@@ -2414,11 +2692,14 @@ char badElephant = elephant; // runtime: NullPointerException (unboxing su null)
 </code></pre>
 <p><em>Sintesi:</em> sull’<code>unboxing</code> di <code>null</code>, aspettarsi sempre <code>NPE</code> a runtime, non un valore primitivo “nullo” (i primitivi non sono nullable).</p>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-6" class="chapter">
-      <h1 class="chapter-title">Ch 6: Class Design</h1>
-      <h3 id="cap-6-h1">6.1 Comprensione dell&#39;ereditarietà (Inheritance)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 6: Class Design</h1>
+    <h3 id="cap-6-h1">6.1 Comprensione dell&#39;ereditarietà (Inheritance)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Inheritance (Ereditarietà):</strong> L&#39;ereditarietà è il processo mediante il quale una sottoclasse include automaticamente determinati membri della classe, inclusi primitivi, oggetti o metodi, definiti nella classe genitrice.</li>
@@ -2699,11 +2980,14 @@ zebra.getFavoriteFoods().clear(); // se il getter dà il riferimento reale, lo s
 </ul>
 <hr>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-7" class="chapter">
-      <h1 class="chapter-title">Ch 7: Beyond Classes</h1>
-      <h3 id="cap-7-h1">7.1 Implementazione delle Interfacce (Implementing Interfaces)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 7: Beyond Classes</h1>
+    <h3 id="cap-7-h1">7.1 Implementazione delle Interfacce (Implementing Interfaces)</h3>
 <p><strong>Definizioni e Concetti</strong></p>
 <ul>
 <li><strong>Interface (Interfaccia):</strong> Un&#39;interfaccia è un tipo di dato astratto che dichiara un elenco di metodi astratti che qualsiasi classe che implementa l&#39;interfaccia deve fornire.</li>
@@ -2916,11 +3200,14 @@ Bird bird = (Bird) fish; // NON COMPILA: tipi non correlati
 <pre><code class="language-java">if (fish instanceof Bird b) {} // NON COMPILA
 </code></pre>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-8" class="chapter">
-      <h1 class="chapter-title">Ch 8: Lambdas and Functional Interfaces</h1>
-      <h3 id="cap-8-h1">8.1 Scrittura di Lambda Semplici (Writing Simple Lambdas)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 8: Lambdas and Functional Interfaces</h1>
+    <h3 id="cap-8-h1">8.1 Scrittura di Lambda Semplici (Writing Simple Lambdas)</h3>
 <p><strong>Definizioni e Concetti</strong>
 La <strong>programmazione funzionale</strong> (<em>functional programming</em>) è un modo di scrivere codice in modo più dichiarativo; si specifica cosa si vuole fare invece di gestire lo stato degli oggetti, concentrandosi più sulle espressioni che sui cicli. Una <strong>espressione lambda</strong> (<em>lambda expression</em>) è un blocco di codice che viene passato in giro; può essere pensata come un metodo senza nome esistente all&#39;interno di una classe anonima, dotata di parametri e di un corpo proprio come i metodi completi, ma <strong>senza un nome come un metodo reale</strong>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -3019,11 +3306,14 @@ Le variabili possono comparire nelle lambda in <strong>tre punti</strong>: la <s
 </code></pre>
 <p><strong>⚠️ Tranello (Posizione dell&#39;errore):</strong> Se una variabile locale viene modificata dopo la definizione della lambda, l&#39;errore di compilazione viene generato sulla riga in cui la lambda tenta di usare la variabile, non sulla riga della riassegnazione.</p>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-9" class="chapter">
-      <h1 class="chapter-title">Ch 9: Collections and Generics</h1>
-      <h3 id="cap-9-h1">9.1 Utilizzo delle API Comuni per le Collezioni (Common Collection APIs)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 9: Collections and Generics</h1>
+    <h3 id="cap-9-h1">9.1 Utilizzo delle API Comuni per le Collezioni (Common Collection APIs)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Una <strong>collezione</strong> (<em>collection</em>) è un gruppo di oggetti contenuti in un singolo oggetto. Il <strong>Java Collections Framework</strong> è un insieme di classi in <code>java.util</code> per memorizzare collezioni. Include quattro interfacce principali: <strong>List</strong> (ordinata, ammette duplicati), <strong>Set</strong> (senza duplicati), <strong>Queue</strong> (ordine specifico di elaborazione) e <strong>Map</strong> (mappa chiavi a valori).</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -3138,11 +3428,14 @@ public void chew(List&lt;Double&gt; input) {} // DOES NOT COMPILE
 </code></pre>
 <p><strong>⚠️ Tranello (L&#39;&quot;Evil Trick&quot; del parametro di tipo che maschera una classe):</strong> L&#39;esame usa nomi di parametri di tipo identici a nomi di classi esistenti per confondere. Per coincidenza, <code>B</code> può essere sia il nome di una classe sia il nome di un parametro di tipo nel metodo. All&#39;interno dello scope del metodo, <code>B</code> rappresenta un tipo generico (classe A, B o C) e <strong>non</strong> più la classe <code>B</code>; di conseguenza non è possibile istanziare la classe <code>B</code> con <code>new B()</code> all&#39;interno di quel metodo.</p>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-10" class="chapter">
-      <h1 class="chapter-title">Ch 10: Streams</h1>
-      <h3 id="cap-10-h1">10.1 Restituzione di un Optional (Returning an Optional)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 10: Streams</h1>
+    <h3 id="cap-10-h1">10.1 Restituzione di un Optional (Returning an Optional)</h3>
 <p><strong>Definizioni e Concetti</strong>
 <strong>Optional</strong> (<code>Optional&lt;T&gt;</code>) è un contenitore che può contenere o meno un valore non nullo. Viene utilizzato per gestire i valori di ritorno che potrebbero essere <code>null</code>, evitando così <strong>NullPointerException</strong>. Si crea tramite i metodi factory <code>Optional.empty()</code>, <code>Optional.of(value)</code> o <code>Optional.ofNullable(value)</code>.</p>
 <p><strong>Regole di Sintassi e Comportamento Operativo</strong></p>
@@ -3289,11 +3582,14 @@ L&#39;interfaccia <code>Spliterator&lt;T&gt;</code> viene utilizzata per attrave
 <h3 id="cap-10-h10">10.10 Casi Limite e Tranelli Sintattici</h3>
 <p>Tutti i casi limite e i tranelli sopra descritti costituiscono gli elementi critici per evitare errori di compilazione e runtime nel Capitolo 10. In particolare: l&#39;uso singolo degli stream e la <strong>IllegalStateException</strong> al riutilizzo; le operazioni terminali che non terminano su sorgenti infinite e il comportamento di short-circuit di <code>anyMatch()</code>/<code>allMatch()</code>; le eccezioni checked nelle lambda e il messaggio <em>unhandled exception type IOException</em>; <code>sum()</code> su stream primitivi vuoti che restituisce <code>0</code> senza <strong>Optional</strong>; le chiavi duplicate in <code>toMap()</code>; la dimensione fissa 2 di <code>partitioningBy()</code>; la stampa diretta di uno stream che mostra il riferimento oggetto; e <code>trySplit()</code> che può restituire <code>null</code>.</p>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-11" class="chapter">
-      <h1 class="chapter-title">Ch 11: Exceptions and Localization</h1>
-      <h3 id="cap-11-h1">11.1 Comprensione dei Tipi di Eccezione (Understanding Exception Types)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 11: Exceptions and Localization</h1>
+    <h3 id="cap-11-h1">11.1 Comprensione dei Tipi di Eccezione (Understanding Exception Types)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un&#39;<strong>Exception</strong> (Eccezione) è un evento che altera il flusso del programma. In Java, tutti gli oggetti che rappresentano tali eventi appartengono alla classe radice <strong>java.lang.Throwable</strong>. Le <strong>Checked Exception</strong> (Eccezioni controllate) sono eccezioni che devono essere dichiarate o gestite dal codice applicativo nel punto in cui vengono lanciate; in Java, le eccezioni checked ereditano tutte da <code>Exception</code> ma non da <code>RuntimeException</code>. Le <strong>Unchecked Exception</strong> / <strong>Runtime Exception</strong> (Eccezioni non controllate) sono eccezioni che non richiedono dichiarazione o gestione obbligatoria; include qualsiasi classe che eredita da <code>RuntimeException</code> o <code>Error</code>. Un <strong>Error</strong> (Errore) indica una condizione così grave che il programma non dovrebbe tentare di recuperare; gli errori sono eccezioni unchecked che estendono la classe <code>Error</code> e sono lanciati dalla JVM. Lo <strong>Stack Trace</strong> è la gerarchia di chiamate a metodi effettuate per raggiungere la riga che ha lanciato l&#39;eccezione.</p>
 <p><strong>Regole di Gestione (Tabella 11.1)</strong></p>
@@ -3458,11 +3754,14 @@ class Child extends Parent {
 <h3 id="cap-11-h9">11.9 Casi Limite e Tranelli Sintattici</h3>
 <p>Tutti i casi limite e i tranelli sopra descritti costituiscono gli elementi critici per evitare errori di compilazione e runtime nel Capitolo 11. In particolare: l&#39;obbligo delle parentesi graffe in try/catch (a differenza di if e loop); il blocco try che deve essere seguito da catch, finally o entrambi; l&#39;ordine delle clausole catch (superclasse prima della sottoclasse rende il codice irraggiungibile); i catch di eccezioni checked mai lanciate dal try (con l&#39;eccezione delle unchecked e delle eccezioni dichiarate nella firma); la ridondanza nel multi-catch per eccezioni in relazione di parentela; lo scambio tra <code>throw</code> e <code>throws</code>; l&#39;istanziazione obbligatoria con <code>new</code> in <code>throw</code>; le risorse try-with-resources che devono implementare <code>AutoCloseable</code>, la punteggiatura con punto e virgola tra risorse, e lo scope limitato al blocco try; le eccezioni checked non gestite nel main o nel corpo del metodo; le <strong>Suppressed Exceptions</strong> gestite automaticamente dal try-with-resources; il mismatch dei tipi in <code>String.formatted()</code> e la corrispondenza tra ordine dei simboli e ordine dei parametri; la sintassi dei <strong>Locale</strong> (case sensitivity e separatore <code>_</code>); la gerarchia di ricerca dei Resource Bundle con fallback al locale predefinito; e le regole sulle eccezioni checked in override (meno eccezioni ammesse, eccezioni più ampie vietate).</p>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-12" class="chapter">
-      <h1 class="chapter-title">Ch 12: Modules</h1>
-      <h3 id="cap-12-h1">12.1 Introduzione ai Moduli (Introducing Modules)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 12: Modules</h1>
+    <h3 id="cap-12-h1">12.1 Introduzione ai Moduli (Introducing Modules)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un <strong>modulo</strong> è un gruppo di pacchetti correlati e risorse insieme a un file descrittore di modulo denominato <code>module-info.java</code>. I moduli forniscono un meccanismo per raggruppare i pacchetti in una singola unità logica e garantiscono un incapsulamento più forte (<em>strong encapsulation</em>), consentendo allo sviluppatore di specificare esattamente quali pacchetti sono visibili all&#39;esterno. Questo sistema risolve i problemi storici di classpath ingombranti e conflitti tra dipendenze (<em>JAR hell</em>), verificando che tutte le dipendenze siano presenti e compatibili già al momento dell&#39;avvio (<em>startup</em>) dell&#39;applicazione.</p>
 <hr>
@@ -3671,11 +3970,14 @@ Se un file JAR privo di descrittore viene posto sul module path, Java ne determi
 <li>L&#39;algoritmo di naming dei moduli automatici e la gestione dei file JMOD (non eseguibili direttamente né utilizzabili sul classpath a runtime).</li>
 </ul>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-13" class="chapter">
-      <h1 class="chapter-title">Ch 13: Concurrency</h1>
-      <h3 id="cap-13-h1">13.1 Introduzione ai Thread (Introducing Threads)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 13: Concurrency</h1>
+    <h3 id="cap-13-h1">13.1 Introduzione ai Thread (Introducing Threads)</h3>
 <p><strong>Definizioni e Concetti</strong>
 Un <strong>thread</strong> è la più piccola unità di esecuzione che può essere pianificata da un sistema operativo o dalla JVM. Java 21 supporta due tipologie fondamentali di thread:</p>
 <ul>
@@ -3998,11 +4300,14 @@ nums.parallelStream().forEach(System.out::print);        // Stampa non determini
 <li><strong>Stream Paralleli:</strong> <code>Stream.iterate()</code> richiede argomenti separati da virgole; <code>findAny()</code> è non deterministico in parallelo ma molto più efficiente di <code>findFirst()</code>; l&#39;accumulazione concorrente di risultati richiede combiner associativi e collector thread-safe, non manipolazioni su collezioni standard non sincronizzate.</li>
 </ul>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-14" class="chapter">
-      <h1 class="chapter-title">Ch 14: I/O</h1>
-      <h3 id="cap-14-h1">14.1 Riferimento a File e Directory (Referencing Files and Directories)</h3>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Ch 14: I/O</h1>
+    <h3 id="cap-14-h1">14.1 Riferimento a File e Directory (Referencing Files and Directories)</h3>
 <p><strong>Definizioni e Concetti</strong>
 In Java la gestione di file e directory si basa su due modelli: l&#39;API legacy <code>java.io.File</code> (introdotta in Java 1.0) e l&#39;API moderna <strong>NIO.2</strong> (<code>java.nio.file.Path</code>, introdotta in Java 7 e potenziata in Java 21). Un oggetto <strong>Path</strong> rappresenta una locazione gerarchica all&#39;interno del file system (file o cartella), sia essa esistente o puramente concettuale.</p>
 <ul>
@@ -4371,11 +4676,14 @@ try (Stream&lt;Path&gt; stream = Files.find(startPath, 5,
 <li><strong>Cicli nei Link Simbolici:</strong> L&#39;abilitazione di <code>FileVisitOption.FOLLOW_LINKS</code> su percorsi con link circolari può causare <code>FileSystemLoopException</code> durante l&#39;uso di <code>Files.walk()</code>.</li>
 </ul>
 
-    </section>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section>
 <hr class="chapter-sep">
 <section id="cap-a" class="chapter">
-      <h1 class="chapter-title">Appendice A</h1>
-      <h2 id="cap-A-h1">🧮 Classe <code>java.lang.Math</code></h2>
+  <div class="chapter-content">
+    <h1 class="chapter-title">Appendice A</h1>
+    <h2 id="cap-A-h1">🧮 Classe <code>java.lang.Math</code></h2>
 <p>Tutti i metodi sono <code>static</code>.</p>
 <h3 id="cap-A-h2">Arrotondamento e Valore Assoluto</h3>
 <ul>
@@ -4707,13 +5015,17 @@ Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificar
 </li>
 </ol>
 
-    </section></main>
+  </div>
+  <div class="sticky-notes-layer" aria-hidden="true"></div>
+</section></main>
     </div>
   </div>
   <script>(function () {
   const STORAGE_THEME = "1z0-830-theme";
   const STORAGE_SIDEBAR = "1z0-830-sidebar";
   const STORAGE_AUTOSCROLL = "1z0-830-nav-autoscroll";
+  const STORAGE_STICKY_MODE = "1z0-830-sticky-notes-mode";
+  const STORAGE_NOTES_PREFIX = "1z0-830-sticky-notes-";
 
   const root = document.documentElement;
   const sidebarNav = document.querySelector(".sidebar-nav");
@@ -4721,6 +5033,8 @@ Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificar
   const themeToggle = document.getElementById("theme-toggle");
   const hljsTheme = document.getElementById("hljs-theme");
   const autoscrollToggle = document.getElementById("nav-autoscroll-toggle");
+  const stickyNotesToggle = document.getElementById("sticky-notes-toggle");
+  const notesStorageToggle = document.getElementById("notes-storage-toggle");
   const toggleAllBtn = document.getElementById("nav-toggle-all");
   const navChapters = () => [...document.querySelectorAll(".nav-chapter")];
   const navSections = () => [...document.querySelectorAll("[data-nav-section]")];
@@ -4731,8 +5045,14 @@ Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificar
     "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css";
 
   let autoscrollEnabled = localStorage.getItem(STORAGE_AUTOSCROLL) === "true";
+  let stickyNotesMode = localStorage.getItem(STORAGE_STICKY_MODE) === "true";
+  let notesDirectoryHandle = null;
+  let chapterNotesCache = new Map();
+  let chapterDeleteInProgress = new Set();
   let activeNavId = null;
   let scrollTick = false;
+  let activeDraft = null;
+  let dragState = null;
 
   function setTheme(theme) {
     root.dataset.theme = theme;
@@ -4785,6 +5105,696 @@ Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificar
 
   function toggleAutoscroll() {
     setAutoscroll(!autoscrollEnabled);
+  }
+
+  function setStickyNotesMode(enabled) {
+    stickyNotesMode = enabled;
+    stickyNotesToggle?.setAttribute("aria-pressed", String(enabled));
+    stickyNotesToggle?.classList.toggle("is-active", enabled);
+    stickyNotesToggle?.setAttribute(
+      "aria-label",
+      enabled ? "Disattiva sticky notes mode" : "Attiva sticky notes mode"
+    );
+    if (stickyNotesToggle) {
+      stickyNotesToggle.title = enabled ? "Sticky notes mode (on)" : "Sticky notes mode (off)";
+    }
+    localStorage.setItem(STORAGE_STICKY_MODE, enabled ? "true" : "false");
+    document.querySelectorAll("main .chapter").forEach((section) => {
+      section.classList.toggle("sticky-mode-active", enabled);
+    });
+    if (!enabled) {
+      activeDraft = null;
+    }
+    renderAllNotes();
+  }
+
+  function toggleStickyNotesMode() {
+    setStickyNotesMode(!stickyNotesMode);
+  }
+
+  function getChapterId(section) {
+    return section?.id || "default";
+  }
+
+  function getNotesStorageKey(chapterId) {
+    return `${STORAGE_NOTES_PREFIX}${chapterId}`;
+  }
+
+  function getLocalNotesEntries() {
+    const entries = [];
+    for (let index = 0; index < localStorage.length; index += 1) {
+      const key = localStorage.key(index);
+      if (!key || !key.startsWith(STORAGE_NOTES_PREFIX)) continue;
+
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) continue;
+        const notes = parsed.map(normalizeNote).filter(Boolean);
+        entries.push({ chapterId: key.slice(STORAGE_NOTES_PREFIX.length), notes });
+      } catch (error) {
+        console.warn("Impossibile leggere note salvate nel browser:", error);
+      }
+    }
+    return entries;
+  }
+
+  async function migrateLocalNotesToDisk() {
+    const entries = getLocalNotesEntries();
+    for (const { chapterId, notes } of entries) {
+      if (!notes.length) {
+        localStorage.removeItem(getNotesStorageKey(chapterId));
+        continue;
+      }
+
+      await saveChapterNotesToDisk(chapterId, notes);
+      localStorage.removeItem(getNotesStorageKey(chapterId));
+    }
+  }
+
+  function normalizeNote(rawNote) {
+    if (!rawNote || typeof rawNote !== "object") return null;
+
+    const normalized = {
+      id: String(rawNote.id || `sticky-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`),
+      chapterId: String(rawNote.chapterId || "default"),
+      x: Number.isFinite(Number(rawNote.x)) ? Number(rawNote.x) : 16,
+      y: Number.isFinite(Number(rawNote.y)) ? Number(rawNote.y) : 16,
+      width: Number.isFinite(Number(rawNote.width)) ? Number(rawNote.width) : 220,
+      height: Number.isFinite(Number(rawNote.height)) ? Number(rawNote.height) : 140,
+      text: typeof rawNote.text === "string" ? rawNote.text : "",
+      expanded: Boolean(rawNote.expanded),
+      expandDirection: ["bottom-right", "bottom-left", "top-right", "top-left"].includes(rawNote.expandDirection)
+        ? rawNote.expandDirection
+        : "bottom-right",
+      createdAt: rawNote.createdAt || new Date().toISOString(),
+      updatedAt: rawNote.updatedAt || new Date().toISOString(),
+      deletedAt: rawNote.deletedAt || null,
+    };
+
+    return normalized;
+  }
+
+  async function readChapterNotesFromDisk(chapterId) {
+    if (!notesDirectoryHandle) return null;
+
+    try {
+      const fileHandle = await notesDirectoryHandle.getFileHandle(`${chapterId}.notes.json`, {
+        create: false,
+      });
+      const file = await fileHandle.getFile();
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      const notes = Array.isArray(parsed?.notes) ? parsed.notes : [];
+      return notes.map(normalizeNote).filter(Boolean);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function readChapterNotes(chapterId) {
+    if (notesDirectoryHandle) {
+      return chapterNotesCache.get(chapterId) || [];
+    }
+
+    const raw = localStorage.getItem(getNotesStorageKey(chapterId));
+    if (!raw) {
+      return [];
+    }
+
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed.map(normalizeNote).filter(Boolean);
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async function hydrateChapterNotesFromDisk(chapterId) {
+    const diskNotes = await readChapterNotesFromDisk(chapterId);
+    const normalized = Array.isArray(diskNotes) ? diskNotes.map(normalizeNote).filter(Boolean) : [];
+    chapterNotesCache.set(chapterId, normalized);
+    return normalized;
+  }
+
+  function shouldPersistNote(note) {
+    if (!note || typeof note !== "object") return false;
+    const text = String(note.text ?? "").trim();
+    return text.length > 0;
+  }
+
+  async function deleteChapterNotesFromDisk(chapterId) {
+    if (!notesDirectoryHandle) return false;
+
+    try {
+      const fileHandle = await notesDirectoryHandle.getFileHandle(`${chapterId}.notes.json`, {
+        create: false,
+      });
+      await fileHandle.delete();
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function saveChapterNotesToDisk(chapterId, notes) {
+    if (!notesDirectoryHandle) return false;
+
+    const persistedNotes = Array.isArray(notes) ? notes.filter(shouldPersistNote) : [];
+    if (persistedNotes.length === 0) {
+      return deleteChapterNotesFromDisk(chapterId);
+    }
+
+    try {
+      const payload = {
+        chapterId,
+        notes: persistedNotes,
+        updatedAt: new Date().toISOString(),
+      };
+      const fileHandle = await notesDirectoryHandle.getFileHandle(`${chapterId}.notes.json`, {
+        create: true,
+      });
+      const writable = await fileHandle.createWritable();
+      await writable.write(JSON.stringify(payload, null, 2));
+      await writable.close();
+      return true;
+    } catch (error) {
+      console.warn("Impossibile salvare le note su disco:", error);
+      return false;
+    }
+  }
+
+  function saveChapterNotes(chapterId, notes) {
+    const normalized = Array.isArray(notes) ? notes.map(normalizeNote).filter(Boolean) : [];
+    chapterNotesCache.set(chapterId, normalized);
+
+    if (notesDirectoryHandle) {
+      if (normalized.length === 0) {
+        chapterDeleteInProgress.add(chapterId);
+        localStorage.removeItem(getNotesStorageKey(chapterId));
+        void deleteChapterNotesFromDisk(chapterId).finally(() => {
+          chapterDeleteInProgress.delete(chapterId);
+          const section = document.getElementById(chapterId);
+          if (section) renderChapterNotes(section);
+        });
+        return;
+      }
+
+      chapterDeleteInProgress.delete(chapterId);
+      localStorage.removeItem(getNotesStorageKey(chapterId));
+      void saveChapterNotesToDisk(chapterId, normalized);
+      return;
+    }
+
+    if (normalized.length === 0) {
+      chapterDeleteInProgress.add(chapterId);
+      localStorage.removeItem(getNotesStorageKey(chapterId));
+      void deleteChapterNotesFromDisk(chapterId).finally(() => {
+        chapterDeleteInProgress.delete(chapterId);
+        const section = document.getElementById(chapterId);
+        if (section) renderChapterNotes(section);
+      });
+      return;
+    }
+    chapterDeleteInProgress.delete(chapterId);
+    localStorage.setItem(getNotesStorageKey(chapterId), JSON.stringify(normalized));
+    void saveChapterNotesToDisk(chapterId, normalized);
+  }
+
+  function setNotesStorageButtonState() {
+    if (!notesStorageToggle) return;
+    notesStorageToggle.classList.toggle("is-active", Boolean(notesDirectoryHandle));
+    notesStorageToggle.title = notesDirectoryHandle
+      ? "Cartella note attiva: selezionata"
+      : "Cartella note su disco";
+    notesStorageToggle.setAttribute(
+      "aria-label",
+      notesDirectoryHandle ? "Cartella note selezionata" : "Seleziona cartella note"
+    );
+  }
+
+  function ensureNotesLayer(section) {
+    let layer = section.querySelector(".sticky-notes-layer");
+    if (!layer) {
+      layer = document.createElement("div");
+      layer.className = "sticky-notes-layer";
+      section.appendChild(layer);
+    }
+    return layer;
+  }
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function truncateText(value, maxLength = 20) {
+    const text = String(value ?? "").replace(/\s+/g, " ").trim();
+    if (!text) return "Nuova nota";
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, maxLength - 3)}...`;
+  }
+
+  function createBlankNote(chapterId, x = 24, y = 24) {
+    return {
+      id: `sticky-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+      chapterId,
+      x,
+      y,
+      width: 220,
+      height: 140,
+      text: "",
+      expanded: true,
+      expandDirection: "bottom-right",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      deletedAt: null,
+    };
+  }
+
+  function getCollapsePosition(note) {
+    const width = Number(note.width || 220);
+    const height = Number(note.height || 140);
+    const direction = note.expandDirection || "bottom-right";
+    const vectors = {
+      "top-left": { x: -1, y: -1 },
+      "top-right": { x: 1, y: -1 },
+      "bottom-left": { x: -1, y: 1 },
+      "bottom-right": { x: 1, y: 1 },
+    };
+
+    const expansion = vectors[direction] || vectors["bottom-right"];
+    const collapse = { x: -expansion.x, y: -expansion.y };
+
+    return {
+      x: collapse.x > 0 ? note.x + width - 18 : note.x,
+      y: collapse.y > 0 ? note.y + height - 18 : note.y,
+    };
+  }
+
+  function getExpandedNotePlacement(section, note) {
+    const width = Number(note.width || 220);
+    const height = Number(note.height || 140);
+    const baseX = Number(note.x || 16);
+    const baseY = Number(note.y || 16);
+    const sectionRect = section.getBoundingClientRect();
+
+    const candidates = [
+      { x: baseX, y: baseY },
+      { x: Math.max(8, baseX - width), y: baseY },
+      { x: baseX, y: Math.max(8, baseY - height) },
+      { x: Math.max(8, baseX - width), y: Math.max(8, baseY - height) },
+      { x: baseX, y: Math.max(8, baseY - Math.round(height / 2)) },
+      { x: Math.max(8, baseX - width), y: Math.max(8, baseY - Math.round(height / 2)) },
+    ];
+
+    const viewport = {
+      left: 8,
+      top: 8,
+      right: window.innerWidth - 8,
+      bottom: window.innerHeight - 8,
+    };
+
+    const fit = (candidate) => {
+      const left = sectionRect.left + candidate.x;
+      const top = sectionRect.top + candidate.y;
+      const right = left + width;
+      const bottom = top + height;
+      return left >= viewport.left && top >= viewport.top && right <= viewport.right && bottom <= viewport.bottom;
+    };
+
+    const selected = candidates.find(fit) || candidates[0];
+    const direction =
+      selected.x === Math.max(8, baseX - width) && selected.y === Math.max(8, baseY - height)
+        ? "top-left"
+        : selected.x === Math.max(8, baseX - width) && selected.y === baseY
+          ? "bottom-left"
+          : selected.y === Math.max(8, baseY - height)
+            ? "top-right"
+            : "bottom-right";
+
+    return { ...selected, direction };
+  }
+
+  function createNoteElement(note, section, layer) {
+    const noteEl = document.createElement("div");
+    const isDrafting = Boolean(activeDraft && activeDraft.id === note.id);
+    const isEditableView = stickyNotesMode && note.expanded;
+    const tooltipText = truncateText(note.text || "Nuova nota", 20);
+    noteEl.className = `sticky-note ${note.expanded ? "is-expanded" : "is-collapsed"}`;
+    noteEl.dataset.noteId = note.id;
+    if (isDrafting) noteEl.classList.add("is-editing");
+    noteEl.style.left = `${note.x}px`;
+    noteEl.style.top = `${note.y}px`;
+
+    if (note.expanded) {
+      noteEl.style.width = `${note.width}px`;
+      noteEl.style.height = `${note.height}px`;
+    } else {
+      noteEl.style.width = "18px";
+      noteEl.style.height = "18px";
+    }
+
+    const isDraft = activeDraft && activeDraft.id === note.id;
+
+    if (isDraft && activeDraft.mode === "create") {
+      noteEl.classList.add("is-draft");
+      noteEl.innerHTML = `
+        <div class="sticky-note-editor">
+          <textarea class="sticky-note-input" rows="4" aria-label="Nuova nota">${escapeHtml(note.text || "")}</textarea>
+          <div class="sticky-note-actions">
+            <button type="button" class="sticky-note-action sticky-note-confirm" aria-label="Salva nota" data-tooltip="Salva nota">✓</button>
+            <button type="button" class="sticky-note-action sticky-note-cancel" aria-label="Annulla nota" data-tooltip="Annulla nota">✕</button>
+          </div>
+        </div>
+      `;
+    } else if (isDraft && activeDraft.mode === "edit") {
+      noteEl.classList.add("is-draft");
+      noteEl.innerHTML = `
+        <div class="sticky-note-editor">
+          <textarea class="sticky-note-input" rows="4" aria-label="Modifica nota">${escapeHtml(note.text || "")}</textarea>
+          <div class="sticky-note-actions">
+            <button type="button" class="sticky-note-action sticky-note-confirm" aria-label="Salva modifiche" data-tooltip="Salva modifiche">✓</button>
+            <button type="button" class="sticky-note-action sticky-note-cancel" aria-label="Annulla modifiche" data-tooltip="Annulla modifiche">✕</button>
+          </div>
+        </div>
+      `;
+    } else if (isEditableView) {
+      noteEl.innerHTML = `
+        <div class="sticky-note-editor">
+          <div class="sticky-note-header">
+            <span>Note</span>
+            <button type="button" class="sticky-note-delete" aria-label="Elimina nota" data-tooltip="Elimina nota" title="Elimina nota">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/>
+              </svg>
+            </button>
+          </div>
+          <textarea class="sticky-note-input" rows="4" aria-label="Modifica nota">${escapeHtml(note.text || "")}</textarea>
+          <div class="sticky-note-actions">
+            <button type="button" class="sticky-note-action sticky-note-confirm" aria-label="Salva modifiche" data-tooltip="Salva modifiche">✓</button>
+            <button type="button" class="sticky-note-action sticky-note-cancel" aria-label="Annulla modifiche" data-tooltip="Annulla modifiche">✕</button>
+          </div>
+        </div>
+      `;
+    } else {
+      const compactText = escapeHtml(tooltipText);
+      noteEl.innerHTML = `
+        <div class="sticky-note-compact" title="${compactText}">
+          <span>📌</span>
+        </div>
+      `;
+      if (note.expanded) {
+        noteEl.innerHTML = `
+          <div class="sticky-note-content" title="${compactText}">
+            <div class="sticky-note-header">
+              <span>Note</span>
+              <button type="button" class="sticky-note-delete" aria-label="Elimina nota" data-tooltip="Elimina nota" title="Elimina nota">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/>
+                </svg>
+              </button>
+            </div>
+            <div class="sticky-note-text">${escapeHtml(note.text || "")}</div>
+          </div>
+        `;
+      }
+    }
+
+    noteEl.addEventListener("pointerdown", (event) => {
+      if (!stickyNotesMode) return;
+      if (event.target.closest("button, textarea, .sticky-note-header, .sticky-note-actions")) return;
+      if (isDraft) return;
+      const sectionRect = section.getBoundingClientRect();
+      const offsetX = event.clientX - sectionRect.left - note.x;
+      const offsetY = event.clientY - sectionRect.top - note.y;
+      dragState = { noteId: note.id, sectionId: section.id, offsetX, offsetY };
+      noteEl.setPointerCapture?.(event.pointerId);
+    });
+
+    noteEl.addEventListener("click", (event) => {
+      if (event.target.closest("button, textarea")) return;
+      if (event.target.closest(".sticky-note-action")) return;
+      event.stopPropagation();
+
+      const isHeaderClick = event.target.closest(".sticky-note-header");
+      const isActionClick = event.target.closest(".sticky-note-delete");
+      const isBodyClick = !isHeaderClick && !isActionClick && !event.target.closest(".sticky-note-actions") && !event.target.closest("button");
+
+      if (stickyNotesMode) {
+        if (isDraft) return;
+        if (!note.expanded) {
+          toggleNoteExpanded(section.id, note.id);
+          return;
+        }
+
+        if (isHeaderClick) {
+          toggleNoteExpanded(section.id, note.id);
+          return;
+        }
+
+        if (isBodyClick) {
+          openEditNote(section.id, note.id);
+        }
+        return;
+      }
+
+      if (isBodyClick || isHeaderClick) {
+        toggleNoteExpanded(section.id, note.id);
+      }
+    });
+
+    const deleteBtn = noteEl.querySelector(".sticky-note-delete");
+    deleteBtn?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      removeNote(section.id, note.id, true);
+    });
+
+    const confirmBtn = noteEl.querySelector(".sticky-note-confirm");
+    confirmBtn?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const input = noteEl.querySelector(".sticky-note-input");
+      const nextText = (input?.value || "").trim();
+      if (activeDraft?.mode === "create") {
+        if (nextText.length === 0) {
+          removeNote(section.id, note.id, false);
+          activeDraft = null;
+          renderChapterNotes(section);
+          return;
+        }
+        const notes = readChapterNotes(section.id);
+        const target = notes.find((item) => item.id === note.id);
+        if (target) {
+          target.text = nextText;
+          target.expanded = true;
+          target.updatedAt = new Date().toISOString();
+          target.width = 220;
+          target.height = 140;
+          saveChapterNotes(section.id, notes);
+        }
+      } else {
+        const notes = readChapterNotes(section.id);
+        const target = notes.find((item) => item.id === note.id);
+        if (target) {
+          const original = target.text;
+          if (nextText !== original) {
+            target.text = nextText;
+            target.updatedAt = new Date().toISOString();
+          }
+          target.expanded = true;
+          saveChapterNotes(section.id, notes);
+        }
+      }
+
+      activeDraft = null;
+      renderChapterNotes(section);
+    });
+
+    const cancelBtn = noteEl.querySelector(".sticky-note-cancel");
+    cancelBtn?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (activeDraft?.mode === "create") {
+        removeNote(section.id, note.id, false);
+      }
+      activeDraft = null;
+      renderChapterNotes(section);
+    });
+
+    layer.appendChild(noteEl);
+  }
+
+  function renderChapterNotes(section) {
+    const chapterId = getChapterId(section);
+    const notes = readChapterNotes(chapterId);
+    const layer = ensureNotesLayer(section);
+    layer.innerHTML = "";
+
+    if (notesDirectoryHandle && !chapterNotesCache.has(chapterId) && !chapterDeleteInProgress.has(chapterId)) {
+      void hydrateChapterNotesFromDisk(chapterId).then((diskNotes) => {
+        if (!diskNotes || !diskNotes.length) {
+          chapterNotesCache.set(chapterId, []);
+          renderChapterNotes(section);
+          return;
+        }
+        renderChapterNotes(section);
+      });
+      return;
+    }
+
+    notes.forEach((note) => createNoteElement(note, section, layer));
+  }
+
+  function renderAllNotes() {
+    document.querySelectorAll("section.chapter").forEach((section) => renderChapterNotes(section));
+  }
+
+  function removeNote(chapterId, noteId, preserveLast = true) {
+    const section = document.getElementById(chapterId);
+    const notes = readChapterNotes(chapterId).filter((item) => item.id !== noteId);
+    saveChapterNotes(chapterId, notes);
+    if (section) renderChapterNotes(section);
+  }
+
+  function toggleNoteExpanded(chapterId, noteId) {
+    const section = document.getElementById(chapterId);
+    if (!section) return;
+
+    const notes = readChapterNotes(chapterId);
+    const note = notes.find((item) => item.id === noteId);
+    if (!note) return;
+
+    const isExpanding = !note.expanded;
+    if (isExpanding) {
+      const placement = getExpandedNotePlacement(section, note);
+      note.x = placement.x;
+      note.y = placement.y;
+      note.expandDirection = placement.direction;
+    } else {
+      const collapsedPosition = getCollapsePosition(note);
+      note.x = collapsedPosition.x;
+      note.y = collapsedPosition.y;
+    }
+
+    note.expanded = isExpanding;
+    saveChapterNotes(chapterId, notes);
+    renderChapterNotes(section);
+  }
+
+  function openEditNote(chapterId, noteId) {
+    const section = document.getElementById(chapterId);
+    if (!section) return;
+
+    const notes = readChapterNotes(chapterId);
+    const note = notes.find((item) => item.id === noteId);
+    if (!note) return;
+
+    activeDraft = { id: note.id, mode: "edit", chapterId, originalText: note.text };
+    renderChapterNotes(section);
+  }
+
+  function createEmptyDraftNote(chapterId, x, y) {
+    const section = document.getElementById(chapterId);
+    if (!section) return;
+
+    const note = {
+      id: `sticky-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+      chapterId,
+      x,
+      y,
+      width: 220,
+      height: 140,
+      text: "",
+      expanded: true,
+      expandDirection: "bottom-right",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    const notes = readChapterNotes(chapterId);
+    notes.push(note);
+    saveChapterNotes(chapterId, notes);
+
+    activeDraft = { id: note.id, mode: "create", chapterId };
+    renderChapterNotes(section);
+  }
+
+  function findNearbyNote(chapterId, x, y) {
+    const notes = readChapterNotes(chapterId);
+    const threshold = 28;
+    let found = null;
+
+    for (const note of notes) {
+      const dx = x - note.x;
+      const dy = y - note.y;
+      if (Math.abs(dx) <= threshold && Math.abs(dy) <= threshold) {
+        found = note;
+        break;
+      }
+    }
+
+    return found;
+  }
+
+  function handleContentClick(event) {
+    if (!stickyNotesMode) return;
+    const section = event.target.closest("section.chapter");
+    if (!section) return;
+    if (event.target.closest(".sticky-note") || event.target.closest("button") || event.target.closest("textarea")) return;
+
+    const chapterId = getChapterId(section);
+    const rect = section.getBoundingClientRect();
+    const x = clamp(event.clientX - rect.left, 8, Math.max(8, rect.width - 8));
+    const y = clamp(event.clientY - rect.top, 8, Math.max(8, rect.height - 8));
+    const existing = findNearbyNote(chapterId, x, y);
+
+    if (existing) {
+      openEditNote(chapterId, existing.id);
+      return;
+    }
+
+    createEmptyDraftNote(chapterId, x, y);
+  }
+
+  function setupNoteDragHandlers() {
+    window.addEventListener("pointermove", (event) => {
+      if (!dragState) return;
+      const section = document.getElementById(dragState.sectionId);
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const notes = readChapterNotes(dragState.sectionId);
+      const note = notes.find((item) => item.id === dragState.noteId);
+      if (!note) return;
+
+      const noteWidth = note.expanded ? note.width || 220 : 18;
+      const noteHeight = note.expanded ? note.height || 140 : 18;
+      const nextX = clamp(
+        event.clientX - rect.left - dragState.offsetX,
+        6,
+        Math.max(20, rect.width - noteWidth - 6)
+      );
+      const nextY = clamp(
+        event.clientY - rect.top - dragState.offsetY,
+        6,
+        Math.max(20, rect.height - noteHeight - 6)
+      );
+
+      note.x = nextX;
+      note.y = nextY;
+      saveChapterNotes(dragState.sectionId, notes);
+      renderChapterNotes(section);
+    });
+
+    window.addEventListener("pointerup", () => {
+      dragState = null;
+    });
+  }
+
+  function setMainStickyCursor() {
+    document.querySelectorAll("main .chapter").forEach((section) => {
+      section.classList.toggle("sticky-mode-active", stickyNotesMode);
+    });
   }
 
   function isChapterExpanded(chapter) {
@@ -4952,8 +5962,40 @@ Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificar
     });
   }
 
+  function escapeHtml(text) {
+    return String(text || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  async function selectNotesFolder() {
+    if (!("showDirectoryPicker" in window)) {
+      alert("Il browser non supporta la selezione di una cartella locale per le note.");
+      return;
+    }
+
+    try {
+      notesDirectoryHandle = await window.showDirectoryPicker({ mode: "readwrite" });
+      await migrateLocalNotesToDisk();
+      chapterNotesCache.clear();
+      setNotesStorageButtonState();
+      const chapterNodes = document.querySelectorAll("section.chapter");
+      chapterNodes.forEach((section) => {
+        const chapterId = getChapterId(section);
+        void hydrateChapterNotesFromDisk(chapterId).then(() => renderChapterNotes(section));
+      });
+    } catch (error) {
+      console.info("Selezione cartella note annullata.", error);
+    }
+  }
+
   themeToggle?.addEventListener("click", toggleTheme);
   autoscrollToggle?.addEventListener("click", toggleAutoscroll);
+  stickyNotesToggle?.addEventListener("click", toggleStickyNotesMode);
+  notesStorageToggle?.addEventListener("click", selectNotesFolder);
   toggleAllBtn?.addEventListener("click", toggleAllNav);
 
   document.getElementById("sidebar-open")?.addEventListener("click", toggleSidebar);
@@ -4985,6 +6027,7 @@ Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificar
     });
   });
 
+  document.addEventListener("click", handleContentClick);
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
 
@@ -4996,6 +6039,9 @@ Restituisce una &quot;vista&quot; invertita della collezione. Iterare, modificar
   setSidebarOpen(savedSidebar ? savedSidebar === "open" : defaultOpen);
 
   setAutoscroll(autoscrollEnabled);
+  setStickyNotesMode(stickyNotesMode);
+  setupNoteDragHandlers();
+  renderAllNotes();
   updateToggleAllLabel();
   updateScrollSpy();
 })();
